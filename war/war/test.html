@@ -80,7 +80,7 @@
             </div>
 	     </div>
 		 <br>
-		 <nav class="navbar navbar-default">
+		 <nav class="navbar navbar-default margin">
               <div class="navbar-header">
                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -367,7 +367,8 @@
 
 
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding">
-            <div class="panel with-nav-tabs panel-success">
+		
+            <div class="panel with-nav-tabs panel-success padding">
                 <div class="panel-heading">
                 <nav class="navbar navbar-default">
               <div class="navbar-header">
@@ -377,13 +378,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">OverAll</a>
+                <a class="navbar-brand" href="#">Top Movies:</a>
               </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
-          
-                             <li><a href="#tab1success" data-toggle="tab">OverAll</a></li>
+                            <li><a href="#tab1success active" data-toggle="tab">OverAll</a></li>
                             <li><a href="#tab2success" data-toggle="tab">Story</a></li>
                             <li><a href="#tab3success" data-toggle="tab">Acting</a></li>
                             <li><a href="#tab4success" data-toggle="tab">Direction</a></li>
@@ -395,63 +395,61 @@
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1success"><div id="myCarousel" class="carousel slide " data-ride="carousel" >
+                        <div class="tab-pane fade in active" id="tab1success">
            
-                     <div  class="row" >
-                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >
-                        <div>
-                             <i class="icon-f-balloon-smiley-sad "   ></i>
-                        </div>
-                    </div>
-                    </div>
+                    
                       <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding_image" >
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " >
                            <div>
+                              <img src="progressbar.png" class="img-responsive">
+                              <br>
+                             <img src="movie.jpg" class="img-responsive">
+                             
+                           </div>
+                        </div>
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " >
+                           <div>
+                             <img src="progressbar.png" class="img-responsive">
+                              <br>
                              <img src="movie.jpg" class="img-responsive">
                            </div>
                         </div>
-                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding_image" >
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " >
                            <div>
+                             <img src="progressbar.png" class="img-responsive">
+                              <br>
                              <img src="movie.jpg" class="img-responsive">
                            </div>
                         </div>
-                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding_image" >
+                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " >
                            <div>
-                             <img src="movie.jpg" class="img-responsive">
-                           </div>
-                        </div>
-                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding_image" >
-                           <div>
+                             <img src="progressbar.png" class="img-responsive">
+                              <br>
                              <img src="movie.jpg" class="img-responsive">
                            </div>
                         </div>
                      </div>
-                     <!-- Left and right controls -->
-                     <br><br><br><br><br>
-                     <a class="left carousel-control margin" stype={background-color:none;} href="#myCarousel" role="button" data-slide="prev">
-                         <span class="glyphicon glyphicon-chevron-left " style="color:white"  ></span>
-                         <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control margin" href="#myCarousel" role="button" data-slide="next">
-             <span class="glyphicon glyphicon-chevron-right" style="color:blue" aria-hidden="white"></span>
-             <span class="sr-only">Next</span>
-        </a>
-                </div></div>
+                     
+                </div>
+                        <div class="tab-pane fade" id="tab1success">OverAll</div>
                         <div class="tab-pane fade" id="tab2success">Acting</div>
                         <div class="tab-pane fade" id="tab3success">Direction</div>
                         <div class="tab-pane fade" id="tab4success">Music</div>
                         <div class="tab-pane fade" id="tab5success">Success 5</div>
                     </div>
                 </div>
-                 <div>
-           <div>
-          <div class="panel panel-success padding">
-          <div class="panel-heading"><div class="row" >
-          <div class="col-lg-6">Latest Released</div>
-        
-          </div></div>
+                   
+          <div class="panel panel-success">
+          <div class="panel-body">
+                <div class="row" >
+                <div class="col-lg-6">
+                       <div class="panel panel-success ">
+                       <div class="panel-heading">
           
-          <div class="panel-body"><div class="row" >
+                          <div>Latest Released</div>
+                       </div>
+                         <div class="panel-body">
+          <div class="row">
           <div class="col-lg-6">Movie1</div>
          
           </div>
@@ -465,17 +463,64 @@
           </div>   
            <div class="row" >
           <div class="col-lg-6">Movie4</div>
-          
+         
+          </div>
+          <div class="row" >
+          <div class="col-lg-6">Movie4</div>
+         
+          </div>
+          <div class="row" >
+          <div class="col-lg-6">Movie4</div>
+         
+          </div>
+          <div class="row" >
+          <div class="col-lg-6">Movie4</div>
+         
+          </div>
+          <div class="row" >
+          <div class="col-lg-6">Movie4</div>
+         
           </div>          
           </div>
-          
-          </div>
-          
-          
                
           
 
          </div>
+                       </div>
+                        <div class="col-lg-6">
+                       <div class="panel panel-success ">
+                       <div class="panel-heading">
+          
+                          <div>UpComing to be  Released</div>
+                       </div>
+                         <div class="panel-body">
+          <div class="row">
+          <div class="col-lg-6">Movie1</div>
+         
+          </div>
+          <div class="row" >
+          <div class="col-lg-6">Movie2</div>
+          
+          </div>
+          <div class="row" >
+          <div class="col-lg-6">Movie3</div>
+         
+          </div>   
+           <div class="row" >
+          <div class="col-lg-6">Movie4</div>
+         
+          </div>          
+          </div>
+               
+          
+
+         </div>
+                       </div>
+                 </div>
+                 
+          </div>
+          
+        
             </div>
             
             
@@ -483,6 +528,8 @@
          
           
           </div>
+          
+        
 
 
 
