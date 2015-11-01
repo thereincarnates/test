@@ -1,0 +1,54 @@
+<html>
+	
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheet.css">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+       
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.3.14/angular-route.js"></script>
+
+        <script src="../js/movieztalk.js" ></script>
+       
+        <link rel="stylesheet" href="../css/stylesheet.css">
+        <link rel="stylesheet" href="../css/Home.css">
+        <link rel="stylesheet" href="../external_css/indicator.css">
+       
+
+        <script src="../external_js/d3.v3.min.js"></script>
+
+	</head>
+
+	<body ng-app="movieztalk">
+        <div ng-view></div>
+        
+    	<script type="text/ng-template" id="indicator.html">
+            <svg class="indicator-circle" 
+                width="150" height="150" 
+                version="1.1" 
+                xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <circle cx="50%" cy="50%" r="45" />
+                    <text class="progress-text actual" text-anchor="middle" alignment-baseline="middle" dx="50%" dy="50%">
+                        <tspan class="actual">{{ actual_formatted }}</tspan>
+                        <tspan class="percent">%</tspan>
+                    </text>
+                    <text class="progress-text" text-anchor="middle" alignment-baseline="middle" dx="50%" dy="60%">Progress</text>
+                </g>
+                <g path-group>
+                    <path class="progress-bar inner-bar normal" stroke-linejoin="round" inner-path />
+                    <path class="progress-bar outer-bar" stroke-linejoin="round" outer-path />
+                </g>
+            </svg>
+         </script>
+       
+	</body>
+
+</html>
