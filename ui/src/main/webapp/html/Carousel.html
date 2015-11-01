@@ -1,0 +1,15 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+	<div class="carousel-inner"   ng-controller="LoadHomePageCont">
+         <div class="item"  ng-class="{active:!$index}"  ng-repeat="movie in movies" ng-include="'Carousel_Panel.html'" ></div>
+    </div>
+
+	<!-- Left and right controls -->
+	<a class="left carousel-control" style={background-color:none;}  data-target="#myCarousel"  data-slide="prev"> 
+		<span class="glyphicon glyphicon-chevron-left " ></span>
+	</a> 
+
+	<a class="right carousel-control" data-target="#myCarousel"  data-slide="next" >
+	    <span class="glyphicon glyphicon-chevron-right" ></span> 
+	</a>
+</div>	

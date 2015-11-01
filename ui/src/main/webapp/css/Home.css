@@ -1,0 +1,49 @@
+.body
+{
+    padding-left:   0px;
+	padding-right:  0px;
+	padding-top:    0px;
+	padding-bottom: 0px;	
+	
+	
+}
+
+.container-fluid
+{
+	background-image: url(../Images/container_fluid_background_image.png);
+	background-size: 100%;
+	
+}
+
+.padding_top_10{
+   padding-top: 10px;
+}
+.bgcolor {
+	background-color: red;
+}
+
+.padding {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.padding_image {
+	padding-left: 0.5px;
+	padding-right: 0.5px;
+}
+
+.margin {
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.carousel-control.left,.carousel-control.right {
+	background-image: none
+}
+
+.radius {
+	radius: 2px;
+}

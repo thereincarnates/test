@@ -1,0 +1,27 @@
+<!-- Outer Container which contains the background image and inner container -->
+<div id="outer_container" class="container-fluid ">
+	<!-- Inner Container which contains all the page elements -->
+	<div class="container">
+		<!-- Row Which contains movieztalk name ,search bar and navigation tabs -->
+		<div class="row">
+			<!-- Row Containing movieztalk name and serach bar -->
+			<div class="row" >
+				<div class="col-lg-3 col-md-3 col-sm-3 col-sm-3 "
+					ng-include="'MovieLabel.html'"></div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-sm-6 padding_top_10"
+					 ng-include="'SearchBar.html'" ></div>
+			</div>
+			<br>
+			<div ng-include="'NavBar.html'"></div>
+		</div>
+         
+        <!-- Row Containing Carousel -->
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  padding" ng-include="'Carousel.html'"></div>
+ 		    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding">
+                <div ng-include="'Top_Movies.html'"></div>
+                <div ng-include="'Latest_Movies.html'"></div>
+ 		    </div>   
+        </div>
+	</div>	
+</div>
