@@ -1,3 +1,647 @@
-<div ng-controller="LoadMoviePageCont">
-	{{moviename}}
-</div>
+
+<html>
+<head>
+<meta name="robots" content="NOODP" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="stylesheet.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<style>
+.bgimage {
+	background-image: url(test5.png);
+	background-size: 100%;
+}
+
+.bgcolor {
+	background-color: #DDDAD6;
+}
+
+.bgcolor1 {
+	background-color: #F9F1B5;
+}
+
+.bgcolor2 {
+	background-color: #AE9C96;
+}
+
+.bgcolor3 {
+	background-color: #F5EACD;
+}
+
+.bgcolor4 {
+	background-color: #FF8B6C;
+}
+
+.padding {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 5px;
+	padding-bottom: 0px;
+}
+
+.padding_container {
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.padding_image {
+	padding-left: 0.5px;
+	padding-right: 0.5px;
+}
+
+.margin {
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.carousel-control.left,.carousel-control.right {
+	background-image: none
+}
+
+.radius {
+	radius: 2px;
+}
+
+.container-fluid-background {
+	background-image: url(../Images/container_fluid_background_image.png);
+	background-size: 100%;
+}
+
+.top-buffer {
+	margin-top: 5px;
+}
+
+.row1 {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.mycontent-left {
+	border-left: 1px dashed #333;
+}
+</style>
+</head>
+
+
+<body class="bgcolor padding_container" ng-app="myApp">
+
+
+
+
+
+
+
+	<div
+		class="container-fluid padding_container container-fluid-background">
+
+		<div class="container padding_container">
+
+
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h2 class="text-center color-background">MoviezTalk</h2>
+				</div>
+			</div>
+
+
+
+			<div class="row   row-eq-height padding_container well ">
+				<div
+					class="col-lg-12 col-md-12 col-sm-12 col-sm-12 padding_container">
+
+					<div class="col-lg-7 col-md-7 col-sm-7 col-sm-12 padding">
+
+
+
+						<div class="panel-body ">
+							<div class="row">
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+									<img src="../Images/movie.jpg" class="img-responsive center-block">
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+									<div class="row">
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
+											<span class=" starRating"> <input id="rating5"
+												type="radio" name="rating1" value="5"> <label
+												for="rating5">5</label> <input id="rating4" type="radio"
+												name="rating1" value="4"> <label for="rating4">4</label>
+												<input id="rating3" type="radio" name="rating1" value="3"
+												checked> <label for="rating3">3</label> <input
+												id="rating2" type="radio" name="rating1" value="2">
+												<label for="rating2">2</label> <input id="rating1"
+												type="radio" name="rating1" value="1"> <label
+												for="rating1">1</label>
+											</span>
+										</div>
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
+											<span class=" starRating"> <input id="rating5"
+												type="radio" name="rating1" value="5"> <label
+												for="rating5">5</label> <input id="rating4" type="radio"
+												name="rating1" value="4"> <label for="rating4">4</label>
+												<input id="rating3" type="radio" name="rating1" value="3"
+												checked> <label for="rating3">3</label> <input
+												id="rating2" type="radio" name="rating1" value="2">
+												<label for="rating2">2</label> <input id="rating1"
+												type="radio" name="rating1" value="1"> <label
+												for="rating1">1</label>
+											</span>
+										</div>
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
+											<span class=" starRating"> <input id="rating5"
+												type="radio" name="rating1" value="5"> <label
+												for="rating5">5</label> <input id="rating4" type="radio"
+												name="rating1" value="4"> <label for="rating4">4</label>
+												<input id="rating3" type="radio" name="rating1" value="3"
+												checked> <label for="rating3">3</label> <input
+												id="rating2" type="radio" name="rating1" value="2">
+												<label for="rating2">2</label> <input id="rating1"
+												type="radio" name="rating1" value="1"> <label
+												for="rating1">1</label>
+											</span>
+										</div>
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
+											<span class=" starRating"> <input id="rating5"
+												type="radio" name="rating1" value="5"> <label
+												for="rating5">5</label> <input id="rating4" type="radio"
+												name="rating1" value="4"> <label for="rating4">4</label>
+												<input id="rating3" type="radio" name="rating1" value="3"
+												checked> <label for="rating3">3</label> <input
+												id="rating2" type="radio" name="rating1" value="2">
+												<label for="rating2">2</label> <input id="rating1"
+												type="radio" name="rating1" value="1"> <label
+												for="rating1">1</label>
+											</span>
+										</div>
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Budget</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">500
+											Million</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Earning</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">500
+											Million</div>
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Release
+											Date</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
+
+									</div>
+								</div>
+
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+									<div class="row ">
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center ">Director</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Director</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
+
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Director</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Director</div>
+										<div
+											class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
+
+									</div>
+
+								</div>
+
+
+
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<div
+						class="col-lg-5 col-md-5 col-sm-5 col-sm-12 padding mycontent-left">
+
+						<div class="panel-body ">
+							<p ng-hide="!isVisible">
+								Tanu Weds Manu Returns is a 2015 Indian romantic comedy drama
+								film directed by Anand L. Rai which serves as a sequel to the
+								2011 film Tanu Weds Manu. R. Madhavan, Kangana Ranaut, Jimmy
+								Shergill, Deepak Dobriyal, Swara Bhaskar and Eijaz Khan reprise
+								their roles from the original film. Ranaut also portrays the
+								additional role of a Haryanvi athlete in it. The story,
+								screenplay and the dialogues were written by Himanshu Sharma.
+								The soundtrack and film score were composed by Krsna Solo and
+								the lyrics were penned by Rajshekhar. Saroj Khan and
+								Bosco–Caesar were the film′s choreographers while the editing
+								was done by Hemal Kothari. The principle photography began on
+								October 2014 and the film was released on 22 May 2015. The film
+								carries the story forward showing the next chapter of the
+								couple's life. Tanu Weds Manu Returns received positive reviews
+								from critics and Ranaut's performance was particularly
+								praised.[3][4] Made on a budget of ₹30 crore (US$4.5 million),
+								the film earned ₹252 crore (US$38 million) worldwide and became
+								one of the highest grossing Bollywood film. <a data-target="#"
+									ng-click="isVisible = !isVisible">less..</a>
+							</p>
+							<p ng-hide="isVisible">
+								Tanu Weds Manu Returns is a 2015 Indian romantic comedy drama
+								film directed by Anand L. Rai which serves as a sequel to the
+								2011 film Tanu Weds Manu. R. Madhavan, Kangana Ranaut, Jimmy
+								Shergill, Deepak Dobriyal, Swara Bhaskar and Eijaz Khan reprise
+								their roles from the original film. Ranaut also portrays the
+								additional role of a Haryanvi athlete in it. The story,
+								screenplay and the dialogues were written by Himanshu Sharma.
+								The soundtrack and film score were composed by Krsna Solo and
+								the lyrics were penned by Rajshekhar. Saroj Khan and
+								Bosco–Caesar were the film′s choreographers while the editing
+								was done by Hemal Kothari. The principle photography began on
+								October 2014 and the film was released on 22 May 2015. The film
+								carries the story forward showing the next chapter of the
+								couple's life. <a data-target="#"
+									ng-click="isVisible = !isVisible">contd..</a>
+							</p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="row padding_container">
+				<div class="col-lg-9 col-md-9 col-sm-9 col-sm-12 padding_container">
+
+					<div class="panel-heading  padding_container">
+						<nav class="navbar navbar-default  padding_container">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed"
+									data-toggle="collapse"
+									data-target="#bs-example-navbar-collapse-2"
+									aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+								<a class="navbar-brand" href="#">About Movie:</a>
+							</div>
+
+							<div class="collapse navbar-collapse"
+								id="bs-example-navbar-collapse-2">
+								<ul class="nav navbar-nav">
+								
+								<li class="dropdown"><a href="#tab1success"
+                    class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="false">User Reviews <span
+                      class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#overallreviews" data-toggle="tab">Overall</a></li>
+                      <li><a href="#storyreviews" data-toggle="tab">Story</a></li>
+                      <li><a href="#actingreviews" data-toggle="tab">Acting</a></li>
+                      <li><a href="#directionreviews" data-toggle="tab">Direction</a></li>
+                      <li><a href="#musicreviews" data-toggle="tab">Music</a></li>
+                    </ul></li>
+
+									<li><a href="#tab2success" data-toggle="tab">Songs &
+											Trailers</a></li>
+									<li><a href="#tab3success" data-toggle="tab">Video
+											Reviews</a></li>
+									<li><a href="#tab4success" data-toggle="tab">Interview
+											& Events</a></li>
+									
+
+								</ul>
+							</div>
+						</nav>
+					</div>
+
+					<div class="panel-body">
+						<div class="tab-content">
+
+
+							<div class="tab-pane fade" id="tab2success"  ng-controller="myCtrl">
+								<div class="row top-buffer">
+									<div class="col-lg-4 col-md-4 col-sm-4 col-sm-12">
+										<div class="bs-example" >
+											<!-- Button HTML (to Trigger Modal) -->
+											<a href="#myModal" class="btn btn-lg btn-primary"
+												ng-click="initialize()" data-toggle="modal"><img
+												ng-src="http://img.youtube.com/vi/k99-vMPh3-A/0.jpg"  class="img-responsive"/></a>
+
+											<!-- Modal HTML -->
+											<div id="myModal" class="modal fade"
+												ng-init="isModalVisible=1">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true" ng-click="toggle()">x</button>
+															<h4 class="modal-title">YouTube Video</h4>
+														</div>
+														<div class="modal-body">
+															<div class="embed-responsive embed-responsive-4by3">
+																<iframe class="embed-responsive-item"
+																	ng-src="{{embeddedURL}}" frameborder="0"
+																	allowfullscreen></iframe>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-sm-12">
+                    <div class="bs-example">
+                      <!-- Button HTML (to Trigger Modal) -->
+                      <a href="#myModal" class="btn btn-lg btn-primary"
+                        ng-click="initialize()" data-toggle="modal"><img
+                        ng-src="http://img.youtube.com/vi/k99-vMPh3-A/0.jpg"  class="img-responsive"/></a>
+
+                      <!-- Modal HTML -->
+                      <div id="myModal" class="modal fade"
+                        ng-init="isModalVisible=1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true" ng-click="toggle()">x</button>
+                              <h4 class="modal-title">YouTube Video</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="embed-responsive embed-responsive-4by3">
+                                <iframe class="embed-responsive-item"
+                                  ng-src="{{embeddedURL}}" frameborder="0"
+                                  allowfullscreen></iframe>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-sm-12">
+                    <div class="bs-example">
+                      <!-- Button HTML (to Trigger Modal) -->
+                      <a href="#myModal" class="btn btn-lg btn-primary"
+                        ng-click="initialize()" data-toggle="modal"><img
+                        ng-src="http://img.youtube.com/vi/k99-vMPh3-A/0.jpg"  class="img-responsive"/></a>
+
+                      <!-- Modal HTML -->
+                      <div id="myModal" class="modal fade"
+                        ng-init="isModalVisible=1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true" ng-click="toggle()">x</button>
+                              <h4 class="modal-title">YouTube Video</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="embed-responsive embed-responsive-4by3">
+                                <iframe class="embed-responsive-item"
+                                  ng-src="{{embeddedURL}}" frameborder="0"
+                                  allowfullscreen></iframe>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+								</div>
+							 <div class="row  top-buffer">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-sm-12">
+                    <div class="bs-example" >
+                      <!-- Button HTML (to Trigger Modal) -->
+                      <a href="#myModal" class="btn btn-lg btn-primary"
+                        ng-click="initialize()" data-toggle="modal"><img
+                        ng-src="http://img.youtube.com/vi/k99-vMPh3-A/0.jpg"  class="img-responsive"/></a>
+
+                      <!-- Modal HTML -->
+                      <div id="myModal" class="modal fade"
+                        ng-init="isModalVisible=1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true" ng-click="toggle()">x</button>
+                              <h4 class="modal-title">YouTube Video</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="embed-responsive embed-responsive-4by3">
+                                <iframe class="embed-responsive-item"
+                                  ng-src="{{embeddedURL}}" frameborder="0"
+                                  allowfullscreen></iframe>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-sm-12">
+                    <div class="bs-example">
+                      <!-- Button HTML (to Trigger Modal) -->
+                      <a href="#myModal" class="btn btn-lg btn-primary"
+                        ng-click="initialize()" data-toggle="modal"><img
+                        ng-src="http://img.youtube.com/vi/k99-vMPh3-A/0.jpg"  class="img-responsive"/></a>
+
+                      <!-- Modal HTML -->
+                      <div id="myModal" class="modal fade"
+                        ng-init="isModalVisible=1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true" ng-click="toggle()">x</button>
+                              <h4 class="modal-title">YouTube Video</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="embed-responsive embed-responsive-4by3">
+                                <iframe class="embed-responsive-item"
+                                  ng-src="{{embeddedURL}}" frameborder="0"
+                                  allowfullscreen></iframe>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-sm-12">
+                    <div class="bs-example">
+                      <!-- Button HTML (to Trigger Modal) -->
+                      <a href="#myModal" class="btn btn-lg btn-primary"
+                        ng-click="initialize()" data-toggle="modal"><img
+                        ng-src="http://img.youtube.com/vi/k99-vMPh3-A/0.jpg"  class="img-responsive"/></a>
+
+                      <!-- Modal HTML -->
+                      <div id="myModal" class="modal fade"
+                        ng-init="isModalVisible=1">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true" ng-click="toggle()">x</button>
+                              <h4 class="modal-title">YouTube Video</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="embed-responsive embed-responsive-4by3">
+                                <iframe class="embed-responsive-item"
+                                  ng-src="{{embeddedURL}}" frameborder="0"
+                                  allowfullscreen></iframe>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+							</div>
+							<div class="tab-pane fade" id="tab3success">Direction</div>
+							<div class="tab-pane fade" id="tab4success">Music</div>
+							<div class="tab-pane fade  in active" id="overallreviews">
+								<div class="panel panel-default">
+									<div class="panel-heading">Top overall comments</div>
+									<div class="panel-body">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-sm-12 ">
+											<div class="panel panel-default">
+												<div class="panel-heading">Positive Reviews</div>
+												<div class="panel-body">
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<nav>
+														<ul class="pager">
+															<li class="previous"><a href="#"><span
+																	aria-hidden="true">&larr;</span> Previous</a></li>
+															<li class="next"><a href="#">Next <span
+																	aria-hidden="true">&rarr;</span></a></li>
+														</ul>
+													</nav>
+												</div>
+											</div>
+										</div>
+
+
+										<div class="col-lg-6 col-md-6 col-sm-6 col-sm-12 ">
+											<div class="panel panel-default">
+												<div class="panel-heading">Negative Reviews</div>
+												<div class="panel-body">
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<div>Hum thode bewafa kea hue aap to badchalan hi jo
+														gae #tanuwedsmanu #bestdialouge</div>
+													<hr>
+													<nav>
+														<ul class="pager">
+															<li class="previous"><a href="#"><span
+																	aria-hidden="true">&larr;</span> Previous</a></li>
+															<li class="next"><a href="#">Next <span
+																	aria-hidden="true">&rarr;</span></a></li>
+														</ul>
+													</nav>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app
+				.controller(
+						'myCtrl',
+						function($scope, $sce) {
+							console.log('log me');
+							console.log($scope.embeddedURL)
+
+							$scope.initialize = function() {
+								console.log('calling me');
+								$scope.embeddedURL = $sce
+										.trustAsResourceUrl('https://www.youtube.com/embed/k99-vMPh3-A?autoplay=1');
+							}
+
+							$scope.toggle = function() {
+								$scope.embeddedURL = $sce
+										.trustAsResourceUrl('http//movieztalk.com');
+								console.log($scope.embeddedURL);
+							}
+						});
+	</script>
+</body>
+
