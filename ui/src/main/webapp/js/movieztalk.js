@@ -14,6 +14,10 @@ moviezApp.config(['$routeProvider',
         templateUrl: 'Movie.html',
         controller: 'LoadMoviePageCont'
       }).
+      when('/movie', {
+          templateUrl: 'Movie.html',
+          controller: 'LoadMoviePageCont'
+        }).
      otherwise({
         redirectTo: '/home'
       });
