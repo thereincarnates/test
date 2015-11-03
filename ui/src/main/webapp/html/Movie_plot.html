@@ -1,0 +1,10 @@
+<div class="panel-body" >
+              <p ng-hide="!isVisible">
+                {{movieobj.plot}} <a data-target="#"
+                  ng-click="isVisible = !isVisible">less..</a>
+              </p>
+              <p ng-hide="isVisible">
+                {{movieobj.plot | limitTo:500 }} <a data-target="#"
+                  ng-click="isVisible = !isVisible">contd..</a>
+              </p>
+            </div>
