@@ -4,7 +4,7 @@ moviezApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'Movie.html',
+        templateUrl: 'Home.html',
         controller: 'LoadHomePageCont'
       }).
       when('/menu1', {
