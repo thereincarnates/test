@@ -4,7 +4,7 @@ moviezApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'Home.html',
+        templateUrl: 'Movie.html',
         controller: 'LoadHomePageCont'
       }).
       when('/menu1', {
@@ -18,6 +18,7 @@ moviezApp.config(['$routeProvider',
         redirectTo: '/home'
       });
   }]);
+
 
  moviezApp.controller("LoadMoviePageCont",function($scope,$routeParams,$http)
  { 
@@ -54,6 +55,7 @@ moviezApp.config(['$routeProvider',
           });
  });
 
+ 
 
 
 moviezApp.directive('indicatorWidget', [function (){

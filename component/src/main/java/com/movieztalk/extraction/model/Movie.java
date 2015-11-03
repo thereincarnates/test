@@ -19,7 +19,7 @@ public class Movie {
   // Box office of the movie
   private String boxOffice;
   // Actors and actresses in movie
-  private final Set<Celebrity> actors = new HashSet<>();
+  private Set<Celebrity> actors = new HashSet<>();
   // Represents the overall aspect of the movie
   private MovieAspect overall;
   // Represents the story aspect of the movie
@@ -31,86 +31,143 @@ public class Movie {
   // Represents the direction aspect of the movie
   private MovieAspect direction;
   // Embeded URLs for songs and trailers of movie
-  private final Set<String> songAndTrailers = new HashSet<>();
+  private Set<String> songAndTrailers = new HashSet<>();
   // Embeded URLs for video reviews.
   private final Set<String> videoReviews = new HashSet<>();
   // Embeded URLs for interviews and events
-  private final Set<String> interviewAndEvents = new HashSet<>();
+  private Set<String> interviewAndEvents = new HashSet<>();
   // Plot of movie
   private String plot;
   // Celebrity tweets
-  private final Set<String> tweets = new LinkedHashSet<>();
+  private Set<String> tweets = new LinkedHashSet<>();
 
   public String getPlot() {
     return plot;
   }
-  public void setPlot(String plot) {
+
+  public Movie setPlot(String plot) {
     this.plot = plot;
+    return this;
   }
+
   public String getName() {
     return name;
   }
-  public void setName(String name) {
+
+  public Movie setName(String name) {
     this.name = name;
+    return this;
   }
+
   public Celebrity getDirector() {
     return director;
   }
-  public void setDirector(Celebrity director) {
+
+  public Movie setDirector(Celebrity director) {
     this.director = director;
+    return this;
   }
+
   public String getBudget() {
     return budget;
   }
-  public void setBudget(String budget) {
+
+  public Movie setBudget(String budget) {
     this.budget = budget;
+    return this;
   }
+
   public String getBoxOffice() {
     return boxOffice;
   }
-  public void setBoxOffice(String boxOffice) {
+
+  public Movie setBoxOffice(String boxOffice) {
     this.boxOffice = boxOffice;
+    return this;
   }
+
   public MovieAspect getOverall() {
     return overall;
   }
-  public void setOverall(MovieAspect overall) {
+
+  public Movie setOverall(MovieAspect overall) {
     this.overall = overall;
+    return this;
   }
+
   public MovieAspect getStory() {
     return story;
   }
-  public void setStory(MovieAspect story) {
+
+  public Movie setStory(MovieAspect story) {
     this.story = story;
+    return this;
   }
+
   public MovieAspect getActing() {
     return acting;
   }
-  public void setActing(MovieAspect acting) {
+
+  public Movie setActing(MovieAspect acting) {
     this.acting = acting;
+    return this;
   }
+
   public MovieAspect getMusic() {
     return music;
   }
-  public void setMusic(MovieAspect music) {
+
+  public Movie setMusic(MovieAspect music) {
     this.music = music;
+    return this;
   }
+
   public MovieAspect getDirection() {
     return direction;
   }
-  public void setDirection(MovieAspect direction) {
+
+  public Movie setDirection(MovieAspect direction) {
     this.direction = direction;
+    return this;
   }
+
   public Set<Celebrity> getActors() {
     return actors;
   }
+
   public Set<String> getSongAndTrailers() {
     return songAndTrailers;
   }
+
   public Set<String> getVideoReviews() {
     return videoReviews;
   }
+
   public Set<String> getInterviewAndEvents() {
     return interviewAndEvents;
+  }
+
+  public Set<String> getTweets() {
+    return tweets;
+  }
+
+  public Movie setTweets(Set<String> tweets) {
+    this.tweets = tweets;
+    return this;
+  }
+
+  public Movie setActors(Set<Celebrity> actors) {
+    this.actors = actors;
+    return this;
+  }
+
+  public Movie setSongAndTrailers(Set<String> songAndTrailers) {
+    this.songAndTrailers = songAndTrailers;
+    return this;
+  }
+
+  public Movie setInterviewAndEvents(Set<String> interviewAndEvents) {
+    this.interviewAndEvents = interviewAndEvents;
+    return this;
   }
 }

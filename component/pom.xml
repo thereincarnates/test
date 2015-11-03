@@ -4,7 +4,7 @@
 	<groupId>com.movieztalk</groupId>
 	<artifactId>component</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>component</name>
 	<url>http://maven.apache.org</url>
 	<build>
