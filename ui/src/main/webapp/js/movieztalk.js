@@ -27,14 +27,17 @@ moviezApp.config(['$routeProvider',
  moviezApp.controller("LoadMoviePageCont",function($scope,$routeParams,$http)
  { 
 
-    $http({
-          method: 'GET',
-          url: '/ui/user',
-          headers: {'Content-Type': 'application/json'}
-        }).success(function (data) 
-          {
-            $scope.moviename=data;
-          });
+	 $http({
+			method : 'GET',
+			url : '/ui/movieplot',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).success(function(data) {
+			console.log('successfull');
+			$scope.movieobj = data;
+
+		});
 
  });
 
