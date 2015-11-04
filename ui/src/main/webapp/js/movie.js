@@ -1,5 +1,5 @@
-
-moviezApp.controller(
+moviezApp
+		.controller(
 				'myCtrl',
 				function($scope, $sce) {
 					console.log('log me');
@@ -19,19 +19,3 @@ moviezApp.controller(
 						console.log($scope.embeddedURL);
 					}
 				});
-
-moviezApp.controller("loadMoviePlot",function($scope,$routeParams,$http)
-		 { 
-	console.log('calling loadMoviePlot');
-
-		    $http({
-		          method: 'GET',
-		          url: '/ui/movieplot',
-		          headers: {'Content-Type': 'application/json'}
-		        }).success(function (data) 
-		          {
-		        	console.log('successfull');
-		            $scope.movieobj=data;
-		            
-		          });
-		 });
