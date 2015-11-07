@@ -1,0 +1,50 @@
+
+<div id="outer_container" class="container-fluid" ng-controller="LoadManagePageCont">
+    <!-- Inner Container which contains all the page elements -->
+    <div class="container" style ='background-color: #FFEBCC;'>
+
+    <h1><b>MoviezTalk Management Page<b></h1>
+    <hr>
+    <div class="row" style ='background-color: #FFFFF;'>
+        <div   class="dropdown col-lg-9 col-md-9 col-sm-9 col-xs-12" style ='background-color: #FFFFF;'>
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{selectedItem}}
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li style="text-align: right;" role="presentation" ng-repeat='option in options'>
+                        <a ng-click="selFunction(option)" > {{option}} </a>
+                    </li>
+               </ul>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <button type="button" class="btn btn-default" ng-click="sendData()">SendData>></button>
+            </div>
+
+
+    </div>
+            
+ 
+
+    <br>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Choose</th>
+                <th>Release Date</th>
+                <th>Movie Id</th>
+                <th>Movie Name</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in dataTable">
+                    <td><input type="checkbox" ng-click="onClick(row)" value="1"/></td>
+                    <td>{{ row.Date }}</td>
+                    <td>{{ row.MovieId }}</td>
+                    <td>{{ row.MovieName }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Manage</servlet-name>
+		<servlet-class>com.movieztalk.server.ManagePageServelet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Manage</servlet-name>
+		<url-pattern>/managemz</url-pattern>
+	</servlet-mapping>
+
+	<!--security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>
+	        </web-resource-name>
+	        <url-pattern>/html/Manage.html</url-pattern>
+	    </web-resource-collection>
+	    <auth-constraint>
+	        <role-name>manager-gui</role-name>
+	    </auth-constraint>
+    </security-constraint>
+ 
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config-->
+
+</web-app>
