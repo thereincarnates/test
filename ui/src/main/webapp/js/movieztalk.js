@@ -26,7 +26,6 @@ moviezApp.config(['$routeProvider',
 
  moviezApp.controller("LoadMoviePageCont",function($scope,$routeParams,$http)
  { 
-
 	 $http({
 			method : 'GET',
 			url : '/ui/movieplot',
