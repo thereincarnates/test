@@ -6,7 +6,7 @@
       <div class="panel-heading">Positive Reviews</div>
       <div class="panel-body">
         <div ng-repeat="positiveReview in movieobj.overall.positiveReviews">
-          <div>{{positiveReview}}</div>
+          <div>{{positiveReview +" "+ $index}}</div>
           <hr>
         </div>
         <nav>
