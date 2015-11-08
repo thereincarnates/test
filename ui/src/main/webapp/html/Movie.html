@@ -159,7 +159,7 @@
 
 			</div>
 
-			<div class="row padding_container">
+			<div class="row padding_container"  ng-controller="LoadMoviePageCont">
 				<div class="col-lg-9 col-md-9 col-sm-9 col-sm-12 padding_container">
 
 					<div class="panel-heading  padding_container">
@@ -192,11 +192,11 @@
                       <li><a href="#musicreviews" data-toggle="tab">Music</a></li>
                     </ul></li>
 
-									<li><a data-target="#tab2success" data-toggle="tab">Songs &
+									<li><a data-target="#tab2success" data-toggle="tab" ng-click="buldDefaultList('songAndTrailers')">Songs &
 											Trailers</a></li>
-									<li><a data-target="#tab3success" data-toggle="tab">Video
+									<li><a data-target="#tab3success" data-toggle="tab"  ng-click="buldDefaultList('videoReviews')">Video
 											Reviews</a></li>
-									<li><a data-target="#tab4success" data-toggle="tab">Interview
+									<li><a data-target="#tab4success" data-toggle="tab" ng-click="buldDefaultList('interviewAndEvents')">Interview
 											& Events</a></li>
 									
 
@@ -209,17 +209,15 @@
 						<div class="tab-content">
 
 
-							<div class="tab-pane fade" id="tab2success"  ng-controller="LoadMoviePageCont">
+							<div class="tab-pane fade" id="tab2success" >
 		            <div ng-include="'Songs_Trailer.html'"></div>
 							</div>
 							<div class="tab-pane fade" id="tab3success">
-							<div class="_SMB-saavn-remote" data-id="59eZwnaaVkU_" data-size="button_stacked" data-type="album" data-imageurl="" data-partner="">
-      <a href="http://saavn.com/p/album/hindi/Tamasha-2015/59eZwnaaVkU_" rel="nofollow">Listen to Tamasha-2015 on Saavn</a>
-    </div>
+						<div ng-include="'Songs_Trailer.html'"></div>
 							</div>
 							
-							<div class="tab-pane fade" id="tab4success" ng-include="'interview_and_event.html'">
-							
+							<div class="tab-pane fade" id="tab4success">
+							<div ng-include="'Songs_Trailer.html'"></div>
 							</div>
 							
 							<div class="tab-pane fade  in active" id="overallreviews">
@@ -228,6 +226,7 @@
               </div>
               </div>
 						</div>
+						<div ng-include = "'videomodal.html'"></div>
 						</div>
 
 				</div>

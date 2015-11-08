@@ -39,16 +39,34 @@ moviezApp.config(['$routeProvider',
 			$scope.movieobj = data;
 
 		});
-	 $scope.getSongAndTrailerImage = function(index) {
-		 console.log('index found is ' + index);
-		 return $scope.movieobj.songAndTrailers[index].replace('embed','vi').replace('www', 'img').replace(new RegExp('$'),'/0.jpg');
+	 $scope.buldDefaultList = function(type){
+		 console.log('typs is' + type);
+		 if(type=='songAndTrailers') {
+			 $scope.subtype='songAndTrailers';
+			 $scope.list = $scope.movieobj.songAndTrailers;
+		 } else if (type=='videoReviews'){
+			 $scope.subtype='videoReviews';
+			 $scope.list = $scope.movieobj.videoReviews;
+		 } else if (type == 'interviewAndEvents') {
+			 $scope.subtype='interviewAndEvents';
+			 $scope.list = $scope.movieobj.interviewAndEvents;
+		 }
 	 }
 	 
-	 $scope.initializeModal = function(index) {
-		 console.log('new modal id is ' + 'myModal'+index );
-		 $scope.modalID='myModal'+index;
+	 $scope.getBuildDefaultList = function() {
+		 return $scope.list;
+	 }
+	 
+	 $scope.getSongAndTrailerImage = function(index) {
+		 // console.log('index found is ' + index);
+		 return $scope.list[index].replace('embed','vi').replace('www', 'img').replace(new RegExp('$'),'/0.jpg');
+	 }
+	 
+	 $scope.initializeModal = function(subtypeStr, index) {
+		 console.log('new modal id is ' + 'myModal'+ index + subtypeStr );
+		 $scope.modalID = 'myModal'+subtypeStr+index;
 		 $scope.embeddedURL =  $sce
-			.trustAsResourceUrl($scope.movieobj.songAndTrailers[index]+'?autoplay=1');
+			.trustAsResourceUrl($scope.list[index]+'?autoplay=1');
 	 }
 	 
 	 $scope.clearEmbeddedURL = function() {

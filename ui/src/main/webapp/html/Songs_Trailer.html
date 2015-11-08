@@ -1,30 +1,9 @@
 <div class="row">
-	<div ng-repeat="embedded in movieobj.songAndTrailers" style="margin-bottom:10px; padding-left:0px; padding-right:0px;">
+	<div ng-repeat="embedded in getBuildDefaultList()" style="margin-bottom:10px; padding-left:0px; padding-right:0px;">
 		<div class="col-lg-4 col-md-4 col-sm-12" style="margin-bottom:10px; margin-left:0px; margin-right:0px;">
 			<img
 				ng-src="{{getSongAndTrailerImage($index)}}"
-				class="img-responsive col-xs-12" ng-click="initializeModal($index)" data-target="#myModal{{$index}}" data-toggle="modal" />
-		</div>
-	</div>
-
-
-	<div class="modal fade" id="{{modalID}}" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						ng-click="clearEmbeddedURL()">X</button>
-				</div>
-				<div class="modal-body">
-					<div class="embed-responsive embed-responsive-4by3">
-						<iframe class="embed-responsive-item" ng-src="{{embeddedURL}}"
-							frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
-			</div>
-
+				class="img-responsive col-xs-12" ng-click="initializeModal(subtype, $index)" data-target="#myModal{{subtype}}{{$index}}" data-toggle="modal" />
 		</div>
 	</div>
 </div>
