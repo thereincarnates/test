@@ -40,6 +40,12 @@ public class MoviePlotServlet extends HttpServlet {
         "https://www.youtube.com/embed/gIvVcW2_CIs", "https://www.youtube.com/embed/lYNNgGBVtTo",
         "https://www.youtube.com/embed/zRtPUIumXcY");
 
+    List<String> interviewAndEvents = Arrays.asList("https://www.youtube.com/embed/6CCY4TT_Lbc",
+        "https://www.youtube.com/embed/fAA5-whpz_A");
+
+    List<String> videoReviews = Arrays.asList("https://www.youtube.com/embed/rX5UMND5x6U",
+        "https://www.youtube.com/embed/JsU8nYI1r0Y");
+
     MovieAspect ms = new MovieAspect();
     Set<String> reviews = Sets.newHashSet("This is test1", "This is test2", "This is test3");
     ms.getNegativeReviews().addAll(reviews);
@@ -54,7 +60,8 @@ public class MoviePlotServlet extends HttpServlet {
         .setPlot(
             "Tanu Weds Manu Returns is a 2015 Indian romantic comedy drama film directed by Anand L. Rai which serves as a sequel to the 2011 film Tanu Weds Manu. R. Madhavan, Kangana Ranaut, Jimmy Shergill, Deepak Dobriyal, Swara Bhaskar and Eijaz Khan reprise their roles from the original film. Ranaut also portrays the additional role of a Haryanvi athlete in it. The story, screenplay and the dialogues were written by Himanshu Sharma. The soundtrack and film score were composed by Krsna Solo and the lyrics were penned by Rajshekhar. Saroj Khan and Bosco–Caesar were the film′s choreographers while the editing was done by Hemal Kothari. The principle photography began on October 2014 and the film was released on 22 May 2015. The film carries the story forward showing the next chapter of the couple's life. Tanu Weds Manu Returns received positive reviews from critics and Ranaut's performance was particularly praised.[3][4] Made on a budget of ₹30 crore (US$4.5 million), the film earned ₹252 crore (US$38 million)"
                 + " worldwide and became one of the highest grossing Bollywood film.")
-        .setOverall(ms).setSongAndTrailers(songsAndTrailers);
+        .setOverall(ms).setSongAndTrailers(songsAndTrailers)
+        .setInterviewAndEvents(interviewAndEvents).setVideoReviews(videoReviews);
 
     return movie;
   }

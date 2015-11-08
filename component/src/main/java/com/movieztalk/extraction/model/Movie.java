@@ -145,6 +145,11 @@ public class Movie {
     return videoReviews;
   }
 
+  public Movie setVideoReviews(List<String> videoReviews) {
+    this.videoReviews.addAll(videoReviews);
+    return this;
+  }
+
   public List<String> getInterviewAndEvents() {
     return interviewAndEvents;
   }
