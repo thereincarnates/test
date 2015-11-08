@@ -24,8 +24,10 @@ moviezApp.config(['$routeProvider',
   }]);
 
 
- moviezApp.controller("LoadMoviePageCont",function($scope,$routeParams,$http)
+ moviezApp.controller("LoadMoviePageCont",function($scope,$routeParams,$http, $sce)
  { 
+	 
+	 $scope.modalID='myModal0';
 	 $http({
 			method : 'GET',
 			url : '/ui/movieplot',
@@ -37,6 +39,27 @@ moviezApp.config(['$routeProvider',
 			$scope.movieobj = data;
 
 		});
+	 $scope.getSongAndTrailerImage = function(index) {
+		 console.log('index found is ' + index);
+		 return $scope.movieobj.songAndTrailers[index].replace('embed','vi').replace('www', 'img').replace(new RegExp('$'),'/0.jpg');
+	 }
+	 
+	 $scope.getAuthenticatedURL = function(index) {
+		 return  $sce
+			.trustAsResourceUrl($scope.movieobj.songAndTrailers[index]);
+	 }
+	 
+	 $scope.initializeModal = function(index) {
+		 console.log('new modal id is ' + 'myModal'+index );
+		 $scope.modalID='myModal'+index;
+		 $scope.embeddedURL =  $sce
+			.trustAsResourceUrl($scope.movieobj.songAndTrailers[index]+'?autoplay=1');
+	 }
+	 
+	 $scope.clearEmbeddedURL = function() {
+		 $scope.embeddedURL =  $sce
+			.trustAsResourceUrl('http://www.example.com');
+	 }
 
  });
 

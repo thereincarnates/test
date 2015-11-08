@@ -1,7 +1,9 @@
 package com.movieztalk.extraction.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.movieztalk.movieaspects.model.MovieAspect;
@@ -31,11 +33,11 @@ public class Movie {
   // Represents the direction aspect of the movie
   private MovieAspect direction;
   // Embeded URLs for songs and trailers of movie
-  private Set<String> songAndTrailers = new HashSet<>();
+  private final List<String> songAndTrailers = new ArrayList<>();
   // Embeded URLs for video reviews.
-  private final Set<String> videoReviews = new HashSet<>();
+  private final List<String> videoReviews = new ArrayList<>();
   // Embeded URLs for interviews and events
-  private Set<String> interviewAndEvents = new HashSet<>();
+  private final List<String> interviewAndEvents = new ArrayList<>();
   // Plot of movie
   private String plot;
   // Celebrity tweets
@@ -135,15 +137,15 @@ public class Movie {
     return actors;
   }
 
-  public Set<String> getSongAndTrailers() {
+  public List<String> getSongAndTrailers() {
     return songAndTrailers;
   }
 
-  public Set<String> getVideoReviews() {
+  public List<String> getVideoReviews() {
     return videoReviews;
   }
 
-  public Set<String> getInterviewAndEvents() {
+  public List<String> getInterviewAndEvents() {
     return interviewAndEvents;
   }
 
@@ -161,13 +163,13 @@ public class Movie {
     return this;
   }
 
-  public Movie setSongAndTrailers(Set<String> songAndTrailers) {
-    this.songAndTrailers = songAndTrailers;
+  public Movie setSongAndTrailers(List<String> songAndTrailers) {
+    this.songAndTrailers.addAll(songAndTrailers);
     return this;
   }
 
-  public Movie setInterviewAndEvents(Set<String> interviewAndEvents) {
-    this.interviewAndEvents = interviewAndEvents;
+  public Movie setInterviewAndEvents(List<String> interviewAndEvents) {
+    this.interviewAndEvents.addAll(interviewAndEvents);
     return this;
   }
 }
