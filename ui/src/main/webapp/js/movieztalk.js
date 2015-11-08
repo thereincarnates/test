@@ -44,11 +44,6 @@ moviezApp.config(['$routeProvider',
 		 return $scope.movieobj.songAndTrailers[index].replace('embed','vi').replace('www', 'img').replace(new RegExp('$'),'/0.jpg');
 	 }
 	 
-	 $scope.getAuthenticatedURL = function(index) {
-		 return  $sce
-			.trustAsResourceUrl($scope.movieobj.songAndTrailers[index]);
-	 }
-	 
 	 $scope.initializeModal = function(index) {
 		 console.log('new modal id is ' + 'myModal'+index );
 		 $scope.modalID='myModal'+index;
