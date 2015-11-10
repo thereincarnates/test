@@ -13,7 +13,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/managemz</url-pattern>
 	</servlet-mapping>
 
-	<!--security-constraint>
+	<security-constraint>
 	    <web-resource-collection>
 	        <web-resource-name>
 	        </web-resource-name>
@@ -26,6 +26,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
  
     <login-config>
         <auth-method>BASIC</auth-method>
-    </login-config-->
+    </login-config>
 
 </web-app>
