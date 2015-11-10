@@ -81,6 +81,8 @@ moviezApp.controller("LoadMoviePageCont", function($scope, $routeParams, $http,
 	}
 
 	$scope.fillReviewType = function(reviewtype) {
+		$scope.posIndex = 0;
+		$scope.negIndex = 0;
 		if (reviewtype == 'overall') {
 			$scope.positiveReviews = $scope.movieobj.overall.positiveReviews;
 			$scope.negativeReviews = $scope.movieobj.overall.negativeReviews;
