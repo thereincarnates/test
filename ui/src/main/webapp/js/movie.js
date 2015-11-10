@@ -14,6 +14,7 @@ moviezApp.controller("LoadMoviePageCont", function($scope, $routeParams, $http,
 	}).success(function(data) {
 		console.log('successfull');
 		$scope.movieobj = data;
+		$scope.commentType = 'overall';
 		$scope.positiveReviews = $scope.movieobj.overall.positiveReviews;
 		$scope.negativeReviews = $scope.movieobj.overall.negativeReviews;
 		
@@ -84,18 +85,23 @@ moviezApp.controller("LoadMoviePageCont", function($scope, $routeParams, $http,
 		$scope.posIndex = 0;
 		$scope.negIndex = 0;
 		if (reviewtype == 'overall') {
+			$scope.commentType = 'overall';
 			$scope.positiveReviews = $scope.movieobj.overall.positiveReviews;
 			$scope.negativeReviews = $scope.movieobj.overall.negativeReviews;
 		} else if (reviewtype == 'story') {
+			$scope.commentType = 'story';
 			$scope.positiveReviews = $scope.movieobj.story.positiveReviews;
 			$scope.negativeReviews = $scope.movieobj.story.negativeReviews;
 		} else if (reviewtype == 'acting') {
+			$scope.commentType = 'acting';
 			$scope.positiveReviews = $scope.movieobj.acting.positiveReviews;
 			$scope.negativeReviews = $scope.movieobj.acting.negativeReviews;
 		} else if (reviewtype == 'direction') {
+			$scope.commentType = 'direction';
 			$scope.positiveReviews = $scope.movieobj.direction.positiveReviews;
 			$scope.negativeReviews = $scope.movieobj.direction.negativeReviews;
 		} else if (reviewtype == 'music') {
+			$scope.commentType = 'music';
 			$scope.positiveReviews = $scope.movieobj.music.positiveReviews;
 			$scope.negativeReviews = $scope.movieobj.music.negativeReviews;
 		}
