@@ -5,15 +5,15 @@
     <div class="panel panel-default">
       <div class="panel-heading">Positive Reviews</div>
       <div class="panel-body">
-        <div ng-repeat="positiveReview in movieobj.overall.positiveReviews">
-          <div>{{positiveReview +" "+ $index}}</div>
+        <div ng-repeat="positiveReview in movieobj.overall.positiveReviews " ng-if="$index >= posIndex && $index < posIndex + commentWindowSize" >
+          <div>{{positiveReview}}</div>
           <hr>
         </div>
         <nav>
           <ul class="pager">
-            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>
+            <li class="previous"><a ng-click="posPrev()"><span aria-hidden="true">&larr;</span>
                 Previous</a></li>
-            <li class="next"><a href="#">Next <span
+            <li class="next"><a ng-click="posNext()">Next <span
                 aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </nav>
@@ -26,15 +26,15 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Negative Reviews</div>
 			<div class="panel-body">
-				<div ng-repeat="negativeReview in movieobj.overall.negativeReviews">
+				<div ng-repeat="negativeReview in movieobj.overall.negativeReviews" ng-if="$index >= negIndex && $index < negIndex + commentWindowSize">
 					<div>{{negativeReview}}</div>
 					<hr>
 				</div>
 				<nav>
 					<ul class="pager">
-						<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>
+						<li class="previous"><a ng-click="negPrev()"><span aria-hidden="true">&larr;</span>
 								Previous</a></li>
-						<li class="next"><a href="#">Next <span
+						<li class="next"><a ng-click="negNext()">Next <span
 								aria-hidden="true">&rarr;</span></a></li>
 					</ul>
 				</nav>

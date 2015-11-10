@@ -47,9 +47,15 @@ public class MoviePlotServlet extends HttpServlet {
         "https://www.youtube.com/embed/JsU8nYI1r0Y");
 
     MovieAspect ms = new MovieAspect();
-    Set<String> reviews = Sets.newHashSet("This is test1", "This is test2", "This is test3");
+    Set<String> reviews = Sets.newHashSet("This is test1", "This is test2", "This is test3",
+        "This is test4", "This is test5", "This is test 6");
     ms.getNegativeReviews().addAll(reviews);
     ms.getPositiveReviews().addAll(reviews);
+
+    MovieAspect music = new MovieAspect();
+    reviews = Sets.newHashSet("This is music1", "this is music 2", "this is music 3");
+    music.getNegativeReviews().addAll(reviews);
+    music.getPositiveReviews().addAll(reviews);
 
     Movie movie = new Movie();
     movie
@@ -61,7 +67,8 @@ public class MoviePlotServlet extends HttpServlet {
             "Tanu Weds Manu Returns is a 2015 Indian romantic comedy drama film directed by Anand L. Rai which serves as a sequel to the 2011 film Tanu Weds Manu. R. Madhavan, Kangana Ranaut, Jimmy Shergill, Deepak Dobriyal, Swara Bhaskar and Eijaz Khan reprise their roles from the original film. Ranaut also portrays the additional role of a Haryanvi athlete in it. The story, screenplay and the dialogues were written by Himanshu Sharma. The soundtrack and film score were composed by Krsna Solo and the lyrics were penned by Rajshekhar. Saroj Khan and Bosco–Caesar were the film′s choreographers while the editing was done by Hemal Kothari. The principle photography began on October 2014 and the film was released on 22 May 2015. The film carries the story forward showing the next chapter of the couple's life. Tanu Weds Manu Returns received positive reviews from critics and Ranaut's performance was particularly praised.[3][4] Made on a budget of ₹30 crore (US$4.5 million), the film earned ₹252 crore (US$38 million)"
                 + " worldwide and became one of the highest grossing Bollywood film.")
         .setOverall(ms).setSongAndTrailers(songsAndTrailers)
-        .setInterviewAndEvents(interviewAndEvents).setVideoReviews(videoReviews);
+        .setInterviewAndEvents(interviewAndEvents).setVideoReviews(videoReviews).setStory(ms)
+        .setActing(ms).setDirection(ms).setMusic(music);
 
     return movie;
   }
