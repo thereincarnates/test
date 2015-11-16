@@ -25,6 +25,9 @@ moviezApp.config(['$routeProvider',
           templateUrl: 'Movie_Game.html',
           controller: 'LoadMovieGame'
         }).
+      when('/hello', {
+          templateUrl: 'Hello.html'
+        }).
      otherwise({
         redirectTo: '/home'
       });

@@ -41,9 +41,17 @@
 }
 
 .carousel-control.left,.carousel-control.right {
-	background-image: none
+	background-image: none;
 }
 
 .radius {
 	radius: 2px;
+}
+
+.btn-space {
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background: #8A8A5C;
+    color: #ffffff;
+    font-weight: 800;
 }

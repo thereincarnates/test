@@ -3,10 +3,17 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
  	 var success= true;
  	 var movieName ;
 	 var compareChar = [" ","A","E","I","O","U",","];
+	 var vowelChar = ["A","E","I","O","U"];
 	 var replace;
 	 var receivedName = [];
 	 var maxChoices = 9;
 	 var usedChoices = 0;
+	 $scope.alphabetvec = [["A","disabled"],["B","enabled"],["C","enabled"],["D","enabled"],["E","disabled"],["F","enabled"],["G","enabled"],["H","enabled"],["I","disabled"],["J","enabled"],["K","enabled"],
+	                      ["L","enabled"],["M","enabled"],["N","enabled"],["O","disabled"],["P","enabled"],["Q","enabled"],
+	                      ["R","enabled"],["S","enabled"],["T","enabled"],["U","disabled"],["V","enabled"],["W","enabled"],
+	                      ["X","enabled"],["Y","enabled"],["Z","enabled"],["0","enabled"],["1","enabled"],["2","enabled"]
+	                      ,["3","enabled"],["4","enabled"],["5","enabled"],["6","enabled"],["7","enabled"],["8","enabled"]
+	                      ,["9","enabled"]];
 
 	 $http({
 			method : 'GET',
@@ -47,6 +54,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 
 
            console.log("Recieved Dataa"+ movieName);
+           $scope.visibility = "enabled";
 		});
 
 
@@ -54,34 +62,73 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
             {
                var userMovie = $scope.words;
 		       var movie = movieName.join(" ");
-               
+               var isvowel = false;
+               var isalreadyused = false;
+               var alphabet = $scope.alphabetvec;
+
+               for(var  k =0; k< alphabet.length; k++)
+               {
+                 if(!alphabet[k][0].localeCompare(option))
+                 {
+                 	$scope.alphabetvec[k][1] = "disabled";
+                 }
+
+               }
+
                if((usedChoices < maxChoices) && ((userMovie.localeCompare(movie))))
                {
 	               
 	               replace = true;
-	               compareChar.push(option);
-	               console.log("Push Char " + compareChar);
 	               console.log("movieName "+ movieName );
 	               receivedName = movieName.slice();
 	               success = true; 
                    validchoice = false;
+                  
 
-                   for(var  i =0; i< movieName.length; i++)
-                   {
-                   	  if(!(option.localeCompare(movieName[i])))
-							{
+                   for(var  j =0; j< vowelChar.length; j++)
+					{
+						if(!(option.localeCompare(vowelChar[j])))
+						{
+							        console.log("is vowel..");
+									isvowel = true;   
+						}     
+					}
 
-	                          validchoice = true;            
- 		                    }        
+					for(var  j =0; j< compareChar.length; j++)
+					{
+						if(!(option.localeCompare(compareChar[j])))
+						{
+							        console.log("is already used..");
+									isalreadyused = true;  
 
+						}     
+					}
+
+					compareChar.push(option); 
+					console.log("Push Char " + compareChar);
+
+				   if(!isvowel)
+				   {
+	                   for(var  i =0; i< movieName.length; i++)
+	                   {
+	                   	  if(!(option.localeCompare(movieName[i]))  )
+								{
+									console.log("is valid choice..");
+									validchoice = true;    
+	 		                    }        
+	                   }
                    }
-                   if(!validchoice)
+                    
+                   if(!isalreadyused  && !validchoice)
                    {
-                   	    usedChoices =  usedChoices + 1;
-                   	    
-                   	    $scope.imageno = usedChoices ;
+	                   if(!validchoice && (!isvowel))
+	                   {
+	                   	    usedChoices =  usedChoices + 1;
+	                   	    
+	                   	    $scope.imageno = usedChoices ;
 
-                        console.log("invalid option selected");
+	                        console.log("invalid option selected");
+	                   }
                    }
                    if(validchoice)
                    {
@@ -142,3 +189,23 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 
            
  });
+
+
+
+moviezApp.controller('refresh_control',function($scope,$interval,$http)
+{
+   var c=0;
+   $scope.message="This DIV is refreshed "+c+" time.";
+
+   $interval(function()
+   {
+   	    $http({
+          method: 'GET',
+          url: '/ui/HelloServlet',
+          headers: {'Content-Type': 'application/json'}
+        }).success(function (data) 
+          {
+            $scope.message=data; 
+          });
+   },1000);
+});
