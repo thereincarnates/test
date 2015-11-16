@@ -66,17 +66,19 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
                var isalreadyused = false;
                var alphabet = $scope.alphabetvec;
 
-               for(var  k =0; k< alphabet.length; k++)
-               {
-                 if(!alphabet[k][0].localeCompare(option))
-                 {
-                 	$scope.alphabetvec[k][1] = "disabled";
-                 }
-
-               }
+               
 
                if((usedChoices < maxChoices) && ((userMovie.localeCompare(movie))))
                {
+
+               	   for(var  k =0; k< alphabet.length; k++)
+                   {
+		                 if(!alphabet[k][0].localeCompare(option))
+		                 {
+		                 	$scope.alphabetvec[k][1] = "disabled";
+		                 }
+
+                    }
 	               
 	               replace = true;
 	               console.log("movieName "+ movieName );
