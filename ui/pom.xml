@@ -34,6 +34,15 @@
 			<artifactId>component</artifactId>
 			<version>1.3-SNAPSHOT</version>
 		</dependency>
+		
+		<!-- Provided Websocket API, because tomcat has its own implementation -->
+<dependency>
+    <groupId>javax.websocket</groupId>
+    <artifactId>javax.websocket-api</artifactId>
+    <version>1.0</version>
+    <scope>provided</scope>
+</dependency>
+		
 
 
 	</dependencies>
@@ -49,7 +58,7 @@
 					<update>true</update>
 					<username>${user}</username>
 					<password>${password}</password>
-					<path>/ui</path>
+					<path>/ROOT</path>
 				</configuration>
 			</plugin>
 		</plugins>
