@@ -14,12 +14,17 @@ moviezApp.config(['$routeProvider',
         templateUrl: 'Movie.html',
         controller: 'LoadMoviePageCont'
       }).
+      when('/play/:gameid', {
+        templateUrl: 'Movie_Game.html',
+        controller: 'LoadMovieGame'
+      }).
       when('/movie', {
           templateUrl: 'Movie.html',
           controller: 'LoadMoviePageCont'
         }).
       when('/game', {
-          templateUrl: 'Game.html'
+          templateUrl: 'Game.html',
+          controller: 'GameController'
         }).
       when('/moviegame', {
           templateUrl: 'Movie_Game.html',
@@ -45,6 +50,16 @@ moviezApp.config(['$routeProvider',
           {
             $scope.movies=data; 
           });    
+ });
+
+ moviezApp.controller("GameController",function($scope,$routeParams,$http)
+ {
+    $scope.startplay = function(option)
+    {
+       console.log("option on play: "+ option);
+       $scope.idlocal = "local";
+       $scope.idremote = "remote";
+    }    
  });
 
  

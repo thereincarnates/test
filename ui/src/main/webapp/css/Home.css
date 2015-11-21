@@ -15,19 +15,14 @@
 	
 }
 
-.img-holder {position: relative;}
-.img-holder .link {
-    position: absolute;
-    bottom: 40px; 
-    right: 40px; 
-}
-
 .padding_top_10{
    padding-top: 10px;
 }
+
 .bgcolor {
 	background-color: red;
 }
+
 
 .padding {
 	padding-left: 0px;
@@ -62,3 +57,19 @@
     color: #ffffff;
     font-weight: 800;
 }
+
+
+.img-holder {position: relative;}
+
+.img-holder .link {
+    position: absolute;
+    bottom: 220px; 
+    right: 220px; 
+}
+
+.img-holder .link1 {
+    position: absolute;
+    bottom: 130px; 
+    right: 240px; 
+}
+
