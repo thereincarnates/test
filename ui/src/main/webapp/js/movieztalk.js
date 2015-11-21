@@ -39,21 +39,12 @@ moviezApp.config(['$routeProvider',
  {
     $http({
           method: 'GET',
-          url: '/ui/carousel',
+          url: '/carousel',
           headers: {'Content-Type': 'application/json'}
         }).success(function (data) 
           {
             $scope.movies=data; 
-          });
-
-    $http({
-          method: 'GET',
-          url: '/ui/topmovies',
-          headers: {'Content-Type': 'application/json'}
-        }).success(function (data) 
-          {
-            $scope.topmovies=data; 
-          });
+          });    
  });
 
  

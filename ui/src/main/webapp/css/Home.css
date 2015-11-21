@@ -15,6 +15,13 @@
 	
 }
 
+.img-holder {position: relative;}
+.img-holder .link {
+    position: absolute;
+    bottom: 40px; 
+    right: 40px; 
+}
+
 .padding_top_10{
    padding-top: 10px;
 }

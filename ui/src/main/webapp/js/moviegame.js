@@ -17,7 +17,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 
 	 $http({
 			method : 'GET',
-			url : '/ui/moviegame',
+			url : '/moviegame',
 			headers : {
 				'Content-Type' : 'application/json'
 			}
@@ -54,7 +54,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 
 
            console.log("Recieved Dataa"+ movieName);
-           $scope.visibility = "enabled";
+          
 		});
 
 

@@ -7,7 +7,7 @@ moviezApp.controller("LoadMoviePageCont", function($scope, $routeParams, $http,
 	$scope.commentWindowSize = 5;
 	$http({
 		method : 'GET',
-		url : '/ui/movieplot',
+		url : '/movieplot',
 		headers : {
 			'Content-Type' : 'application/json'
 		}
