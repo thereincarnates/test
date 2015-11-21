@@ -30,6 +30,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>MovieGame</servlet-name>
 		<url-pattern>/moviegame</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>MovieGameInitialize</servlet-name>
+    <servlet-class>com.movieztalk.server.MovieGameInitializerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MovieGameInitialize</servlet-name>
+    <url-pattern>/moviegameinit</url-pattern>
+  </servlet-mapping>
 
     <servlet>
 		<servlet-name>HelloServlet</servlet-name>
