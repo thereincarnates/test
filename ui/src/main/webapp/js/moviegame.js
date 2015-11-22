@@ -1,29 +1,59 @@
-moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
+moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameService)
  { 
- 	 var success= true;
- 	 var movieName ;
-	 var compareChar = [" ","A","E","I","O","U",","];
-	 var vowelChar = ["A","E","I","O","U"];
-	 var replace;
-	 var receivedName = [];
-	 var maxChoices = 9;
-	 var usedChoices = 0;
-	 $scope.alphabetvec = [["A","disabled"],["B","enabled"],["C","enabled"],["D","enabled"],["E","disabled"],["F","enabled"],["G","enabled"],["H","enabled"],["I","disabled"],["J","enabled"],["K","enabled"],
-	                      ["L","enabled"],["M","enabled"],["N","enabled"],["O","disabled"],["P","enabled"],["Q","enabled"],
-	                      ["R","enabled"],["S","enabled"],["T","enabled"],["U","disabled"],["V","enabled"],["W","enabled"],
-	                      ["X","enabled"],["Y","enabled"],["Z","enabled"],["0","enabled"],["1","enabled"],["2","enabled"]
-	                      ,["3","enabled"],["4","enabled"],["5","enabled"],["6","enabled"],["7","enabled"],["8","enabled"]
-	                      ,["9","enabled"]];
+     console.log("userchoice get: "+gameService.getUserChoice());
+     console.log("route param id : "+ $routeParams.gameid);
+     if(!((gameService.getUserChoice()).localeCompare("friend")))
+     {
+ 	        $("#game-modal").modal({backdrop: false});
+ 	        $scope.remoteUrl = "127.0.0.1:8080/html/Start.html#/play/" + gameService.getRemoteId();
+ 	        console.log("remote url: " + $scope.remoteUrl);
 
-	 $http({
-			method : 'GET',
-			url : '/moviegame',
-			headers : {
-				'Content-Type' : 'application/json'
-			}
-		}).success(function(data) {
-			console.log(data);
-			console.log("Char in success"+compareChar);
+     }
+
+      var movieName ;
+		        	 var compareChar ;
+		        	 var vowelChar ;
+		        	 var replace;
+		        	 var receivedName ;
+		        	 var maxChoices = 9;
+		        	  var usedChoices;
+		        	  $scope.alphabetvec =[];
+
+     if(!((gameService.getUserChoice()).localeCompare("computer")))
+     {
+     	$http({
+		          method: 'GET',
+		          url: '/gamemanager?preinit='+ gameService.getUserChoice() + '&id=' +  $routeParams.gameid,
+		          headers: {'Content-Type': 'application/json'}
+		        }).success(function (option) 
+		        {
+
+ 	    			 initialize(option);
+	            });
+	 }
+    
+
+       function initialize(option)
+        {
+             var success= true;
+		 	 
+			 compareChar = [" ","A","E","I","O","U",","];
+			 vowelChar = ["A","E","I","O","U"];
+			 receivedName = [];
+			 usedChoices = 0;
+			 $scope.alphabetvec = [["A","disabled"],["B","enabled"],["C","enabled"],["D","enabled"],["E","disabled"],["F","enabled"],["G","enabled"],["H","enabled"],["I","disabled"],["J","enabled"],["K","enabled"],
+			                      ["L","enabled"],["M","enabled"],["N","enabled"],["O","disabled"],["P","enabled"],["Q","enabled"],
+			                      ["R","enabled"],["S","enabled"],["T","enabled"],["U","disabled"],["V","enabled"],["W","enabled"],
+			                      ["X","enabled"],["Y","enabled"],["Z","enabled"],["0","enabled"],["1","enabled"],["2","enabled"]
+			                      ,["3","enabled"],["4","enabled"],["5","enabled"],["6","enabled"],["7","enabled"],["8","enabled"]
+			                      ,["9","enabled"]];
+
+			
+        	$scope.moviedata = option; 
+        	var data = option.moviename.split("");
+        	//console.log("mname: " + data);
+			//console.log(data);
+			//console.log("Char in success"+compareChar);
             movieName = data.slice();
             $scope.imageno = "" ;
             
@@ -31,33 +61,32 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 			for(var  i =0; i< data.length; i++)
 			{
 				replace = true;
-				console.log("data[i]: "+ data[i]);
+			//	console.log("data[i]: "+ data[i]);
 				for(var j =0;j<compareChar.length;j++)
 				{
-					console.log("compareChar[j]: "+ compareChar[j]);
+					//console.log("compareChar[j]: "+ compareChar[j]);
 					if(!data[i].localeCompare(compareChar[j]))
 					{	
-                        console.log("set replace false");
+              //          console.log("set replace false");
 
                         replace =  false;
                     }        
 			    }		
 			    if(replace)
 			    {
-			    	console.log("set data[i]: to _ "+ data[i]);
+			    //	console.log("set data[i]: to _ "+ data[i]);
 					data[i] = "_";
                 }
 
-				console.log(data);
+				//console.log(data);
 			}
             $scope.words=data.join(" ");
 
 
-           console.log("Recieved Dataa"+ movieName);
-          
-		});
+           //console.log("Recieved Dataa"+ movieName);
+		    
 
-
+        }
          $scope.selectfunction = function(option)
             {
                var userMovie = $scope.words;
@@ -81,7 +110,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
                     }
 	               
 	               replace = true;
-	               console.log("movieName "+ movieName );
+	         //      console.log("movieName "+ movieName );
 	               receivedName = movieName.slice();
 	               success = true; 
                    validchoice = false;
@@ -100,14 +129,14 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 					{
 						if(!(option.localeCompare(compareChar[j])))
 						{
-							        console.log("is already used..");
+				//			        console.log("is already used..");
 									isalreadyused = true;  
 
 						}     
 					}
 
 					compareChar.push(option); 
-					console.log("Push Char " + compareChar);
+				//	console.log("Push Char " + compareChar);
 
 				   if(!isvowel)
 				   {
@@ -115,7 +144,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 	                   {
 	                   	  if(!(option.localeCompare(movieName[i]))  )
 								{
-									console.log("is valid choice..");
+				//					console.log("is valid choice..");
 									validchoice = true;    
 	 		                    }        
 	                   }
@@ -129,7 +158,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 	                   	    
 	                   	    $scope.imageno = usedChoices ;
 
-	                        console.log("invalid option selected");
+	              //          console.log("invalid option selected");
 	                   }
                    }
                    if(validchoice)
@@ -137,10 +166,10 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 		               for(var  i =0; i< receivedName.length; i++)
 					   {
 					   	    replace = true;
-					   	    console.log("receivedName[i]: "+ receivedName[i]);
+					//   	    console.log("receivedName[i]: "+ receivedName[i]);
 							for(var j =0;j<compareChar.length;j++)
 							{
-								console.log("compareChar[j]: "+ compareChar[j]);
+					//			console.log("compareChar[j]: "+ compareChar[j]);
 								if(!receivedName[i].localeCompare(compareChar[j]))
 								{	
 		                            console.log("set replace false");
@@ -150,7 +179,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 						    if(replace)
 						    {
 								receivedName[i] = "_";
-								console.log("set receivedName[i]: to _ "+ receivedName[i])
+					//			console.log("set receivedName[i]: to _ "+ receivedName[i])
 			                    success = false;
 
 			                }
@@ -165,8 +194,12 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 		            	if(!(userMovie.localeCompare(movie)))
 		            		{
 		            			$scope.won="Congratulations!!!! You Won...";
-								
+		            			$scope.gamescore = 9 + (maxChoices - usedChoices);
+
+						        $("#result-modal").modal({backdrop: false});		
 							}
+
+
 				    }
 	            }
 	            
@@ -178,19 +211,44 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http)
 		            if(!(userMovie.localeCompare(movie)))
 		            {
 		            		$scope.won="Congratulations!!!! You Won...";
-								
+                            $scope.gamescore = 9 ;								
 					}
 					else
 					{
 						$scope.won="SORRY !!!! You Lose...";
+						$scope.gamescore = 0;
 					}
-
+                     
+                    $("#result-modal").modal({backdrop: false});
 			    }
-
+                     
             }
+             
+             
 
-           
+     $scope.sendMovieName = function(moviename)
+     {
+           console.log("MovieName to send to friend: " + moviename);
+     }
+
+     $scope.sendResult = function(gamescore,gamepostaction)
+     {
+           console.log("gamescore: "+gamescore +"gamepostaction: "+ gamepostaction);
+           $http({
+                  method: 'GET',
+                  url: '/gamemanager?score='+ gamescore + '&gamepostaction=' +  gamepostaction,
+                  headers: {'Content-Type': 'application/json'}
+              }).success(function (option) 
+              {
+              	    if(!gamepostaction.localeCompare("continue"))
+                       initialize(option);
+                    else
+                    	console.log("finish");
+              });
+     }
+
  });
+
 
 
 

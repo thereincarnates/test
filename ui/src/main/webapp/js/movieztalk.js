@@ -52,15 +52,61 @@ moviezApp.config(['$routeProvider',
           });    
  });
 
- moviezApp.controller("GameController",function($scope,$routeParams,$http)
+ moviezApp.controller("GameController",function($scope,$routeParams,$http,gameService)
  {
+    
+   $http({
+          method: 'GET',
+          url: '/moviegameinit',
+          headers: {'Content-Type': 'application/json'}
+        }).success(function (data) 
+          {
+            $scope.idlocal = data.initiatorId;
+            $scope.idremote = data.otherPlayerId;
+          });  
+
     $scope.startplay = function(option)
     {
        console.log("option on play: "+ option);
-       $scope.idlocal = "local";
-       $scope.idremote = "remote";
+       gameService.setUserChoice(option);
+       console.log("userchoice get: "+gameService.getUserChoice())
+
+       $http({
+          method: 'GET',
+          url: '/gamemanager?preinit='+ option + '&id=' + $scope.idlocal,
+          headers: {'Content-Type': 'application/json'}
+        }).success(function (data) 
+          {
+             console.log("data froms servlet"+data);
+             $scope.moviedata = data;
+          });  
+
+       gameService.setRemoteId($scope.idremote);
     }    
  });
+
+ moviezApp.service('gameService', function () {
+        var userchoice = "computer";
+        var remoteid ="";
+
+        
+
+        return {
+            getUserChoice: function () {
+                return userchoice;
+            },
+            setUserChoice: function(value) {
+                userchoice = value;
+            },
+            getRemoteId: function () {
+                return remoteid;
+            },
+            setRemoteId: function(value) {
+                remoteid = value;
+            }
+        };
+
+    });
 
  
 

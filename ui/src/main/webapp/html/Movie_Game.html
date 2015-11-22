@@ -1,52 +1,140 @@
 <div id="outer_container" class="container-fluid ">
 	<div class="container">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h1 class="text-center">Let's Play Bollywood</h1>
+					<h1 class="text-center">Let's Play Bollywood</h1>
 		</div>
-		<div>
-			<h2>Guess the Movie Name:</h2>
-		</div>
+		<hr>
 		<br>
 		<br>
-		<br>  
-
-		<div>
-			<b> Instructions : 9 Choices are available in the form of 9
-				letters of bollywood, U have to select your choices on the virtual
-				keyboard provided , for each wrong choice one letter will get cut
-				from bollywood written below. Vowels are already displayed above in movie , further
-        selection of vowels is not allowed. </b>
-		</div>
-
-<br><br><br>
-
 		<div class="row">
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-0"></div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<img ng-src="../Images/bollywood{{imageno}}.png"
-					class="img-responsive">
-			</div>
-		</div>
-		<div class="row" style="text-align: center;">
-			<h1>
-				{{words}}
-				<h1>
-		</div>
+           <div class ="col-lg-9 col-md-9 col-sm-9 col-xs-12">	
+				<div>
+					<h2>Guess the Movie Name:</h2>
+				</div>
+				<br>
+				<br>
+				<div>
+					<b> Instructions : 9 Choices are available in the form of 9
+						letters of bollywood, U have to select your choices on the virtual
+						keyboard provided , for each wrong choice one letter will get cut
+						from bollywood written below. Vowels are already displayed above in movie , further
+		        selection of vowels is not allowed. </b>
+				</div>
 
-		<div class="row" style="text-align: center;">
-			<h2>
-				{{won}}
-				<h2>
-		</div>
-		<br>
-		<div class="row" style="text-align: center;">
-			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<button type="button"
-					class="btn btn-info btn-space col-lg-1 col-md-1 col-sm-1 col-xs-1 {{x[1]}}"
-					ng-click="selectfunction(x[0])" ng-repeat="x in alphabetvec">{{x[0]}}</button>
-			</div>
+		        <br><br><br>
 
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-0"></div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<img ng-src="../Images/bollywood{{imageno}}.png"
+							class="img-responsive">
+					</div>
+				</div>
+				<div class="row" style="text-align: center;">
+					<h1>
+						{{words}}
+						<h1>
+				</div>
+				<br>
+				<div class="row" style="text-align: center;">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<button type="button"
+							class="btn btn-info btn-space col-lg-1 col-md-1 col-sm-1 col-xs-1 {{x[1]}}"
+							ng-click="selectfunction(x[0])" ng-repeat="x in alphabetvec">{{x[0]}}</button>
+					</div>
+                </div>
+	</div>
+
+	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+		<div class="panel panel-default">
+			  <div class="panel-heading">ScoreBoard</div>
+			  <div class="panel-body">
+                  <div class= "row">
+                       <table class="table table-striped">
+                           <thead>
+                              <tr>
+						         <th>Game No.</th>
+						         <th>Score</th>
+						      </tr>
+                            </thead>
+                            <tbody>
+							      <tr ng-repeat="score in moviedata.scoreboard.scores">
+							        <td>{{$index+1 }} </td>
+							        <td>{{score}}</td>
+							      </tr>
+                              </tbody>
+  						</table>
+                  </div>
+                  <div class="row">
+                  	<p><b> Total Game Played: <b> {{moviedata.scoreboard.totalGamePlayed}}<p>
+                  </div>
+                  <div class="row">
+                  	 <p><b> Total Score: <b> {{moviedata.scoreboard.totalScore}}<p>
+                  </div>
+
+			  </div>
 		</div>
 	</div>
+    </div>
+	</div>
+
+    <!-- Modal -->
+		<div id="game-modal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Bollywood Game</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p><b>Copy the  below URL and give it to friend:</b></p>
+
+		        <p>{{remoteUrl}}</p>
+
+		        <p><b>   Enter Movie Name:</b></p>
+		        
+		        <input type="text" class="input-default  form-control col-" name="movieplay" id="movieplay" ng-model="movieplay" placeholder="Enter movie name..." >
+		        <div>
+
+		        </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click='sendMovieName(movieplay)'>Continue</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+
+        <div id="result-modal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Bollywood Game</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p><b>{{won}}</b></p>
+                <p><b>Your Score : <h1>{{gamescore}}</h1></b></p>
+		      </div>
+		      <div class="modal-footer">
+                <div class= "row">
+                	<div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+		                <a href="#game"><button type="button" class="btn btn-default" ng-click='sendResult(gamescore,"finish")'>Finish</button></a>
+                    </div>
+                    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+                    <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+		               <button type="button" class="btn btn-default" data-dismiss="modal" ng-click='sendResult(gamescore,"continue")'>Continue</button>
+		            </div>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+
 </div>
