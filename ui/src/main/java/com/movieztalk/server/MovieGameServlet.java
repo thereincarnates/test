@@ -60,7 +60,7 @@ public class MovieGameServlet extends HttpServlet {
     String json = gson.toJson(listC);
 
     PrintWriter out = response.getWriter();
-    out.write(MovieGameInitializerServlet.usedURLs.toString());
+    out.write(json);
 
     out.flush();
     out.close();
