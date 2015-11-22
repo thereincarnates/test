@@ -32,5 +32,7 @@ public class MovieGameInitializerServlet extends HttpServlet {
     String json = gson.toJson(game);
     PrintWriter out = response.getWriter();
     out.write(json);
+    out.flush();
+    out.close();
   }
 }
