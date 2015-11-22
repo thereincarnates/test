@@ -20,22 +20,32 @@ public class MovieGameManagerServlet extends HttpServlet {
     String gameState = request.getParameter("gamestate");
     String preint = request.getParameter("preinit");
     String id = request.getParameter("id");
-    System.out.println(preint + id);
+    String gamePostAction = request.getParameter("gamepostaction");
+    if (preint.equalsIgnoreCase("computer") || gamePostAction.equalsIgnoreCase("continue")) {
+      System.out.println(preint + id);
 
-    MovieRequest movieRequest = new MovieRequest();
-    movieRequest.setMoviename("PYAAR TO HONA HI THA");
-    ScoreBoard scoreBoard = new ScoreBoard();
-    scoreBoard.getScores().add(0);
-    scoreBoard.setTotalScore("0");
-    scoreBoard.setTotalGamePlayed("0");
-    movieRequest.setScoreboard(scoreBoard);
+      MovieRequest movieRequest = new MovieRequest();
+      movieRequest.setMoviename("PYAAR,TO,HONA,HI,THA");
+      ScoreBoard scoreBoard = new ScoreBoard();
+      scoreBoard.getScores().add(0);
+      scoreBoard.setTotalScore("0");
+      scoreBoard.setTotalGamePlayed("0");
+      movieRequest.setScoreboard(scoreBoard);
 
-    Gson gson = new Gson();
+      Gson gson = new Gson();
 
-    PrintWriter out = response.getWriter();
-    out.write(gson.toJson(movieRequest));
-    out.flush();
-    out.close();
+      PrintWriter out = response.getWriter();
+      out.write(gson.toJson(movieRequest));
+      out.flush();
+      out.close();
+    }
+
+    if (gamePostAction.equalsIgnoreCase("finish")) {
+      PrintWriter out = response.getWriter();
+      out.write("");
+      out.flush();
+      out.close();
+    }
 
     /*
      * PrintWriter out = response.getWriter();

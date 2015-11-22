@@ -15,6 +15,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.movieztalk.game.model.GuessMovieNameGame;
 
+@SuppressWarnings("serial")
 public class MovieGameInitializerServlet extends HttpServlet {
   public static Set<Integer> usedURLs = Sets.newHashSet();
   public static final Map<String, GuessMovieNameGame> initiatorIdToGameObjMap = new HashMap<>();
@@ -32,5 +33,7 @@ public class MovieGameInitializerServlet extends HttpServlet {
     String json = gson.toJson(game);
     PrintWriter out = response.getWriter();
     out.write(json);
+    out.flush();
+    out.close();
   }
 }
