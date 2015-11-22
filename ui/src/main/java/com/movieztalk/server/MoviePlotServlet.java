@@ -30,6 +30,7 @@ public class MoviePlotServlet extends HttpServlet {
     String json = gson.toJson(buildMovieObject());
     PrintWriter out = response.getWriter();
     out.write(json);
+
     out.flush();
     out.close();
   }

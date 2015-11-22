@@ -3,7 +3,6 @@ package com.movieztalk.server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,17 +17,17 @@ import com.movieztalk.game.model.GuessMovieNameGame;
 
 public class MovieGameInitializerServlet extends HttpServlet {
   public static Set<Integer> usedURLs = Sets.newHashSet();
-  private final Map<Integer, GuessMovieNameGame> initiatorIdToGameObjMap = new HashMap<>();
-  private final Map<Integer, GuessMovieNameGame> playerIdToGameObjMap = new HashMap<>();
+  public static final Map<String, GuessMovieNameGame> initiatorIdToGameObjMap = new HashMap<>();
+  public static final Map<String, GuessMovieNameGame> playerIdToGameObjMap = new HashMap<>();
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    response.setContentType("text/html");
+    response.setContentType("application/json");
     String isMultiPlayer = request.getParameter("isMultiPlayer");
     GuessMovieNameGame game = GuessMovieNameGame.build();
-    initiatorIdToGameObjMap.put(game.getInitiatorId(), game);
-    playerIdToGameObjMap.put(game.getOtherPlayerId(), game);
+    initiatorIdToGameObjMap.put(String.valueOf(game.getInitiatorId()), game);
+    playerIdToGameObjMap.put(String.valueOf(game.getInitiatorId()), game);
     Gson gson = new Gson();
     String json = gson.toJson(game);
     PrintWriter out = response.getWriter();
