@@ -1,53 +1,42 @@
 package com.movieztalk.game.model;
 
-import com.movieztalk.server.MovieGameInitializerServlet;
-
 public class GuessMovieNameGame {
 
-  private String gameState;
-  private int initiatorId;
-  private int otherPlayerId;
+  private String gameCurrentState;
+  private String initiatorId;
+  private String otherPlayerId;
+  private String movieName;
 
-  public String getGameState() {
-    return gameState;
+  public String getGameCurrentState() {
+    return gameCurrentState;
   }
 
-  public void setGameState(String gameState) {
-    this.gameState = gameState;
+  public void setGameCurrentState(String gameCurrentState) {
+    this.gameCurrentState = gameCurrentState;
   }
 
-  public int getInitiatorId() {
+  public String getInitiatorId() {
     return initiatorId;
   }
 
-  public void setInitiatorId(int initiatorId) {
+  public void setInitiatorId(String initiatorId) {
     this.initiatorId = initiatorId;
   }
 
-  public int getOtherPlayerId() {
+  public String getOtherPlayerId() {
     return otherPlayerId;
   }
 
-  public void setOtherPlayerId(int otherPlayerId) {
+  public void setOtherPlayerId(String otherPlayerId) {
     this.otherPlayerId = otherPlayerId;
   }
 
-  public static GuessMovieNameGame build() {
-    GuessMovieNameGame obj = new GuessMovieNameGame();
-    obj.setInitiatorId(getURLId());
-    obj.setOtherPlayerId(getURLId());
-    obj.setGameState("");
-    return obj;
+  public String getMovieName() {
+    return movieName;
   }
 
-  public static int getURLId() {
-    while (true) {
-      int probableUrl = Math.abs(String.valueOf(System.currentTimeMillis() * Math.random())
-          .hashCode());
-      if (!MovieGameInitializerServlet.usedURLs.contains(probableUrl)) {
-        MovieGameInitializerServlet.usedURLs.add(probableUrl);
-        return probableUrl;
-      }
-    }
+  public void setMovieName(String movieName) {
+    this.movieName = movieName;
   }
+
 }

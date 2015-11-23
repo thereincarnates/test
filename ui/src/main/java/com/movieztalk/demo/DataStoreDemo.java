@@ -1,15 +1,22 @@
 package com.movieztalk.demo;
 
+import static com.google.api.services.datastore.client.DatastoreHelper.*;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.google.api.services.datastore.DatastoreV1.BeginTransactionRequest;
 import com.google.api.services.datastore.DatastoreV1.BeginTransactionResponse;
 import com.google.api.services.datastore.DatastoreV1.CommitRequest;
+import com.google.api.services.datastore.DatastoreV1.CommitResponse;
 import com.google.api.services.datastore.DatastoreV1.Entity;
 import com.google.api.services.datastore.DatastoreV1.Key;
-import com.google.api.services.datastore.DatastoreV1.LookupRequest;
-import com.google.api.services.datastore.DatastoreV1.LookupResponse;
+import com.google.api.services.datastore.DatastoreV1.Mutation;
 import com.google.api.services.datastore.DatastoreV1.Property;
 import com.google.api.services.datastore.DatastoreV1.Value;
 import com.google.api.services.datastore.client.Datastore;
@@ -44,67 +51,46 @@ public class DataStoreDemo {
       ByteString tx = tres.getTransaction();
 
       // Create an RPC request to get entities by key.
-      LookupRequest.Builder lreq = LookupRequest.newBuilder();
       // Set the entity key with only one `path_element`: no parent.
-      Key.Builder key = Key.newBuilder().addPathElement(
-          Key.PathElement.newBuilder().setKind("Trivia").setName("hgtg2"));
-      // Add one key to the lookup request.
-      lreq.addKey(key);
-      // Set the transaction, so we get a consistent snapshot of the
-      // entity at the time the transaction started.
-      lreq.getReadOptionsBuilder().setTransaction(tx);
-      // Execute the RPC and get the response.
-      LookupResponse lresp = datastore.lookup(lreq.build());
-      // Create an RPC request to commit the transaction.
       CommitRequest.Builder creq = CommitRequest.newBuilder();
       // Set the transaction to commit.
       creq.setTransaction(tx);
-      Entity entity;
-      if (lresp.getFoundCount() > 0) {
-        entity = lresp.getFound(0).getEntity();
-        System.out.println("Entity Found");
-      } else {
-        // If no entity was found, create a new one.
-        Entity.Builder entityBuilder = Entity.newBuilder();
-        // Set the entity key.
-        entityBuilder.setKey(key);
-        // Add two entity properties:
-        // - a utf-8 string: `question`
-        entityBuilder
-            .addProperty(Property
-                .newBuilder()
-                .setName("question")
-                .setValue(
-                    Value
-                        .newBuilder()
-                        .setStringValue(
-                            "Meaning of Life, what is your name?vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
-                        .setIndexed(false)));
-        // - a 64bit integer: `answer`
-        entityBuilder.addProperty(Property.newBuilder().setName("answer")
-            .setValue(Value.newBuilder().setIntegerValue(4)));
-        // Build the entity.
-        entity = entityBuilder.build();
-        // Insert the entity in the commit request mutation.
-        creq.getMutationBuilder().addInsert(entity);
-      }
+      List<String> movieList = Arrays.asList("Sholay", "Mughal e Azam", "Mother India",
+          "Dilwale Dulhania Le Jayenee", "Pyaasa", "Guide", "Deewaar", "Lagaan", "Pakeezah",
+          "Amar Akbar Anthony", "Do Bigha Zamin", "Jaane Bhi Do Yaaro", "3 Idiots",
+          "Kaagaz Ke Phool", "Bombay", "Mr India", "Satya", "Dil Chahta Hai", "Andaz Apna Apna",
+          "Awaara", "Dil To Pagal Hai", "Om Shanti Om", "Shree 420", "Jab We Met", "Parinda",
+          "Shaan", "Zindagi Na Milegi Dobara", "Silsila", "Anand", "Prem Rog", "Barfi", "GolMaal",
+          "Ankur", "Ek Tha Tiger", "Chak De  India", "Kaala Patthar", "Ghajini", "Jodhaa Akbar",
+          "Kabhi Khushi Kabhie Gham", "Dil Se", "The Lunchbox", "Khakee", "Maine Pyar Kiya",
+          "Parvarish", "Velu Nayakan", "Kuch Kuch Hota Hai", "Mera Naam Joker", "Queen",
+          "Main Hoon Na", "Rockstar", "Sangam", "Tezaab", "Sahib Bibi Aur Ghulam", "Tashan",
+          "Satyam Shivam Sundaram", "Aiyyaa", "Mr   Mrs  55", "Garam Hawa", "Hum Hain Rahi Pya Ke",
+          "Lootera", "Parineeta", "Sharmeelee", "Bunty Aur Babli", "Jagte Raho", "Chandni",
+          "Madhumati", "Gunga Jumna", "Devdas", "Jewel Thief", "Chhoti Si Baat", "Omkara",
+          "Zanjeer", "Naseeb", "Teesri Kasam", "Zubeidaa", "Udaan", "Kabhie Kabhie",
+          "Bandit Queen", "Gangster", "Black", "Dabangg", "Kahaani", "Dhoom", "Arth",
+          "Gangs of Wasseypur  Part One", "Black Friday", "Kati Patang", "Dhobi Ghat",
+          "Bhaag Milkha Bhaag", "Hera Pheri", "Ardh Satya", "Lage Raho Munna Bhai",
+          "Mujhse Dosti Karoge", "Salaam Bombay", "Swades", "Umrao Jaan", "Veer Zaara",
+          "Yeh Jawaani Hai Deewani", "Hum Aapke Hain Koun", "Bobby");
+      Entity.Builder employee = Entity.newBuilder().setKey(makeKey("movie"))
+          .addProperty(makeProperty("name", makeValue("devdas")));
+      Entity entity = employee.build();
+      /*
+       * Set<Entity> entities = new HashSet<>(); for (String movie : movieList) { Entity entity;
+       * Entity.Builder employee = Entity.newBuilder().setKey(makeKey("movie"))
+       * .addProperty(makeProperty("name", makeValue(movie))); entity = employee.build();
+       * entities.add(entity); }
+       */
+      creq.getMutationBuilder().addInsertAutoId(entity);
+      // Insert the entity in the commit request mutation.
+      // creq.getMutationBuilder().addAllInsertAutoId(entities);
       // Execute the Commit RPC synchronously and ignore the response.
       // Apply the insert mutation if the entity was not found and close
       // the transaction.
       datastore.commit(creq.build());
-      // Get `question` property value.
-      String question = entity.getProperty(0).getValue().getStringValue();
-      // Get `answer` property value.
-      System.out.println("Question is" + question);
-      Long answer = entity.getProperty(1).getValue().getIntegerValue();
-      System.out.println(question);
-      String result = System.console().readLine("> ");
-      if (result.equals(answer.toString())) {
-        System.out.println("fascinating, extraordinary and, "
-            + "when you think hard about it, completely obvious.");
-      } else {
-        System.out.println("Don't Panic!" + answer.toString());
-      }
+
     } catch (DatastoreException exception) {
       // Catch all Datastore rpc errors.
       System.err.println("Error while doing datastore operation");
@@ -113,7 +99,5 @@ public class DataStoreDemo {
           exception.getMethodName(), exception.getCode()));
       System.exit(1);
     }
-
   }
-
 }
