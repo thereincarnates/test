@@ -23,17 +23,12 @@ public class MovieGameManagerServlet extends HttpServlet {
     String gamePostAction = request.getParameter("gamepostaction");
     if (preint.equalsIgnoreCase("computer") || gamePostAction.equalsIgnoreCase("continue")) {
       System.out.println(preint + id);
-
       MovieRequest movieRequest = new MovieRequest();
       movieRequest.setMoviename("PYAAR,TO,HONA,HI,THA");
       ScoreBoard scoreBoard = new ScoreBoard();
-      scoreBoard.getScores().add(0);
-      scoreBoard.setTotalScore("0");
-      scoreBoard.setTotalGamePlayed("0");
+
       movieRequest.setScoreboard(scoreBoard);
-
       Gson gson = new Gson();
-
       PrintWriter out = response.getWriter();
       out.write(gson.toJson(movieRequest));
       out.flush();

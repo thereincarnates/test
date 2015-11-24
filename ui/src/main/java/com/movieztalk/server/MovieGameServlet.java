@@ -29,7 +29,7 @@ public class MovieGameServlet extends HttpServlet {
     logger.info("Testing the data");
     List<List<Character>> charinMovie = new ArrayList<List<Character>>();
 
-    String movieName = "PYAAR KIYA TO DARNA KYA";
+    String movieName = "HATA SAWAN KI GHATA";
     List<String> movieWords = Arrays.asList(movieName.split(" +"));
     List<Character> listC = new ArrayList<Character>();
 
