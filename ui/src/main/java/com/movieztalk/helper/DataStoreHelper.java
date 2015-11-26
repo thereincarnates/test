@@ -4,11 +4,19 @@ import static com.google.api.services.datastore.client.DatastoreHelper.*;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.api.services.datastore.DatastoreV1.CommitRequest;
 import com.google.api.services.datastore.DatastoreV1.Entity;
+import com.google.api.services.datastore.DatastoreV1.EntityResult;
+import com.google.api.services.datastore.DatastoreV1.GqlQuery;
 import com.google.api.services.datastore.DatastoreV1.Mutation;
+import com.google.api.services.datastore.DatastoreV1.RunQueryRequest;
+import com.google.api.services.datastore.DatastoreV1.RunQueryResponse;
 import com.google.api.services.datastore.client.Datastore;
 import com.google.api.services.datastore.client.DatastoreException;
 import com.google.api.services.datastore.client.DatastoreFactory;
@@ -19,6 +27,7 @@ public class DataStoreHelper {
   private static Datastore datastoreConnection;
 
   public static Datastore getDatastoreConnection() {
+	  System.out.println("get data store connection entry" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
     if (datastoreConnection == null) {
       try {
         // Setup the connection to Google Cloud Datastore and infer credentials
@@ -32,12 +41,18 @@ public class DataStoreHelper {
         System.err.println("I/O error connecting to the datastore: " + exception.getMessage());
         System.exit(1);
       }
+      System.out.println("get data store connection exit" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+      
       return datastoreConnection;
     }
+    System.out.println("get data store connection exit" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+    
     return datastoreConnection;
   }
 
   public static boolean storeData(Map<String, String> propertyMap, String kind) {
+	  System.out.println("Entering into storedata" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+	  
     Entity entity;
     Entity.Builder entityBuilder = Entity.newBuilder().setKey(makeKey(kind));
     for (String key : propertyMap.keySet()) {
@@ -52,6 +67,7 @@ public class DataStoreHelper {
     } catch (DatastoreException e) {
       e.printStackTrace();
     }
+    System.out.println("exiting storedata" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
     return false;
   }
 }

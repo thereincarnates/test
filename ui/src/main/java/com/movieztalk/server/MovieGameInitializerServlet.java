@@ -2,6 +2,7 @@ package com.movieztalk.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +29,8 @@ public class MovieGameInitializerServlet extends HttpServlet {
       throws ServletException, IOException {
     response.setContentType("application/json");
     String isMultiPlayer = request.getParameter("isMultiPlayer");
+    
+    System.out.println("Start" + new Date());
     GuessMovieNameGame game;
     try {
       game = new GuessMovieNameGameBuilder().buildGameState().buildInitiatorId().buildMovieName()
@@ -35,6 +38,7 @@ public class MovieGameInitializerServlet extends HttpServlet {
       Gson gson = new Gson();
       String json = gson.toJson(game);
       PrintWriter out = response.getWriter();
+      System.out.println("Start" + new Date());
       out.write(json);
       out.flush();
       out.close();

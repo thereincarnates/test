@@ -69,18 +69,7 @@ moviezApp.config(['$routeProvider',
     {
        console.log("option on play: "+ option);
        gameService.setUserChoice(option);
-       console.log("userchoice get: "+gameService.getUserChoice())
-
-       $http({
-          method: 'GET',
-          url: '/gamemanager?preinit='+ option + '&id=' + $scope.idlocal,
-          headers: {'Content-Type': 'application/json'}
-        }).success(function (data) 
-          {
-             console.log("data froms servlet"+data);
-             $scope.moviedata = data;
-          });  
-
+       console.log("userchoice get: "+gameService.getUserChoice());
        gameService.setRemoteId($scope.idremote);
     }    
  });

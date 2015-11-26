@@ -27,7 +27,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
 		          headers: {'Content-Type': 'application/json'}
 		        }).success(function (option) 
 		        {
-
+                     
  	    			 initialize(option);
 	            });
 	 }
@@ -236,7 +236,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
            console.log("gamescore: "+gamescore +"gamepostaction: "+ gamepostaction);
            $http({
                   method: 'GET',
-                  url: '/gamemanager?score='+ gamescore + '&gamepostaction=' +  gamepostaction,
+                  url: '/gamemanager?score='+ gamescore + '&gamepostaction=' +  gamepostaction + '&id=' + $routeParams.gameid,
                   headers: {'Content-Type': 'application/json'}
               }).success(function (option) 
               {

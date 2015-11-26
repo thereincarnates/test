@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.movieztalk.game.builder.MovieRequestBuilder;
 import com.movieztalk.game.model.MovieRequest;
 import com.movieztalk.game.model.ScoreBoard;
 
@@ -19,15 +20,17 @@ public class MovieGameManagerServlet extends HttpServlet {
     String intiatorId = request.getParameter("initiatorid");
     String gameState = request.getParameter("gamestate");
     String preint = request.getParameter("preinit");
+    String score = request.getParameter("score");
+    System.out.println("Score received: " + score);
     String id = request.getParameter("id");
+    System.out.println("String id receive" + id);
     String gamePostAction = request.getParameter("gamepostaction");
-    if (preint.equalsIgnoreCase("computer") || gamePostAction.equalsIgnoreCase("continue")) {
+    System.out.println("String gamepostaction" + gamePostAction);
+    if (((preint!=null) && (preint.equalsIgnoreCase("computer"))) || 
+    		((gamePostAction!=null) && (gamePostAction.equalsIgnoreCase("continue")))) {
       System.out.println(preint + id);
-      MovieRequest movieRequest = new MovieRequest();
-      movieRequest.setMoviename("PYAAR,TO,HONA,HI,THA");
-      ScoreBoard scoreBoard = new ScoreBoard();
-
-      movieRequest.setScoreboard(scoreBoard);
+      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieName(id).buildScore().build();
+      
       Gson gson = new Gson();
       PrintWriter out = response.getWriter();
       out.write(gson.toJson(movieRequest));

@@ -8,6 +8,11 @@ public class ScoreBoard {
   private PlayerScoreBoard playerScoreBoard1;
   private PlayerScoreBoard playerScoreBoard2;
 
+  public ScoreBoard() {
+	playerScoreBoard1 = new PlayerScoreBoard();
+	playerScoreBoard2 = new PlayerScoreBoard();
+  }
+  
   public PlayerScoreBoard getPlayerScoreBoard1() {
     return playerScoreBoard1;
   }
@@ -24,24 +29,29 @@ public class ScoreBoard {
     this.playerScoreBoard2 = playerScoreBoard2;
   }
 
-  public class PlayerScoreBoard {
-    private final List<Integer> scores = new ArrayList<>();
-    private String totalScore;
-    private String totalGamePlayed;
+ public class PlayerScoreBoard {
+    private List<Integer> scores;
+    private int totalScore;
+    private int totalGamePlayed;
 
-    public String getTotalScore() {
+    public PlayerScoreBoard() {
+		totalScore = 0;
+		totalGamePlayed = 0;
+		scores = new ArrayList<>();
+	}
+    public int getTotalScore() {
       return totalScore;
     }
 
-    public void setTotalScore(String totalScore) {
+    public void setTotalScore(int totalScore) {
       this.totalScore = totalScore;
     }
 
-    public String getTotalGamePlayed() {
+    public int getTotalGamePlayed() {
       return totalGamePlayed;
     }
 
-    public void setTotalGamePlayed(String totalGamePlayed) {
+    public void setTotalGamePlayed(int totalGamePlayed) {
       this.totalGamePlayed = totalGamePlayed;
     }
 
