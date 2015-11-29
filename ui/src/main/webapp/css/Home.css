@@ -10,7 +10,7 @@
 
 .container-fluid
 {
-	background-image: url(../Images/container_fluid_background_image.png);
+	background-image: url(../Images/container_fluid_background_image1.png);
 	background-size: 100%;
 	
 }
@@ -56,6 +56,19 @@
     background: #8A8A5C;
     color: #ffffff;
     font-weight: 800;
+}
+
+.bgbodycolor
+{
+	background-color: #FFD464;
+}
+.bgcolorinstruct
+{
+	
+}
+
+.bgcolorpink{
+
 }
 
 

@@ -40,6 +40,7 @@ moviezApp.config(['$routeProvider',
 
 
 
+
  moviezApp.controller("LoadHomePageCont",function($scope,$routeParams,$http)
  {
     $http({
@@ -55,6 +56,9 @@ moviezApp.config(['$routeProvider',
  moviezApp.controller("GameController",function($scope,$routeParams,$http,gameService)
  {
     
+   //$scope.hideplay = "false";
+   //$scope.imgplay = "";
+   //$scope.imgplay = "../Images/loading.gif";
    $http({
           method: 'GET',
           url: '/moviegameinit',
@@ -63,6 +67,9 @@ moviezApp.config(['$routeProvider',
           {
             $scope.idlocal = data.initiatorId;
             $scope.idremote = data.otherPlayerId;
+            
+            
+            //$scope.hideplay = "false";
           });  
 
     $scope.startplay = function(option)

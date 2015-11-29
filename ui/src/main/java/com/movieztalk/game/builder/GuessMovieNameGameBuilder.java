@@ -58,6 +58,7 @@ public class GuessMovieNameGameBuilder {
     propertyMap.put("otherplayerid", guessMovieNameGame.getOtherPlayerId());
     propertyMap.put("gamecurrentstate", guessMovieNameGame.getGameCurrentState());
     propertyMap.put("moviename", guessMovieNameGame.getMovieName());
+    propertyMap.put("scoreboard","");
     DataStoreHelper.storeData(propertyMap, "gamestate");
     return guessMovieNameGame;
   }

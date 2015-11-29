@@ -29,7 +29,7 @@ public class MovieGameManagerServlet extends HttpServlet {
     if (((preint!=null) && (preint.equalsIgnoreCase("computer"))) || 
     		((gamePostAction!=null) && (gamePostAction.equalsIgnoreCase("continue")))) {
       System.out.println(preint + id);
-      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieName(id).buildScore().build();
+      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieRequest(id,score).build();
       
       Gson gson = new Gson();
       PrintWriter out = response.getWriter();

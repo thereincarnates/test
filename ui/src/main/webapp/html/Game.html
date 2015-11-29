@@ -10,9 +10,9 @@
             </div>
             
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  img-holder">
-             	<img src="../Images/bollywoodgame.png" class="img-responsive" ng-click="callBollywoodPage()">
-                <a href="#play/{{idlocal}}"><button type="button" class="btn btn-info link"  ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
-                <a href="#play/{{idlocal}}"><button type="button" class="btn btn-info link1" ng-click="startplay('friend')"><b>Play with Friend</b></button></a>
+             	<img src="../Images/bollywoodgame.png" class="img-responsive " >
+                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link"  ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
+                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link1" ng-click="startplay('friend')"><b>Play with Friend</b></button></a>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -24,7 +24,7 @@
             </div>
             
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <h1><b> Bollywood Game <b></h1>
+              <h1><b ng-hide="hideplay"> Bollywood Game <b></h1>
              </div>
         </div> 
     </div>

@@ -18,6 +18,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
 		        	 var maxChoices = 9;
 		        	  var usedChoices;
 		        	  $scope.alphabetvec =[];
+		        	  $scope.moviedata;
 
      if(!((gameService.getUserChoice()).localeCompare("computer")))
      {
@@ -27,7 +28,7 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
 		          headers: {'Content-Type': 'application/json'}
 		        }).success(function (option) 
 		        {
-                     
+                     console.log("option" + option);
  	    			 initialize(option);
 	            });
 	 }
@@ -49,7 +50,11 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
 			                      ,["9","enabled"]];
 
 			
-        	$scope.moviedata = option; 
+        	$scope.moviedata = option;
+        	 console.log("moviedata moviename: " + $scope.moviedata.moviename);
+ 
+            console.log("moviedata score: " + $scope.moviedata.scoreboard);
+        	console.log("moviedata: " + $scope.moviedata.scoreboard.playerScoreBoard1.totalGamePlayed);
         	var data = option.moviename.split("");
         	//console.log("mname: " + data);
 			//console.log(data);

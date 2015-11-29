@@ -15,6 +15,7 @@ import com.google.api.services.datastore.DatastoreV1.Entity;
 import com.google.api.services.datastore.DatastoreV1.EntityResult;
 import com.google.api.services.datastore.DatastoreV1.GqlQuery;
 import com.google.api.services.datastore.DatastoreV1.Mutation;
+import com.google.api.services.datastore.DatastoreV1.Property;
 import com.google.api.services.datastore.DatastoreV1.RunQueryRequest;
 import com.google.api.services.datastore.DatastoreV1.RunQueryResponse;
 import com.google.api.services.datastore.client.Datastore;
@@ -70,4 +71,20 @@ public class DataStoreHelper {
     System.out.println("exiting storedata" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
     return false;
   }
+  
+  public static boolean UpdateEntity(Entity.Builder prop)
+  {
+	  CommitRequest request = CommitRequest.newBuilder()
+			    .setMode(CommitRequest.Mode.NON_TRANSACTIONAL)
+			    .setMutation(Mutation.newBuilder().addUpdate(prop))
+			    .build();
+	try {
+		getDatastoreConnection().commit(request);
+	} catch (DatastoreException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	return false;
+  }
+  
 }

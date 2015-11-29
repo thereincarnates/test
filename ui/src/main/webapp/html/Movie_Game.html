@@ -1,7 +1,8 @@
 <div id="outer_container" class="container-fluid ">
 	<div class="container">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<h1 class="text-center">Let's Play Bollywood</h1>
+					<h1 class="text-center bgcolorinstruct">MoviezTalk</h1>
+					<hr>
 		</div>
 		<hr>
 		<br>
@@ -9,19 +10,9 @@
 		<div class="row">
            <div class ="col-lg-9 col-md-9 col-sm-9 col-xs-12">	
 				<div>
-					<h2>Guess the Movie Name:</h2>
+					<h2 class="bgcolorpink">Guess the Movie Name:</h2>
 				</div>
-				<br>
-				<br>
-				<div>
-					<b> Instructions : 9 Choices are available in the form of 9
-						letters of bollywood, U have to select your choices on the virtual
-						keyboard provided , for each wrong choice one letter will get cut
-						from bollywood written below. Vowels are already displayed above in movie , further
-		        selection of vowels is not allowed. </b>
-				</div>
-
-		        <br><br><br>
+				<br><br>
 
 				<div class="row">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-0"></div>
@@ -30,7 +21,8 @@
 							class="img-responsive">
 					</div>
 				</div>
-				<div class="row" style="text-align: center;">
+
+				<div class="row  bgcolorinstruct" style="text-align: center;">
 					<h1>
 						{{words}}
 						<h1>
@@ -44,6 +36,15 @@
 							ng-click="selectfunction(x[0])" ng-repeat="x in alphabetvec">{{x[0]}}</button>
 					</div>
                 </div>
+                <br><br>
+
+                	<div class="bgcolorinstruct">
+					<b> Instructions : 9 Choices are available in the form of 9
+						letters of bollywood, U have to select your choices on the virtual
+						keyboard provided , for each wrong choice one letter will get cut
+						from bollywood written below. Vowels are already displayed above in movie , further
+		        selection of vowels is not allowed. </b>
+				</div>
 	</div>
 
 	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -59,7 +60,7 @@
 						      </tr>
                             </thead>
                             <tbody>
-							      <tr ng-repeat="score in moviedata.scoreboard.scores">
+							      <tr ng-repeat="score in moviedata.scoreboard.playerScoreBoard1.scores track by $index">
 							        <td>{{$index+1 }} </td>
 							        <td>{{score}}</td>
 							      </tr>
@@ -67,10 +68,10 @@
   						</table>
                   </div>
                   <div class="row">
-                  	<p><b> Total Game Played: <b> {{moviedata.scoreboard.totalGamePlayed}}<p>
+                  	<p> <b>Total Game Played: {{moviedata.scoreboard.playerScoreBoard1.totalGamePlayed}}</b></p>
                   </div>
                   <div class="row">
-                  	 <p><b> Total Score: <b> {{moviedata.scoreboard.totalScore}}<p>
+                  	 <p><b> Total Score: <b> {{moviedata.scoreboard.playerScoreBoard1.totalScore}}<p>
                   </div>
 
 			  </div>
@@ -121,16 +122,19 @@
 		      <div class="modal-body">
 		        <p><b>{{won}}</b></p>
                 <p><b>Your Score : <h1>{{gamescore}}</h1></b></p>
+                <p>Correct Movie: {{moviedata.moviename}}</p>
 		      </div>
 		      <div class="modal-footer">
                 <div class= "row">
-                	<div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                	<div class = "col-lg-3 col-md-3 col-sm-3 col-xs-6">
 		                <a href="#game"><button type="button" class="btn btn-default" ng-click='sendResult(gamescore,"finish")'>Finish</button></a>
                     </div>
-                    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
-                    <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
-		               <button type="button" class="btn btn-default" data-dismiss="modal" ng-click='sendResult(gamescore,"continue")'>Continue</button>
+                    <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-1"></div>
+                    <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-4">
+		              <button type="button" class="btn btn-default " data-dismiss="modal" ng-click='sendResult(gamescore,"continue")'>Continue</button>
 		            </div>
+		        </div>
+		           
 		      </div>
 		    </div>
 
