@@ -62,15 +62,33 @@
 {
 	background-color: #FFD464;
 }
+.bgcolorwhite
+{
+	background-color: white;
+}
 .bgcolorinstruct
 {
 	
+}
+
+.img-center {
+  margin: 0 auto;
 }
 
 .bgcolorpink{
 
 }
 
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.height
+{
+	height: 100%;
+}
 
 .img-holder {position: relative;}
 

@@ -1,23 +1,29 @@
-<div id="outer_container" class="container-fluid ">
+<div id="outer_container" class="container-fluid {{color}} height">
 	<div class="container">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-             <h1 class="text-center">Game</h1>
-             <hr>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-hide="hideplay">
+             <h1 class="text-center" >Game</h1>
+             <hr >
         </div>
-
+        <div class= "row"  ng-hide="hideload">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <img src="../Images/loading.gif" class="img-responsive center-block"  >
+        </div>
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-            </div>
-            
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  img-holder">
-             	<img src="../Images/bollywoodgame.png" class="img-responsive " >
-                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link"  ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
-                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link1" ng-click="startplay('friend')"><b>Play with Friend</b></button></a>
+              
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  img-holder" ng-hide="hideplay">
+             	<img src="../Images/bollywoodgame.png" class="img-responsive center-block" >
+                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link" ng-hide="hideplay" ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
+                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link1" ng-hide="hideplay" ng-click="startplay('friend')"><b>Play with Friend</b></button></a>
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                
-            </div>
+            
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
