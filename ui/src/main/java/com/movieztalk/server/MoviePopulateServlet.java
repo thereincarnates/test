@@ -1,32 +1,33 @@
-package com.movieztalk.demo;
+package com.movieztalk.server;
 
-import static com.google.api.services.datastore.client.DatastoreHelper.*;
+import static com.google.api.services.datastore.client.DatastoreHelper.makeKey;
+import static com.google.api.services.datastore.client.DatastoreHelper.makeProperty;
+import static com.google.api.services.datastore.client.DatastoreHelper.makeValue;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.api.services.datastore.DatastoreV1.BeginTransactionRequest;
 import com.google.api.services.datastore.DatastoreV1.BeginTransactionResponse;
 import com.google.api.services.datastore.DatastoreV1.CommitRequest;
-import com.google.api.services.datastore.DatastoreV1.CommitResponse;
 import com.google.api.services.datastore.DatastoreV1.Entity;
-import com.google.api.services.datastore.DatastoreV1.Key;
 import com.google.api.services.datastore.DatastoreV1.Mutation;
-import com.google.api.services.datastore.DatastoreV1.Property;
-import com.google.api.services.datastore.DatastoreV1.Value;
 import com.google.api.services.datastore.client.Datastore;
 import com.google.api.services.datastore.client.DatastoreException;
 import com.google.api.services.datastore.client.DatastoreFactory;
 import com.google.api.services.datastore.client.DatastoreHelper;
 import com.google.protobuf.ByteString;
 
-public class DataStoreDemo {
-  public static void main(String args[]) {
+public class MoviePopulateServlet extends HttpServlet {
+
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) {
     String datasetId = "purchhaseme";
     Datastore datastore = null;
     try {
@@ -55,23 +56,23 @@ public class DataStoreDemo {
       CommitRequest.Builder creq = CommitRequest.newBuilder();
       // Set the transaction to commit.
       creq.setTransaction(tx);
-      List<String> movieList = Arrays.asList("3 Idiots", "Rang De Basanti", "Like Stars on Earth",
+      List<String> movieList = Arrays.asList("3 Idiots", "Rang De Basanti",
           "Mughal-E-Azam", "Lagaan: Once Upon a Time in India", "Swades", "Pyaasa", "A Wednesday",
-          "Anand", "Drishyam", "Gangs of Wasseypur", "Udaan", "Bhaag Milkha Bha    ag",
+          "Anand", "Drishyam", "Gangs of Wasseypur", "Udaan", "Bhaag Milkha Bhaag",
           "Special 26", "Dil Chahta Hai", "Black Friday", "Queen", "Haider", "Paan Singh Tomar",
           "Guru", "Andaz Apna Apna", "Dev D", "Chakde India", "Sarfarosh", "Barfi",
-          "Zindagi Na Milegi Dobara", "PK", "Baby", "My Name     Is Khan",
+          "Zindagi Na Milegi Dobara", "PK", "Baby", "My Name Is Khan",
           "The Legend of Bhagat Singh", "Kahaani", "Bajrangi Bhaijaan", "Shahid", "Salaam Bombay",
           "Black", "Gol Maal", "Omkara", "Guide", "Kaagaz Ke Phool", "Jo Jeeta Wohi Sikandar",
-          "Vaastav The Reality", "The     Chess Players", "Mother India", "Water", "Sholay",
+          "Vaastav The Reality", "The Chess Players", "Mother India", "Water", "Sholay",
           "Hera Pheri", "Chupke Chupke", "Manjhi The Mountain Man", "Roja",
           "Straight from the Heart", "Deewaar", "Who Pays the Piper", "Company", "Hindustani",
-          "Jaane Tu Y    a Jaane Na", "Rock On", "Lage Raho Munna Bhai", "Johnny Gaddaar",
+          "Jaane Tu Ya Jaane Na", "Rock On", "Lage Raho Munna Bhai", "Johnny Gaddaar",
           "Padosan", "Do Bigha Zamin", "Jab We Met", "Mumbai Meri Jaan", "Oye Lucky Lucky Oye",
-          "Kal Ho Naa Ho", "Chhoti Si Baat", "Awaara", "Dilwale Dulhan    ia Le Jayenge", "Ugly",
+          "Kal Ho Naa Ho", "Chhoti Si Baat", "Awaara", "Dilwale Dulhania Le Jayenge", "Ugly",
           "Bombay", "Gangaajal", "Vicky Donor", "Don", "Parinda", "Ghulam",
           "Qayamat Se Qayamat Tak", "Dil Se", "Jodhaa Akbar", "Mera Naam Joker", "Lootera",
-          "Ankur", "I Am Kalam", "Devdas", "Satya", "Sa    aransh", "Maine Pyar Kiya", "Zanjeer",
+          "Ankur", "I Am Kalam", "Devdas", "Satya", "Saaransh", "Maine Pyar Kiya", "Zanjeer",
           "Hum Aapke Hain Koun", "Masoom", "Don", "Maqbool", "Agneepath", "Shree 420",
           "Damini  Lightning", "Kai po che", "Rockstar", "Delhi Belly", "OMG Oh My God");
 
@@ -102,11 +103,7 @@ public class DataStoreDemo {
 
     } catch (DatastoreException exception) {
       // Catch all Datastore rpc errors.
-      System.err.println("Error while doing datastore operation");
-      // Log the exception, the name of the method called and the error code.
-      System.err.println(String.format("DatastoreException(%s): %s %s", exception.getMessage(),
-          exception.getMethodName(), exception.getCode()));
-      System.exit(1);
+
     }
   }
 }

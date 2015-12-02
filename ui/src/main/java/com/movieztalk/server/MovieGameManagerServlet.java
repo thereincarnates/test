@@ -16,21 +16,23 @@ import com.movieztalk.game.model.ScoreBoard;
 public class MovieGameManagerServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws IOException {
+
     String intiatorId = request.getParameter("initiatorid");
     String gameState = request.getParameter("gamestate");
     String preint = request.getParameter("preinit");
     String score = request.getParameter("score");
+
     System.out.println("Score received: " + score);
     String id = request.getParameter("id");
     System.out.println("String id receive" + id);
     String gamePostAction = request.getParameter("gamepostaction");
     System.out.println("String gamepostaction" + gamePostAction);
-    if (((preint!=null) && (preint.equalsIgnoreCase("computer"))) || 
-    		((gamePostAction!=null) && (gamePostAction.equalsIgnoreCase("continue")))) {
-      System.out.println(preint + id);
-      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieRequest(id,score).build();
-      
+    if (((preint != null) && (preint.equalsIgnoreCase("computer")))
+        || ((gamePostAction != null) && (gamePostAction.equalsIgnoreCase("continue")))) {
+      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieRequest(id, score).build();
+
       Gson gson = new Gson();
       PrintWriter out = response.getWriter();
       out.write(gson.toJson(movieRequest));
@@ -44,16 +46,5 @@ public class MovieGameManagerServlet extends HttpServlet {
       out.flush();
       out.close();
     }
-
-    /*
-     * PrintWriter out = response.getWriter();
-     * 
-     * if (MovieGameInitializerServlet.initiatorIdToGameObjMap.keySet().contains(intiatorId)) {
-     * MovieGameInitializerServlet.initiatorIdToGameObjMap.get(intiatorId).setGameState(gameState);
-     * out.write(gameState);
-     * 
-     * } else if (MovieGameInitializerServlet.playerIdToGameObjMap.keySet().contains(intiatorId)) {
-     * out.println(MovieGameInitializerServlet.playerIdToGameObjMap.get(intiatorId).getGameState());
-     * }
-     */}
+  }
 }

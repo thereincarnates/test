@@ -27,7 +27,9 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
      	$http({
 		          method: 'GET',
 		          url: '/gamemanager?preinit='+ gameService.getUserChoice() + '&id=' +  $routeParams.gameid,
-		          headers: {'Content-Type': 'application/json'}
+		          headers: {'Content-Type': 'application/json'},
+		          time:3000
+     		
 		        }).success(function (option) 
 		        {
                      console.log("option" + option);

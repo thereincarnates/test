@@ -20,6 +20,7 @@ import com.movieztalk.game.model.GuessMovieNameGame;
 
 @SuppressWarnings("serial")
 public class MovieGameInitializerServlet extends HttpServlet {
+
   public static Set<Integer> usedURLs = Sets.newHashSet();
   public static final Map<String, GuessMovieNameGame> initiatorIdToGameObjMap = new HashMap<>();
   public static final Map<String, GuessMovieNameGame> playerIdToGameObjMap = new HashMap<>();
@@ -27,10 +28,10 @@ public class MovieGameInitializerServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     response.setContentType("application/json");
     String isMultiPlayer = request.getParameter("isMultiPlayer");
-    
-    System.out.println("Start" + new Date());
+
     GuessMovieNameGame game;
     try {
       game = new GuessMovieNameGameBuilder().buildGameState().buildInitiatorId().buildMovieName()
