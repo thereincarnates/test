@@ -14,13 +14,19 @@
           <br>
           <img src="../Images/loading.gif" class="img-responsive center-block"  >
         </div>
-        <div class="row">
-              
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ></div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  img-holder" ng-hide="hideplay">
-             	<img src="../Images/bollywoodgame.png" class="img-responsive center-block" >
-                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link" ng-hide="hideplay" ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
-                <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info link1" ng-hide="hideplay" ng-click="startplay('friend')"><b>Play with Friend</b></button></a>
+        <div class="row">  
+            
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ></div>
+            <div class="col-lg-6 scol-md-6 col-sm-6 col-xs-12  img-holder bgcolorblack" ng-hide="hideplay" >
+                <br><br><br><br><br>
+                <div class="row">
+                    <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info center-block" ng-hide="hideplay" ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info center-block" ng-hide="hideplay" ng-click="startplay('friend')"><b>Play with Friend</b></button></a>
+                 </div>
+                 <br><br><br><br><br>
             </div>
 
             

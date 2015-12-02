@@ -2,23 +2,25 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
  { 
      console.log("userchoice get: "+gameService.getUserChoice());
      console.log("route param id : "+ $routeParams.gameid);
+     $scope.color="bgcolorwhite";
+     $scope.hideload = false;
      if(!((gameService.getUserChoice()).localeCompare("friend")))
      {
  	        $("#game-modal").modal({backdrop: false});
  	        $scope.remoteUrl = "127.0.0.1:8080/html/Start.html#/play/" + gameService.getRemoteId();
  	        console.log("remote url: " + $scope.remoteUrl);
-
+           
      }
 
-      var movieName ;
-		        	 var compareChar ;
-		        	 var vowelChar ;
-		        	 var replace;
-		        	 var receivedName ;
-		        	 var maxChoices = 9;
-		        	  var usedChoices;
-		        	  $scope.alphabetvec =[];
-		        	  $scope.moviedata;
+    var movieName ;
+    var compareChar ;
+	var vowelChar ;
+    var replace;
+	var receivedName ;
+    var maxChoices = 9;
+	var usedChoices;
+    $scope.alphabetvec =[];
+    $scope.moviedata;
 
      if(!((gameService.getUserChoice()).localeCompare("computer")))
      {
@@ -30,6 +32,8 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
 		        {
                      console.log("option" + option);
  	    			 initialize(option);
+ 	    			 $scope.color="";
+ 	    			 $scope.hideload = true;
 	            });
 	 }
     
@@ -238,6 +242,8 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
 
      $scope.sendResult = function(gamescore,gamepostaction)
      {
+     	    $scope.color="bgcolorwhite";
+            $scope.hideload = false;
            console.log("gamescore: "+gamescore +"gamepostaction: "+ gamepostaction);
            $http({
                   method: 'GET',
@@ -246,7 +252,11 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
               }).success(function (option) 
               {
               	    if(!gamepostaction.localeCompare("continue"))
-                       initialize(option);
+                     {
+                     	initialize(option);
+                     	$scope.color="";
+                        $scope.hideload = true;
+                     }  
                     else
                     	console.log("finish");
               });
