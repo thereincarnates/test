@@ -21,25 +21,31 @@
                 <br><br><br><br><br>
                  <div class="row">
                   <h3 class ="fgcolorwhite">Step 1:</h3>
-                   <b>
+                   
                          <div class="row" style ='background-color: #FFFFF;'>
-                             <div   class="dropdown col-lg-9 col-md-9 col-sm-9 col-xs-12" style ='background-color: #FFFFF;'>
-                             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{selectedindustry}}
+                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+                             <div   class="dropdown col-lg-6 col-md-6 col-sm-6 col-xs-6 " style ='background-color: #FFFFF;'>
+                             <button class="btn btn-info dropdown-toggle " type="button" id="menu1" data-toggle="dropdown">{{selectedindustry}}
                              <span class="caret"></span></button>
-                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                  <li style="text-align: right;" role="presentation" ng-repeat='industry in industryList'>
+                             <ul class="dropdown-menu " role="menu" aria-labelledby="menu1">
+                                  <li style="text-align: center;" role="presentation" ng-repeat='industry in industryList'>
                                      <a ng-click="selIndustry(industry)" > {{industry}} </a>
                                   </li>
                              </ul>
                          </div>
                   
                       </div>
-                      </b>
+                      
                 </div>
                 <div class="row">
                   <h3 class="fgcolorwhite">Step 2:</h3>
-                    <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info center-block" ng-hide="hideplay" ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
+                     <div class="row" style ='background-color: #FFFFF;'>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <a href="#play/{{idlocal}}" ><button type="button" class="btn btn-info " ng-hide="hideplay" ng-click="startplay('computer')" ><b>Play with Computer</b></button></a>
                 </div>
+              </div>
+              </div>
                 <br><br><br>
                 <!--div class="row">
 

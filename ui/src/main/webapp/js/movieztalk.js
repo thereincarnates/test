@@ -57,9 +57,10 @@ moviezApp.config(['$routeProvider',
  {
     
    $scope.industryList = ["Bollywood","Hollywood","Tollywood"];
-   $scope.selectedindustry = "Select Type";
+   $scope.selectedindustry = "Select Movie Type";
    $scope.selIndustry = function(industry)
    {
+   
     $scope.selectedindustry = industry;
    }
 
@@ -83,9 +84,11 @@ moviezApp.config(['$routeProvider',
 
     $scope.startplay = function(option)
     {
+      
        console.log("option on play: "+ option);
        gameService.setUserChoice(option);
        console.log("userchoice get: "+gameService.getUserChoice());
+       gameService.setIndustryName($scope.selectedindustry);
        gameService.setRemoteId($scope.idremote);
     }    
  });
@@ -93,6 +96,7 @@ moviezApp.config(['$routeProvider',
  moviezApp.service('gameService', function () {
         var userchoice = "computer";
         var remoteid ="";
+        var industryname ="";
 
         
 
@@ -108,6 +112,12 @@ moviezApp.config(['$routeProvider',
             },
             setRemoteId: function(value) {
                 remoteid = value;
+            },
+            setIndustryName: function(value){
+                industryname =value;
+            },
+            getIndustryName: function(){
+                 return industryname;
             }
         };
 
