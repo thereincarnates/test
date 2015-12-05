@@ -41,9 +41,10 @@ public class MovieRequestBuilder {
     movieRequest = new MovieRequest();
   }
 
-  public MovieRequestBuilder buildMovieRequest(String id, String score) {
+  public MovieRequestBuilder buildMovieRequest(String id, String score, String industryType) {
     try {
-      movieRequest.setMoviename(fetchMovieName(id, score).toUpperCase().replaceAll(" ", " , "));
+      movieRequest.setMoviename(fetchMovieName(id, score, industryType).toUpperCase().replaceAll(
+          " ", " , "));
     } catch (DatastoreException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -63,11 +64,11 @@ public class MovieRequestBuilder {
     return movieRequest;
   }
 
-
-  private String fetchMovieName(String id, String score) throws DatastoreException {
+  private String fetchMovieName(String id, String score, String industryType)
+      throws DatastoreException {
     Set<String> alreadyUsedMovies = new HashSet<>();
     Entity gameStateEntity = fetchGameStateEntity(id, alreadyUsedMovies);
-    String movie = buildNewMovieForPlayer(alreadyUsedMovies);
+    String movie = buildNewMovieForPlayer(alreadyUsedMovies, industryType);
     updateGameState(movie, gameStateEntity, score);
     log.info("Movie name is" + movie);
     return movie;
@@ -115,13 +116,15 @@ public class MovieRequestBuilder {
     DataStoreHelper.UpdateEntity(updateddata);
   }
 
-  private String buildNewMovieForPlayer(Set<String> alreadyUsedMovies) {
-     SetView<String>  difference = Sets.difference(MovieGameUtil.fetchMovieNames("bollywood"),alreadyUsedMovies);
-     int random = new Random().nextInt(difference.size());
-     return new ArrayList<>(difference).get(random);
+  private String buildNewMovieForPlayer(Set<String> alreadyUsedMovies, String industryType) {
+    SetView<String> difference = Sets.difference(MovieGameUtil.fetchMovieNames(industryType),
+        alreadyUsedMovies);
+    int random = new Random().nextInt(difference.size());
+    return new ArrayList<>(difference).get(random);
   }
 
-  private Entity fetchGameStateEntity(String id, Set<String> alreadyUsedMovies) throws DatastoreException {
+  private Entity fetchGameStateEntity(String id, Set<String> alreadyUsedMovies)
+      throws DatastoreException {
     Datastore datastore = DataStoreHelper.getDatastoreConnection();
     Filter equalInitiatorIdFilter = makeFilter("initiatorid", PropertyFilter.Operator.EQUAL,
         makeValue(String.valueOf(id.toString()))).build();
@@ -134,9 +137,9 @@ public class MovieRequestBuilder {
     RunQueryResponse movieresponse = datastore.runQuery(movierequest);
 
     Entity gameStateEntity = movieresponse.getBatch().getEntityResult(0).getEntity();
-    for(Property property :  gameStateEntity.getPropertyList()){
-      if(property.getName().equalsIgnoreCase("moviename")){
-        for(Value value : property.getValue().getListValueList()){
+    for (Property property : gameStateEntity.getPropertyList()) {
+      if (property.getName().equalsIgnoreCase("moviename")) {
+        for (Value value : property.getValue().getListValueList()) {
           alreadyUsedMovies.add(value.getStringValue());
         }
       }

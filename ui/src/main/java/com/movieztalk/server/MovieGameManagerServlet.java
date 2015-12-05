@@ -23,6 +23,7 @@ public class MovieGameManagerServlet extends HttpServlet {
     String gameState = request.getParameter("gamestate");
     String preint = request.getParameter("preinit");
     String score = request.getParameter("score");
+    String industryType = request.getParameter("industry");
 
     System.out.println("Score received: " + score);
     String id = request.getParameter("id");
@@ -31,7 +32,7 @@ public class MovieGameManagerServlet extends HttpServlet {
     System.out.println("String gamepostaction" + gamePostAction);
     if (((preint != null) && (preint.equalsIgnoreCase("computer")))
         || ((gamePostAction != null) && (gamePostAction.equalsIgnoreCase("continue")))) {
-      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieRequest(id, score).build();
+      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieRequest(id, score,industryType).build();
 
       Gson gson = new Gson();
       PrintWriter out = response.getWriter();

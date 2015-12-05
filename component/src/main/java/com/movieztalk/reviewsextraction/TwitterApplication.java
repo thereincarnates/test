@@ -61,19 +61,17 @@ public class TwitterApplication {
                 tweetcount = tweets.size();
 
 
-               /* List<Status> tweets = result.getTweets();
                 for (Status tweet : tweets) {
                     //System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
                 	System.out.println(tweet.getText()+ "\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"+ counter + " " + tweetcount);
                 	System.out.println(tweet.toString());
-                	bw.write(tweet.getText()+ "\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"+ counter + " " + tweetcount);
                 	tweetcount++;
                 }
                 counter++;
                 if(counter>=180){
                 	Thread.sleep(15*60*1000);
                 	counter = 0;
-                }*/
+                }
                 tweetcount++;
             } while ((query = result.nextQuery()) != null && tweetcount<1000 && counter<180);
             System.out.println("Size Before the cosine similarity" + tweets.size());
