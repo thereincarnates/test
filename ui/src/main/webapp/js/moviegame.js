@@ -6,9 +6,9 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
      $scope.hideload = false;
      if(!((gameService.getUserChoice()).localeCompare("friend")))
      {
- 	        $("#game-modal").modal({backdrop: false});
- 	        $scope.remoteUrl = "127.0.0.1:8080/html/Start.html#/play/" + gameService.getRemoteId();
- 	        console.log("remote url: " + $scope.remoteUrl);
+ 	        //$("#game-modal").modal({backdrop: false});
+ 	        //$scope.remoteUrl = "127.0.0.1:8080/html/Start.html#/play/" + gameService.getRemoteId();
+ 	        //console.log("remote url: " + $scope.remoteUrl);
            
      }
 

@@ -56,10 +56,17 @@ moviezApp.config(['$routeProvider',
  moviezApp.controller("GameController",function($scope,$routeParams,$http,gameService)
  {
     
+   $scope.industryList = ["Bollywood","Hollywood","Tollywood"];
+   $scope.selectedindustry = "Select Type";
+   $scope.selIndustry = function(industry)
+   {
+    $scope.selectedindustry = industry;
+   }
+
    $scope.hideplay = true;
    
    $scope.hideload = false;
-  $scope.color = "bgcolorwhite";
+   $scope.color = "bgcolorwhite";
    $http({
           method: 'GET',
           url: '/moviegameinit',

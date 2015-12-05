@@ -63,15 +63,15 @@
 		<div class="panel panel-default ">
 			  <div class="panel-heading">ScoreBoard</div>
 			  <div class="panel-body">
-                  <div class= "row">
-                       <table class="table table-fixed" >
+                  <div class= "row scroll">
+                       <table class="table table-stripped " >
                            <thead>
                               <tr>
 						         <th>Game No.</th>
 						         <th>Score</th>
 						      </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-test" >
 							      <tr ng-repeat="score in moviedata.scoreboard.playerScoreBoard1.scores track by $index">
 							        <td>{{$index+1 }} </td>
 							        <td>{{score}}</td>
