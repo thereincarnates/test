@@ -23,7 +23,11 @@ public class MovieGameManagerServlet extends HttpServlet {
     String gameState = request.getParameter("gamestate");
     String preint = request.getParameter("preinit");
     String score = request.getParameter("score");
-    String industryType = request.getParameter("industry");
+    String industryType = request.getParameter("industry").toLowerCase();
+    if(industryType.split(" ").length>1)
+    {
+      industryType = "bollywood";
+    }
 
     System.out.println("Score received: " + score);
     String id = request.getParameter("id");

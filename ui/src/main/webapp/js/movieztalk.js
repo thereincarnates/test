@@ -60,8 +60,15 @@ moviezApp.config(['$routeProvider',
    $scope.selectedindustry = "Select Movie Type";
    $scope.selIndustry = function(industry)
    {
-   
-    $scope.selectedindustry = industry;
+     if(!(($scope.selectedindustry).localeCompare("Select Movie Type")))
+     {
+        console.log("type not selected");
+        $scope.selectedindustry = "Bollywood";
+     }
+     else
+     {
+        $scope.selectedindustry = industry;
+      }
    }
 
    $scope.hideplay = true;
