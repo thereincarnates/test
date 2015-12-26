@@ -2,6 +2,7 @@ package com.movieztalk.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.movieztalk.game.builder.GuessMovieNameGameBuilder;
 import com.movieztalk.game.model.GuessMovieNameGame;
+import com.movieztalk.helper.DataStoreHelper;
 
 @SuppressWarnings("serial")
 public class MovieGameInitializerServlet extends HttpServlet {
@@ -36,6 +38,20 @@ public class MovieGameInitializerServlet extends HttpServlet {
     try {
       game = new GuessMovieNameGameBuilder().buildGameState().buildInitiatorId().buildMovieName()
           .buildOtherPlayerId().build();
+
+      Map<String, String> propertyMap = new HashMap<>();
+      for(Field field : game.getClass().getDeclaredFields()){
+        field.setAccessible(true);
+        try {
+          propertyMap.put(field.getName().toLowerCase(), (String)field.get(game));
+        } catch (IllegalArgumentException e) {
+          e.printStackTrace();
+        } catch (IllegalAccessException e) {
+          e.printStackTrace();
+        }
+      }
+      propertyMap.put("scoreboard", "");
+      DataStoreHelper.storeData(propertyMap, "gamestate");
       Gson gson = new Gson();
       String json = gson.toJson(game);
       PrintWriter out = response.getWriter();
@@ -44,9 +60,7 @@ public class MovieGameInitializerServlet extends HttpServlet {
       out.flush();
       out.close();
     } catch (DatastoreException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
-
   }
 }

@@ -2,11 +2,13 @@ package com.movieztalk.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.api.services.datastore.client.DatastoreException;
 import com.google.gson.Gson;
 import com.movieztalk.game.builder.MovieRequestBuilder;
 import com.movieztalk.game.model.MovieRequest;
@@ -14,6 +16,8 @@ import com.movieztalk.game.model.ScoreBoard;
 
 @SuppressWarnings("serial")
 public class MovieGameManagerServlet extends HttpServlet {
+
+  private static final Logger logger = Logger.getLogger(MovieGameManagerServlet.class.getName());
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,15 +38,21 @@ public class MovieGameManagerServlet extends HttpServlet {
     System.out.println("String id receive" + id);
     String gamePostAction = request.getParameter("gamepostaction");
     System.out.println("String gamepostaction" + gamePostAction);
+    MovieRequest movieRequest;
     if (((preint != null) && (preint.equalsIgnoreCase("computer")))
         || ((gamePostAction != null) && (gamePostAction.equalsIgnoreCase("continue")))) {
-      MovieRequest movieRequest = new MovieRequestBuilder().buildMovieRequest(id, score,industryType).build();
-
-      Gson gson = new Gson();
-      PrintWriter out = response.getWriter();
-      out.write(gson.toJson(movieRequest));
-      out.flush();
-      out.close();
+      try {
+        logger.info("input to movie request builder is " + "id\t" + id +"\t" + score +"\t" + industryType);
+        movieRequest = new MovieRequestBuilder(id, score, industryType).buildMovieName().buildScore().build();
+        Gson gson = new Gson();
+        PrintWriter out = response.getWriter();
+        out.write(gson.toJson(movieRequest));
+        out.flush();
+        out.close();
+      } catch (DatastoreException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
 
     if (gamePostAction.equalsIgnoreCase("finish")) {
@@ -51,5 +61,6 @@ public class MovieGameManagerServlet extends HttpServlet {
       out.flush();
       out.close();
     }
+    logger.info("done giving movie");
   }
 }

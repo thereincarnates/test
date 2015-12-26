@@ -40,8 +40,7 @@ public class MovieGameUtil {
           for(Property prop : moviename.getEntity().getPropertyList()){
             if(prop.getName().equalsIgnoreCase("name")){
               moviesList.put(industryType, prop.getValue()
-                  .getStringValue());
-              log.info("movie name being stored is" + prop.getValue().getStringValue() );
+                  .getStringValue().toUpperCase().replaceAll(" ", ","));
             }
           }
 
