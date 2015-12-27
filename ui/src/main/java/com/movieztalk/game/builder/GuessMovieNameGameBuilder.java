@@ -17,13 +17,13 @@ public class GuessMovieNameGameBuilder {
   }
 
   public GuessMovieNameGame build() {
-    Map<String, String> propertyMap = new HashMap<>();
+   /* Map<String, String> propertyMap = new HashMap<>();
     propertyMap.put("initiatorid", guessMovieNameGame.getInitiatorId());
     propertyMap.put("otherplayerid", guessMovieNameGame.getOtherPlayerId());
     propertyMap.put("gamecurrentstate", guessMovieNameGame.getGameCurrentState());
     propertyMap.put("moviename", guessMovieNameGame.getMovieName());
     propertyMap.put("scoreboard", "");
-    DataStoreHelper.storeData(propertyMap, "gamestate");
+    DataStoreHelper.storeData(propertyMap, "gamestate");*/
     return guessMovieNameGame;
   }
 
