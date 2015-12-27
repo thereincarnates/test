@@ -1,10 +1,6 @@
 package com.movieztalk.game.builder;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.movieztalk.game.model.GuessMovieNameGame;
-import com.movieztalk.helper.DataStoreHelper;
 import com.movieztalk.util.DataStoreUtil;
 import com.google.api.services.datastore.client.DatastoreException;
 
