@@ -3,6 +3,8 @@ package com.movieztalk.server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +53,8 @@ public class MovieGameInitializerServlet extends HttpServlet {
         }
       }
       propertyMap.put("scoreboard", "");
+      String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+      propertyMap.put("time", timeStamp);
       DataStoreHelper.storeData(propertyMap, "gamestate");
       Gson gson = new Gson();
       String json = gson.toJson(game);
