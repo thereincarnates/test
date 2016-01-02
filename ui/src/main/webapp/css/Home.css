@@ -23,6 +23,11 @@
 	background-color: red;
 }
 
+.padding_top
+{
+	padding-top: 10px;
+	margin-top: 10px;
+}
 
 .padding {
 	padding-left: 0px;
@@ -75,6 +80,11 @@
 .bgcolorblack
 {
 	background-color: black;
+}
+
+.bgcolornew
+{
+	background-color:  #dfded4;
 }
 
 .bgcolorinstruct

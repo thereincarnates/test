@@ -57,19 +57,15 @@ moviezApp.config(['$routeProvider',
  {
     
    $scope.industryList = ["Bollywood","Hollywood","Tollywood"];
-   $scope.selectedindustry = "Select Movie Type";
-   $scope.selIndustry = function(industry)
-   {
-     if(!(($scope.selectedindustry).localeCompare("Select Movie Type")))
-     {
-        console.log("type not selected");
-        $scope.selectedindustry = "Bollywood";
-     }
-     else
-     {
-        $scope.selectedindustry = industry;
-      }
-   }
+   //$scope.selectedindustry = "Select Movie Type";
+   //$scope.selIndustry = function(industry)
+   //{
+      
+     //     $scope.selectedindustry = industry;
+      
+   //}
+
+
 
    $scope.hideplay = true;
    
@@ -87,14 +83,24 @@ moviezApp.config(['$routeProvider',
             $scope.color = "";
             $scope.hideplay = false;
             
-          });  
+          }).error(function () {
+                   $scope.color="";
+                   $scope.hideload = true;
+                   console.log("eroror response");
+              });  
 
     $scope.startplay = function(option)
     {
-      
+      // if(!(($scope.selectedindustry).localeCompare("Select Movie Type")))
+      // {
+      //    console.log("selected industry tyep:" + $scope.selectedindustry);
+      //    $scope.selectedindustry = "Bollywood";
+      // }
+
+       $scope.selectedindustry = option;
        console.log("option on play: "+ option);
-       gameService.setUserChoice(option);
-       console.log("userchoice get: "+gameService.getUserChoice());
+       gameService.setUserChoice("computer");
+       console.log("userchoice get1: "+gameService.getUserChoice());
        gameService.setIndustryName($scope.selectedindustry);
        gameService.setRemoteId($scope.idremote);
     }    

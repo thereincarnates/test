@@ -22,21 +22,28 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
     $scope.alphabetvec =[];
     $scope.moviedata;
 
+    $scope.industrytype = gameService.getIndustryName();
+
      if(!((gameService.getUserChoice()).localeCompare("computer")))
      {
      	$http({
 		          method: 'GET',
 		          url: '/gamemanager?preinit='+ gameService.getUserChoice() + '&id=' +  $routeParams.gameid +'&industry=' + gameService.getIndustryName(),
-		          headers: {'Content-Type': 'application/json'},
-		          time:3000
-     		
-		        }).success(function (option) 
+		          headers: {'Content-Type': 'application/json'}
+		        }).success(function(option)
 		        {
                      console.log("option" + option);
  	    			 initialize(option);
  	    			 $scope.color="";
  	    			 $scope.hideload = true;
-	            });
+	            })//.catch(function (response)
+	            //{
+	            //	console.log("testing the catch");
+	            	//$scope.hideload = true;
+	            	//alert("Please Check Your network connection");
+	            //	console.error('Gists error', response.status, response.data);
+	            //})
+;
 	 }
     
 
@@ -255,13 +262,21 @@ moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameServ
               {
               	    if(!gamepostaction.localeCompare("continue"))
                      {
+                     	console.log("testing th error");
                      	initialize(option);
                      	$scope.color="";
                         $scope.hideload = true;
                      }  
                     else
                     	console.log("finish");
-              });
+              })//.catch(function (response)
+	            //{
+	            //	console.log("testing the catch");
+	            //	$scope.hideload = true;
+	            	//alert("Please Check Your network connection");
+	            //	console.error('Gists error', response.status, response.data);
+	            //})
+               ;
      }
 
  });
