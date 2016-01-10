@@ -76,13 +76,17 @@ public class MoviePopulateServlet extends HttpServlet {
           "Hum Aapke Hain Koun", "Masoom", "Don", "Maqbool", "Agneepath", "Shree 420",
           "Damini  Lightning", "Kai po che", "Rockstar", "Delhi Belly", "OMG Oh My God");
 
+
+    List<String> kollywoodmovieList = Arrays.asList("Kaththi","Velaiilla Pattadharim","Veeram","Aranmanai","Maan Karate","Manjapai","Yaamirukka Bayamey","Madras","Jigarthanda","Pisasu","Viswaroopam","Arrambam","Varuthapadatha Valibar Sangam","Raja Rani","Soodhu Kavvum","Theeya Vela Seiyyanum Kumaru","Pandiyanadu","Ethir Neechal","Kanna Laddu Thinna Aasaiya","Maattrraan","Sundarapandian","Kalakalappu","Vettai","Leelai","Velayudham","Mankatha","Kaavalan","Vandhaan Vendraan","Thambi Vettothi Sundaram","Oru Kal Oru Kannadi","Aayirathil Oruvan","Sura","Thillalangadi","Sindhu Samaveli","Vaadaa","Aattanayagann","Maasilamani","Ayan","Aadhavan","Padikkadavan","Siva Manasula Sakthi","Malai Malai","Jeyam Kondan","Bommalattam","Yaradi Nee Mohini","Santhosh Subramaniam","Vaaranam Aayiram","Saroja","Dasavatharam"," Subramaniapuram","Anjathey","Pokkiri","Vel","Kireedam","Aalwar","Mirugam","Oram Po","Pattiyal","Thimiru","Pudhupettai","Kovai Brothers","Idhaya Thirudan");
+
+
       CommitRequest.Builder commBuilder = CommitRequest.newBuilder()
           .setMode(CommitRequest.Mode.NON_TRANSACTIONAL).setMutation(Mutation.newBuilder());
 
-      for (String moString : movieList) {
+      for (String moString : kollywoodmovieList) {
         Entity.Builder employee = Entity.newBuilder().setKey(makeKey("movie"))
             .addProperty(makeProperty("name", makeValue(moString)))
-            .addProperty(makeProperty("industrytype", makeValue("bollywood")));
+            .addProperty(makeProperty("industrytype", makeValue("kollywood")));
         Entity entity = employee.build();
         commBuilder.getMutationBuilder().addInsertAutoId(entity);
       }
