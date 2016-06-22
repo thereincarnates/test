@@ -1,50 +1,77 @@
 package com.movieztalk.componentclassifier;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Set;
+import static java.lang.String.format;
+
+import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
-
-public class ComponentDictionary {
-
-	private final String COMPONENT_RESOURCE_FILE = "/ComponentsMapping";
-
-	private final static Map<ComponentName, Set<String>> componentDictionaryMap = new HashMap<>();
-
-	private static ComponentDictionary instance;
-
-	public static ComponentDictionary getInstance(){
-		if(instance!=null && !componentDictionaryMap.isEmpty()){
-			return instance;
-		} else {
-			instance = new ComponentDictionary();
-			instance.fillDictionaryMap();
-		}
-		return instance;
+/**
+ * Class contains details of component and there associated keywords
+ * @author ragrawal
+ *
+ */
+public final class ComponentDictionary {
+	
+	/**
+	 * numberofComp specifies number of class used i.e Story, Direction etc
+	 */
+	private Integer numberOfComp;
+	
+	/**
+	 * List contains the name of the different components
+	 */
+	private List<ComponentName> componentList;
+	
+	/**
+	 * Contains mapping of keywords to the component  
+	 */
+	private Map<String,Set<String>> componentDictionary;
+	
+	/**
+	 * StopWords are words which are not important for classification
+	 */
+	private List<String> stopWords;
+	
+	public List<String> getStopWords() {
+		return stopWords;
 	}
 
-	public synchronized void fillDictionaryMap() {
-		System.out.println(getFileWithUtil(COMPONENT_RESOURCE_FILE));
+	public void setStopWords(List<String> stopWords) {
+		this.stopWords = stopWords;
 	}
 
-	private String getFileWithUtil(String fileName) {
-
-		String result = "";
-
-		try {
-		    result = IOUtils.toString(getClass().getResourceAsStream(fileName));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return result;
-	  }
-
-	public static void main(String args[]) {
-		ComponentDictionary componentDictionary = ComponentDictionary.getInstance();
-
+	public Integer getNumberOfComp() {
+		return numberOfComp;
+	}
+	
+	public void setNumberOfComp(Integer numberOfComp) {
+		this.numberOfComp = numberOfComp;
+	}
+	
+	public List<ComponentName> getComponentList() {
+		return componentList;
+	}
+	
+	public void setComponentList(List<ComponentName> componentList) {
+		this.componentList = componentList;
+	}
+	
+	public Map<String, Set<String>> getComponentDictionary() {
+		return componentDictionary;
+	}
+	
+	public void setComponentDictionary(Map<String, Set<String>> componentDictionary) {
+		this.componentDictionary = componentDictionary;
+	}
+	
+	@Override
+	public String toString() {
+	        return new StringBuilder()
+	            .append( format( "numberOfComp: %s\n", numberOfComp ) )
+	            .append( format( "ListofComponent: %s\n", componentList ) )
+	            .append( format( "componentDictionary: %s\n", componentDictionary) )
+	            .append( format( "stopWords:%s\n", stopWords) )
+	            .toString();
 	}
 }
