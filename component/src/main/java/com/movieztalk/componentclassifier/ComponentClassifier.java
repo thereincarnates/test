@@ -1,4 +1,5 @@
 package com.movieztalk.componentclassifier;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.IOException;
@@ -15,9 +16,9 @@ public class ComponentClassifier {
 
 	private ComponentDictionary componentDictionary = ComponentDictionary.getInstance();
 
+	/* Classifies the given tweet into its respective component. */
 	public Set<String> classify(String tweet) throws InvalidFormatException, IOException {
-		String[] tweetToken = NLPHelper.getOpenNLPTextTokenizer().
-				tokenize(checkNotNull(tweet).toLowerCase());
+		String[] tweetToken = NLPHelper.getOpenNLPTextTokenizer().tokenize(checkNotNull(tweet).toLowerCase());
 		Set<String> componentClass = new HashSet<>();
 		for (String token : tweetToken) {
 			Iterator entries = componentDictionary.getComponentDictionary().entrySet().iterator();
@@ -32,8 +33,8 @@ public class ComponentClassifier {
 		}
 		return componentClass;
 	}
-	
-	public static void main(String args[]) throws InvalidFormatException, IOException{
+
+	public static void main(String args[]) throws InvalidFormatException, IOException {
 		System.out.println(new ComponentClassifier().classify("STORY"));
 	}
 }
