@@ -1,77 +1,44 @@
 package com.movieztalk.componentclassifier;
 
-import static java.lang.String.format;
-
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
 
+import org.yaml.snakeyaml.Yaml;
+
 /**
- * Class contains details of component and there associated keywords
- * @author ragrawal
- *
+ * Represent details of component and there associated keywords
  */
 public final class ComponentDictionary {
-	
-	/**
-	 * numberofComp specifies number of class used i.e Story, Direction etc
-	 */
-	private Integer numberOfComp;
-	
-	/**
-	 * List contains the name of the different components
-	 */
-	private List<ComponentName> componentList;
-	
-	/**
-	 * Contains mapping of keywords to the component  
-	 */
-	private Map<String,Set<String>> componentDictionary;
-	
-	/**
-	 * StopWords are words which are not important for classification
-	 */
-	private List<String> stopWords;
-	
-	public List<String> getStopWords() {
-		return stopWords;
+
+	// contains mapping of keywords to the component
+	private Map<String, Set<String>> componentDictionary;
+
+	private static ComponentDictionary instance;
+
+	private ComponentDictionary() {
 	}
 
-	public void setStopWords(List<String> stopWords) {
-		this.stopWords = stopWords;
+	public static synchronized ComponentDictionary getInstance() {
+		if (instance == null) {
+			Yaml yaml = new Yaml();
+			File componentYamlFile = new File("src/main/java/com/movieztalk/componentclassifier/component.yml");
+			try (InputStream in = new FileInputStream(componentYamlFile)) {
+				instance = yaml.loadAs(in, ComponentDictionary.class);
+			} catch (Exception e) {
+				System.out.println("received following error" + e.getMessage());
+			}
+		}
+		return instance;
 	}
 
-	public Integer getNumberOfComp() {
-		return numberOfComp;
-	}
-	
-	public void setNumberOfComp(Integer numberOfComp) {
-		this.numberOfComp = numberOfComp;
-	}
-	
-	public List<ComponentName> getComponentList() {
-		return componentList;
-	}
-	
-	public void setComponentList(List<ComponentName> componentList) {
-		this.componentList = componentList;
-	}
-	
 	public Map<String, Set<String>> getComponentDictionary() {
 		return componentDictionary;
 	}
-	
+
 	public void setComponentDictionary(Map<String, Set<String>> componentDictionary) {
 		this.componentDictionary = componentDictionary;
-	}
-	
-	@Override
-	public String toString() {
-	        return new StringBuilder()
-	            .append( format( "numberOfComp: %s\n", numberOfComp ) )
-	            .append( format( "ListofComponent: %s\n", componentList ) )
-	            .append( format( "componentDictionary: %s\n", componentDictionary) )
-	            .append( format( "stopWords:%s\n", stopWords) )
-	            .toString();
 	}
 }

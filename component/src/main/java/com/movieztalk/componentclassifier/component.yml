@@ -1,36 +1,19 @@
-numberOfComp: 4
-
-componentList:
-   - Story
-   - Direction
-   - Action
-   - Music
-   - Entertainment
-   
-
 componentDictionary:
-   Story:
-      - Story
-      - StoryLine
+   story:
+      - story
+      - storyLine
       
-   Direction:
-      - Direction
-      - Director
+   direction:
+      - direction
+      - director
       
-   Actor:
-      - Actor
+   actor:
+      - actor
     
-   Music:
-      - Music
-      - Song
+   music:
+      - music
+      - song
       
-   Entertainment:
-      - Entertainment
-      
-stopWords:
-   - is
-   - are
-   - this
-   - that
- 
+   entertainment:
+      - entertainment
   

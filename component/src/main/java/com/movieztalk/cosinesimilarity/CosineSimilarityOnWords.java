@@ -22,34 +22,30 @@ public class CosineSimilarityOnWords implements ReviewsSimilarity {
 	@Override
 	public double findCosineSimilarity(String sentence1, String sentence2) {
 
-		StringMetric metric = with(new CosineSimilarity<String>())
-				.simplify(new Case.Lower(Locale.ENGLISH))
-				.tokenize(new Whitespace())
-				.build();
+		StringMetric metric = with(new CosineSimilarity<String>()).simplify(new Case.Lower(Locale.ENGLISH))
+				.tokenize(new Whitespace()).build();
 		return metric.compare(checkNotNull(sentence1), checkNotNull(sentence2));
 	}
 
 	public List<Status> getNonRepeatingTweets(List<Status> tweets) {
 		Set<Integer> indexToRemove = new HashSet<>();
-		for(int i=0;i<tweets.size();i++){
-			for(int j=i+1;j<tweets.size();j++){
-				if(!indexToRemove.contains(i)
-					&& !indexToRemove.contains(j)
-					&& findCosineSimilarity(tweets.get(i).getText(), tweets.get(j).getText())>COSINE_THRESHOLD){
+		for (int i = 0; i < tweets.size() - 1; i++) {
+			for (int j = i + 1; j < tweets.size(); j++) {
+				if (!indexToRemove.contains(i) && !indexToRemove.contains(j)
+						&& findCosineSimilarity(tweets.get(i).getText(), tweets.get(j).getText()) > COSINE_THRESHOLD) {
 					indexToRemove.add(j);
-					System.out.println("Removing" + tweets.get(i).getText()+"\t" + tweets.get(j).getText());
+					System.out.println("Removing" + tweets.get(i).getText() + "\t" + tweets.get(j).getText());
 				}
 			}
 		}
-		for(int index : indexToRemove){
+		for (int index : indexToRemove) {
 			tweets.remove(index);
 		}
 		return tweets;
 	}
 
-	public static void main(String args[]){
+	public static void main(String args[]) {
 		ReviewsSimilarity similarity = new CosineSimilarityOnWords();
 		System.out.println(similarity.findCosineSimilarity("This is super", "This IS again super"));
 	}
-
 }
