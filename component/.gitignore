@@ -3,3 +3,7 @@
 .settings
 /.settings
 /bin
+.project
+.project/
+/.project/
+project
