@@ -13,10 +13,10 @@ import org.yaml.snakeyaml.Yaml;
  */
 public final class ComponentDictionary {
 
+	private static ComponentDictionary instance;
+
 	// contains mapping of keywords to the component
 	private Map<String, Set<String>> componentDictionary;
-
-	private static ComponentDictionary instance;
 
 	private ComponentDictionary() {
 	}
