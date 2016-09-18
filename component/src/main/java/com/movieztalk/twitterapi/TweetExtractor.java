@@ -19,8 +19,7 @@ public class TweetExtractor {
 	public static void main(String[] args) throws TwitterException, IOException {
 		StatusListener listener = new StatusListener() {
 			public void onStatus(Status status) {
-				System.out.println(status.getUser().getName() + " : "
-						+ status.getText());
+				System.out.println(status.toString());
 			   System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
 			}
 
