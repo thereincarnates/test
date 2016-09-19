@@ -40,14 +40,15 @@ public class DatabaseHelper {
 					Class.forName("com.mysql.jdbc.Driver");
 					connect = DriverManager
 							.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+					preparedStatement = connect
+					          .prepareStatement("insert into  movieztalk.Tweet_Table (tweetid, tweetstr) values(?,?)");
 					for(Tweet tweet : tweets){
-						preparedStatement = connect
-						          .prepareStatement("insert into  movieztalk.Tweet_Table (tweetid, tweetstr) values(?,?)");
 						preparedStatement.setString(1, tweet.getTweetId());
 						preparedStatement.setString(2, tweet.getTweetStr());
 						preparedStatement.addBatch();
 					}
 					preparedStatement.executeBatch();
+					System.out.println("executing batch");
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

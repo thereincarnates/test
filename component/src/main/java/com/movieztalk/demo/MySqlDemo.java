@@ -33,8 +33,13 @@ public class MySqlDemo {
 		connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 		preparedStatement = connect
 		          .prepareStatement("insert into  movieztalk.Tweet_Table (tweetid) values(?)");
-		preparedStatement.setString(1, "Test");
-		preparedStatement.executeUpdate();
+		preparedStatement.setString(1, "Test1");
+		preparedStatement.addBatch();
+		preparedStatement.setString(1, "Test2");
+		preparedStatement.addBatch();
+		preparedStatement.setString(1, "Test3");
+		preparedStatement.addBatch();
+		preparedStatement.executeBatch();
 		connect.close();
 		preparedStatement.close();
 		

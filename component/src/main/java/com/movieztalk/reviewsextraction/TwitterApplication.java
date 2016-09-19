@@ -75,8 +75,8 @@ public class TwitterApplication {
                 tweetcount++;
             } while ((query = result.nextQuery()) != null && tweetcount<1000 && counter<180);
             System.out.println("Size Before the cosine similarity" + tweets.size());
-            tweets = new CosineSimilarityOnWords().getNonRepeatingTweets(tweets);
-            System.out.println("Size After the cosine similarity" + tweets.size());
+            //tweets = new CosineSimilarityOnWords().getNonRepeatingTweets(tweets);
+//            System.out.println("Size After the cosine similarity" + tweets.size());
             // bw.close();
         } catch (TwitterException te) {
             te.printStackTrace();

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.movieztalk.cosinesimilarity.CosineSimilarityOnWords;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
+import com.movieztalk.spamremoval.URLSpamRemoval;
 
 import twitter4j.FilterQuery;
 import twitter4j.Query;
@@ -21,7 +23,7 @@ import twitter4j.auth.RequestToken;
 
 public class TweetExtractor {
 
-	public static int BATCH_SIZE = 50;
+	public static int BATCH_SIZE = 500;
 
 	public static void main(String[] args) throws TwitterException, IOException {
 		final List<Tweet> tweets = new ArrayList<>();
@@ -32,11 +34,15 @@ public class TweetExtractor {
 				Tweet tweet = new Tweet();
 				tweet.setTweetId(Long.toString(status.getId())).setTweetStr(status.getText());
 				if (tweets.size() < BATCH_SIZE) {
-					tweets.add(tweet);
+					if (!URLSpamRemoval.getInstance().isSpam(tweet.getTweetStr())) {
+						tweets.add(tweet);
+					}
 				} else {
-					List<Tweet> clonedList = new ArrayList<>(tweets);
+					List<Tweet> cosinedTweets = CosineSimilarityOnWords.getInstance().getNonRepeatingTweets(tweets);
+					List<Tweet> clonedList = new ArrayList<>(cosinedTweets);
 					DatabaseHelper.getInstance().storeTweetsInDB(clonedList);
 					tweets.clear();
+					cosinedTweets.clear();
 				}
 				System.out.println(status.getText());
 			}
@@ -78,7 +84,7 @@ public class TweetExtractor {
 
 		twitterStream.addListener(listener);
 		FilterQuery fquery = new FilterQuery();
-		String keywords[] = { "#pink" };
+		String keywords[] = { "#pink", "#RaazReboot", "baarbaardekho", "#freakyali" };
 
 		fquery.track(keywords);
 
