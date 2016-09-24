@@ -3,7 +3,9 @@ package com.movieztalk.twitterapi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import com.movieztalk.UUID.UUIDGenerator;
 import com.movieztalk.cosinesimilarity.CosineSimilarityOnWords;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
@@ -23,14 +25,14 @@ import twitter4j.auth.RequestToken;
 
 public class TweetExtractor {
 
-	public static int BATCH_SIZE = 500;
-
+	public static int BATCH_SIZE = 5;
+	
 	public static void main(String[] args) throws TwitterException, IOException {
 		final List<Tweet> tweets = new ArrayList<>();
 		StatusListener listener = new StatusListener() {
 
 			public void onStatus(Status status) {
-
+				
 				Tweet tweet = new Tweet();
 				tweet.setTweetId(Long.toString(status.getId())).setTweetStr(status.getText());
 				if (tweets.size() < BATCH_SIZE) {
@@ -40,11 +42,19 @@ public class TweetExtractor {
 				} else {
 					List<Tweet> cosinedTweets = CosineSimilarityOnWords.getInstance().getNonRepeatingTweets(tweets);
 					List<Tweet> clonedList = new ArrayList<>(cosinedTweets);
+					addTaskIdIntoTweets(clonedList);
 					DatabaseHelper.getInstance().storeTweetsInDB(clonedList);
 					tweets.clear();
 					cosinedTweets.clear();
 				}
 				System.out.println(status.getText());
+			}
+
+			private void addTaskIdIntoTweets(List<Tweet> clonedList) {
+				String taskId = UUIDGenerator.getInstance().fetchUUID();
+				for(Tweet tweet : clonedList){
+					tweet.setTaskid(taskId);
+				}
 			}
 
 			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
@@ -84,7 +94,7 @@ public class TweetExtractor {
 
 		twitterStream.addListener(listener);
 		FilterQuery fquery = new FilterQuery();
-		String keywords[] = { "#pink", "#RaazReboot", "baarbaardekho", "#freakyali" };
+		String keywords[] = { "#banjo, #daysoftafree" , "#pink"};
 
 		fquery.track(keywords);
 

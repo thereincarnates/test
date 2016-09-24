@@ -27,13 +27,38 @@ public class DatabaseHelper {
 		return instance;
 	}
 
+	public void closeResources(Connection connection, Statement statement, ResultSet resultSet) {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (Exception ex) {
+
+			}
+		}
+
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (Exception ex) {
+
+			}
+		}
+
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (Exception ex) {
+
+			}
+		}
+	}
+
 	public void storeTweetsInDB(final List<Tweet> tweets) {
 		executorService.submit(new Runnable() {
 
 			@Override
 			public void run() {
 				Connection connect = null;
-				Statement statement = null;
 				ResultSet resultSet = null;
 				PreparedStatement preparedStatement = null;
 				try {
@@ -41,10 +66,11 @@ public class DatabaseHelper {
 					connect = DriverManager
 							.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 					preparedStatement = connect
-					          .prepareStatement("insert into  movieztalk.Tweet_Table (tweetid, tweetstr) values(?,?)");
-					for(Tweet tweet : tweets){
+							.prepareStatement("insert into  movieztalk.Tweet_Table (tweetid, tweetstr, taskid) values(?,?,?)");
+					for (Tweet tweet : tweets) {
 						preparedStatement.setString(1, tweet.getTweetId());
 						preparedStatement.setString(2, tweet.getTweetStr());
+						preparedStatement.setString(3, tweet.getTaskid());
 						preparedStatement.addBatch();
 					}
 					preparedStatement.executeBatch();
@@ -56,30 +82,7 @@ public class DatabaseHelper {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
-					if (connect != null) {
-						try {
-							connect.close();
-						} catch (SQLException e) {
-						}
-					}
-
-					if (statement != null) {
-						try {
-							statement.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-
-					if (resultSet != null) {
-						try {
-							resultSet.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
+					closeResources(connect, preparedStatement, resultSet);
 				}
 			}
 		});

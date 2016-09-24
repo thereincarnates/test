@@ -1,65 +1,84 @@
 package com.movieztallk.movieclassifier;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.movieztalk.db.DatabaseHelper;
+import com.movieztalk.extraction.model.Tweet;
+import com.movieztalk.helper.RegexHelper;
 
 public class MovieClassifier {
-	
-	public static void main(String[] args) {
-		HashMap<String,List<String>> hashTagMap = new HashMap<>();
-		List<String> tweetList= new ArrayList<>();
-		
-	    tweetList.add("#Pink...Thought provoking. Applause to Pawan Kumar and Rashmi " +
-	    		       "Sharma to debut successfully with such a sensitive subject.");
-	    
-	    tweetList.add("RT @IndianExpress: PINK boxoffice day 2: @SrBachchan-starrer earns Rs 11.97 cr," +
-	    		      " witnesses remarkable growth");
-	    
-	    tweetList.add("@SrBachchan-starrer earns Rs 11.97 cr," +
-	    		      " witnesses remarkable growth");
-	    
-	    List<String> hashTag = new ArrayList<>();
-	    hashTag.add("pink");
-	    hashTag.add("#Pink");
-	    
-        hashTagMap.put("Pink", hashTag);
-        
-		MovieClassifier movieClassifier = new MovieClassifier();
-		List<String> movieList = movieClassifier.ClassifyTweetToMovie(hashTagMap, tweetList);	
-        for(String movie: movieList)
-        {
-        	System.out.println("Printing Movie name :" + movie);
-        }
-	}
-	
-	public List<String> ClassifyTweetToMovie(HashMap<String,List<String>> hashTagMap, List<String> tweetList)
-	{
-		List<String> movieList = new ArrayList<>();
-		for(String tweet: tweetList)
-		{
-			boolean valueExist = false;
-			for (Entry<String, List<String>> tagEntry : hashTagMap.entrySet()) {
-				List<String> tweetValues = tagEntry.getValue();
-				for(String tweetVal : tweetValues)
-				{
-				    valueExist = tweet.toLowerCase().contains(tweetVal.toLowerCase());
-					movieList.add(tagEntry.getKey());
-				    break;
-				}
-				if(valueExist == true)
-				{
-					break;
-				}
-			}
-			if(valueExist == false)
-			{
-				movieList.add("unknown");
-			}
-		}
-		return movieList;
+
+	private RegexHelper regexHelper = RegexHelper.getInstance();
+	private DatabaseHelper dbHelper = DatabaseHelper.getInstance();
+
+	private static MovieClassifier instance;
+
+	private Multimap<String, String> movieIdToKeyWordsMapping;
+
+	private Connection connect = null;
+	private Statement statement = null;
+	private ResultSet resultSet = null;
+
+	private MovieClassifier() {
 	}
 
+	public synchronized MovieClassifier getInstance() throws ClassNotFoundException, SQLException {
+		if (instance == null) {
+			instance = new MovieClassifier();
+			populateMovieNameToKeyWordMap();
+		}
+		return instance;
+	}
+
+	private void populateMovieNameToKeyWordMap() throws ClassNotFoundException, SQLException {
+		instance.movieIdToKeyWordsMapping = HashMultimap.create();
+		Class.forName("com.mysql.jdbc.Driver");
+		connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+		statement = connect.createStatement();
+		resultSet = statement.executeQuery("select * from movieclassification");
+		while (resultSet.next()) {
+			String movieId = resultSet.getString("movieid");
+			instance.movieIdToKeyWordsMapping.putAll(movieId,
+					Arrays.asList(regexHelper.commaPattern.split(resultSet.getString("moviekeywords"))));
+		}
+		dbHelper.closeResources(connect, statement, resultSet);
+	}
+
+	public void processTweets(List<Tweet> tweets) {
+		Preconditions.checkNotNull(tweets);
+		for (Tweet tweet : tweets) {
+			populateMovieForTweet(tweet);
+		}
+	}
+
+	private void populateMovieForTweet(Tweet tweet) {
+		String tweetStr = tweet.getTweetStr();
+		if (!Strings.isNullOrEmpty(tweetStr)) {
+			for (String token : regexHelper.spacePattern.split(tweetStr)) {
+				for (String movieId : movieIdToKeyWordsMapping.keys()) {
+					if (movieIdToKeyWordsMapping.get(movieId).contains(token)) {
+						tweet.setMovieId(movieId);
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		Tweet tweet = new Tweet();
+		tweet.setTweetStr("kya baat hai #pink");
+		new MovieClassifier().getInstance().processTweets(Arrays.asList(tweet));
+		System.out.println("movie name " + tweet.getMovieId());
+	}
 }
