@@ -25,7 +25,7 @@ import twitter4j.auth.RequestToken;
 
 public class TweetExtractor {
 
-	public static int BATCH_SIZE = 5;
+	public static int BATCH_SIZE = 10;
 	
 	public static void main(String[] args) throws TwitterException, IOException {
 		final List<Tweet> tweets = new ArrayList<>();
@@ -43,6 +43,7 @@ public class TweetExtractor {
 					List<Tweet> cosinedTweets = CosineSimilarityOnWords.getInstance().getNonRepeatingTweets(tweets);
 					List<Tweet> clonedList = new ArrayList<>(cosinedTweets);
 					addTaskIdIntoTweets(clonedList);
+					DatabaseHelper.getInstance().storeTaskIdInDB(clonedList.get(0).getTaskid());
 					DatabaseHelper.getInstance().storeTweetsInDB(clonedList);
 					tweets.clear();
 					cosinedTweets.clear();

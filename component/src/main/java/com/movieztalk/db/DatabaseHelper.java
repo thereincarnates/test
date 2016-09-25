@@ -52,6 +52,34 @@ public class DatabaseHelper {
 			}
 		}
 	}
+	
+	public void storeTaskIdInDB(final String taskId){
+		executorService.submit(new Runnable() {
+
+			@Override
+			public void run() {
+				Connection connect = null;
+				ResultSet resultSet = null;
+				PreparedStatement preparedStatement = null;
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					connect = DriverManager
+							.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+					preparedStatement = connect
+							.prepareStatement("insert into  movieztalk.taskid (taskid, status) values(?,?)");
+					preparedStatement.setString(1, taskId);
+					preparedStatement.setString(2, "pending");
+					preparedStatement.execute();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					closeResources(connect, preparedStatement, resultSet);
+				}
+			}
+		});
+	}
 
 	public void storeTweetsInDB(final List<Tweet> tweets) {
 		executorService.submit(new Runnable() {
