@@ -1,6 +1,7 @@
 package com.movieztalk.extraction.model;
 
 public class Tweet {
+	private int rowId;
 	private String tweetId;
 	private String tweetStr;
 	private String status;
@@ -8,6 +9,15 @@ public class Tweet {
 	private String compName;
 	private String sentiment;
 	private String taskid;
+
+	public int getRowId() {
+		return rowId;
+	}
+
+	public Tweet setRowId(int rowId) {
+		this.rowId = rowId;
+		return this;
+	}
 
 	public String getTweetId() {
 		return tweetId;

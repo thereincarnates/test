@@ -25,7 +25,7 @@ import twitter4j.auth.RequestToken;
 
 public class TweetExtractor {
 
-	public static int BATCH_SIZE = 10;
+	public static int BATCH_SIZE = 10	;
 	
 	public static void main(String[] args) throws TwitterException, IOException {
 		final List<Tweet> tweets = new ArrayList<>();

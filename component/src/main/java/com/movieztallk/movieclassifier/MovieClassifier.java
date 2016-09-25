@@ -32,10 +32,10 @@ public class MovieClassifier {
 	private MovieClassifier() {
 	}
 
-	public synchronized MovieClassifier getInstance() throws ClassNotFoundException, SQLException {
+	public static  synchronized MovieClassifier getInstance() throws ClassNotFoundException, SQLException {
 		if (instance == null) {
 			instance = new MovieClassifier();
-			populateMovieNameToKeyWordMap();
+			instance.populateMovieNameToKeyWordMap();
 		}
 		return instance;
 	}

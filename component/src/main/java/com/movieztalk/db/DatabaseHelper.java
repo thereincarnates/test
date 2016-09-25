@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.movieztalk.extraction.model.Tweet;
+import com.movieztalk.task.TaskState;
 
 public class DatabaseHelper {
 
@@ -68,7 +69,7 @@ public class DatabaseHelper {
 					preparedStatement = connect
 							.prepareStatement("insert into  movieztalk.taskid (taskid, status) values(?,?)");
 					preparedStatement.setString(1, taskId);
-					preparedStatement.setString(2, "pending");
+					preparedStatement.setString(2, TaskState.PENDING.name());
 					preparedStatement.execute();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
@@ -80,6 +81,7 @@ public class DatabaseHelper {
 			}
 		});
 	}
+	
 
 	public void storeTweetsInDB(final List<Tweet> tweets) {
 		executorService.submit(new Runnable() {

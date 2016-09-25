@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.List;
 
+import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
 
 public class MySqlDemo {
@@ -46,8 +48,32 @@ public class MySqlDemo {
 		
 	}
 	
+	private void storeUpdatedTweets(List<Tweet> tweets) throws SQLException {
+		Connection connect = null;
+		ResultSet resultSet = null;
+		PreparedStatement preparedStatement = null;
+		try{
+		connect = DriverManager
+				.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+		preparedStatement = connect
+				.prepareStatement("update Tweet_Table set movieid =?, compname=?, sentiment=? where rowid=?");
+		for (Tweet tweet : tweets) {
+			preparedStatement.setString(1, tweet.getMovieId());
+			preparedStatement.setString(2, "testCompName" /*tweet.getCompName()*/);
+			preparedStatement.setString(3, tweet.getSentiment());
+			preparedStatement.setInt(4, tweet.getRowId());
+			preparedStatement.addBatch();
+		}
+		preparedStatement.executeBatch();
+		}finally{
+			DatabaseHelper.getInstance().closeResources(connect, preparedStatement, resultSet);
+		}
+	}
+	
 	public static void main(String args[]) throws ClassNotFoundException, SQLException{
-		new MySqlDemo().writeExample();
+		Tweet tweet = new Tweet();
+		tweet.setRowId(1731).setCompName("xxx");
+		new MySqlDemo().storeUpdatedTweets(Arrays.asList(tweet));
 	}
 
 	public boolean pushTweets(List<Tweet> tweets) {
