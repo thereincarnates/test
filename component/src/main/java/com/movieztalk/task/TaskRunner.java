@@ -27,6 +27,8 @@ public class TaskRunner {
 
 	public static void main(String[] args) throws SQLException, InterruptedException {
 		TaskRunner runner = new TaskRunner();
+		runner.run();
+		/*TaskRunner runner = new TaskRunner();
 		Set<String> taskIds = runner.fetchUnProcessedTasks();
 		Set<Callable<String>> callables = new HashSet<Callable<String>>();
 		for (String taskId : taskIds) {
@@ -44,7 +46,27 @@ public class TaskRunner {
 		}
 		runner.updateTaskStatus(successFullTasks);
 		System.out.println("successful tasks "+ successFullTasks);
-		runner.executorService.shutdownNow();
+		runner.executorService.shutdownNow();*/
+	}
+	
+	public void run() throws SQLException, InterruptedException{
+		Set<String> taskIds = fetchUnProcessedTasks();
+		Set<Callable<String>> callables = new HashSet<Callable<String>>();
+		for (String taskId : taskIds) {
+			addTaskToQueue(taskId, callables);
+		}
+		List<Future<String>> futures = executorService.invokeAll(callables);
+		Set<String> successFullTasks = new  HashSet<>();
+		for(Future<String> future : futures){
+			try {
+				String task = future.get();
+				successFullTasks.add(task);
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
+		updateTaskStatus(successFullTasks);
+		executorService.shutdownNow();
 	}
 	
 	private void updateTaskStatus(Set<String> successFullTasks) throws SQLException {
@@ -88,12 +110,13 @@ public class TaskRunner {
 		connect = DriverManager
 				.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 		preparedStatement = connect
-				.prepareStatement("update Tweet_Table set movieid =?, compname=?, sentiment=? where rowid=?");
+				.prepareStatement("update Tweet_Table set movieid =?, compname=?, sentiment=? , status = ? where rowid=?");
 		for (Tweet tweet : tweets) {
 			preparedStatement.setString(1, tweet.getMovieId());
 			preparedStatement.setString(2, tweet.getCompName());
 			preparedStatement.setString(3, tweet.getSentiment());
-			preparedStatement.setInt(4, tweet.getRowId());
+			preparedStatement.setString(4, tweet.getStatus());
+			preparedStatement.setInt(5, tweet.getRowId());
 			preparedStatement.addBatch();
 		}
 		preparedStatement.executeBatch();
