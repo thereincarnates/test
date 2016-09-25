@@ -1,4 +1,4 @@
-package com.movieztalk.sentimentnalaysis;
+package com.movieztalk.demo;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;

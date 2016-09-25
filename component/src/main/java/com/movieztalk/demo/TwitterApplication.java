@@ -1,4 +1,4 @@
-package com.movieztalk.reviewsextraction;
+package com.movieztalk.demo;
 
 import twitter4j.*;
 import twitter4j.auth.RequestToken;

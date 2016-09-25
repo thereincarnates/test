@@ -12,11 +12,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.movieztalk.TweetProcessor;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
 import com.movieztalk.helper.RegexHelper;
 
-public class MovieClassifier {
+public class MovieClassifier implements TweetProcessor{
 
 	private RegexHelper regexHelper = RegexHelper.getInstance();
 	private DatabaseHelper dbHelper = DatabaseHelper.getInstance();
@@ -54,6 +55,7 @@ public class MovieClassifier {
 		dbHelper.closeResources(connect, statement, resultSet);
 	}
 
+	@Override
 	public void processTweets(List<Tweet> tweets) {
 		Preconditions.checkNotNull(tweets);
 		for (Tweet tweet : tweets) {

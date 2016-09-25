@@ -1,4 +1,4 @@
-package com.movieztalk.reviewsextraction;
+package com.movieztalk.demo;
 
 import java.util.ArrayList;
 import java.util.List;

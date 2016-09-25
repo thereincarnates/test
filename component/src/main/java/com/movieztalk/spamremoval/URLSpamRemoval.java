@@ -9,7 +9,7 @@ import weka.core.Instance;
 
 public class URLSpamRemoval {
 
-	private static Pattern urlPattern = Pattern.compile(".*http.*");
+	private static Pattern urlPattern = Pattern.compile(".*http.*", Pattern.DOTALL);
 
 	private static URLSpamRemoval instance = null;
 
@@ -29,7 +29,10 @@ public class URLSpamRemoval {
 	}
 
 	public static void main(String[] args) {
-		String x = "fvfjvjfdhtp";
+		String x = "RT @TOIEntertain: Know what #Pink actress Andrea Tariang has to say!"
+				+ "\n"
+				+ "\n"
+				+ "https://t.co/HIbpCPIK1P";
 		System.out.println(new URLSpamRemoval().isSpam(x));
 	}
 }

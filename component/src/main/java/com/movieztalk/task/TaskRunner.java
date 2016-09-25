@@ -18,6 +18,7 @@ import java.util.concurrent.Future;
 
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
+import com.movieztalk.spamremoval.BlackListTweetRemoval;
 import com.movieztallk.movieclassifier.MovieClassifier;
 
 public class TaskRunner {
@@ -72,6 +73,7 @@ public class TaskRunner {
 			public String call() throws Exception {
 				List<Tweet> tweets = fetchTweetFromTaskId(taskId);
 				MovieClassifier.getInstance().processTweets(tweets);
+				BlackListTweetRemoval.getInstance().processTweets(tweets);
 				storeUpdatedTweets(tweets);
 				return taskId;
 			}

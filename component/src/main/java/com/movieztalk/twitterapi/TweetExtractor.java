@@ -95,12 +95,10 @@ public class TweetExtractor {
 
 		twitterStream.addListener(listener);
 		FilterQuery fquery = new FilterQuery();
-		String keywords[] = { "#banjo, #daysoftafree" , "#pink"};
+		String keywords[] = { "#banjo, #daysoftafree" , "#pink", "#MSDhoniTheUntoldStory"};
 
 		fquery.track(keywords);
 
-		// sample() method internally creates a thread which manipulates
-		// TwitterStream and calls these adequate listener methods continuously.
 		twitterStream.filter(fquery);
 	}
 
