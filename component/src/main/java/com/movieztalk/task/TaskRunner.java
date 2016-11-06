@@ -152,6 +152,12 @@ public class TaskRunner {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery("select * from taskid where status!='" + TaskState.DONE.name() + "'");

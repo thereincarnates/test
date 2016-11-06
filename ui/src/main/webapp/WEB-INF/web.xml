@@ -42,6 +42,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>MovieGameInitialize</servlet-name>
     <url-pattern>/moviegameinit</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+		<servlet-name>TaskCron</servlet-name>
+		<servlet-class>com.movieztalk.server.cron.CronServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TaskCron</servlet-name>
+		<url-pattern>/taskCron</url-pattern>
+	</servlet-mapping>
 
     <servlet>
 		<servlet-name>HelloServlet</servlet-name>
