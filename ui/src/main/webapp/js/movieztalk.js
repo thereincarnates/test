@@ -50,20 +50,29 @@ moviezApp.config(['$routeProvider',
         }).success(function (data) 
           {
             $scope.movies=data; 
-          });    
+          });  
+    
+    $http({
+        method: 'GET',
+        url: '/latestHome',
+        headers: {'Content-Type': 'application/json'}
+      }).success(function (data) 
+        {
+          $scope.latest_movies=data; 
+        }); 
  });
-
+ 
  moviezApp.controller("GameController",function($scope,$routeParams,$http,gameService)
  {
     
    $scope.industryList = ["Bollywood","Hollywood","Tollywood"];
-   //$scope.selectedindustry = "Select Movie Type";
-   //$scope.selIndustry = function(industry)
-   //{
+   // $scope.selectedindustry = "Select Movie Type";
+   // $scope.selIndustry = function(industry)
+   // {
       
-     //     $scope.selectedindustry = industry;
+     // $scope.selectedindustry = industry;
       
-   //}
+   // }
 
 
 
@@ -93,8 +102,8 @@ moviezApp.config(['$routeProvider',
     {
       // if(!(($scope.selectedindustry).localeCompare("Select Movie Type")))
       // {
-      //    console.log("selected industry tyep:" + $scope.selectedindustry);
-      //    $scope.selectedindustry = "Bollywood";
+      // console.log("selected industry tyep:" + $scope.selectedindustry);
+      // $scope.selectedindustry = "Bollywood";
       // }
 
        $scope.selectedindustry = option;

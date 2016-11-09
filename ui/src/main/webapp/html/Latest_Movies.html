@@ -8,37 +8,11 @@
 
 						<div>Latest Release</div>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-6">Movie1</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie2</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie3</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie4</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie4</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie4</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie4</div>
-
-						</div>
-						<div class="row">
-							<div class="col-lg-6">Movie4</div>
+					<div class="panel-body" ng-controller="LoadHomePageCont">
+						<div ng-repeat="movie in latest_movies">
+							<div class="row">
+								<div class="col-lg-6">{{movie.name}}</div>
+							</div>
 
 						</div>
 					</div>
