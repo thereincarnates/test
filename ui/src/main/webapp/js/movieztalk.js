@@ -60,6 +60,15 @@ moviezApp.config(['$routeProvider',
         {
           $scope.latest_movies=data; 
         }); 
+    
+    $http({
+        method: 'GET',
+        url: '/upComingHome',
+        headers: {'Content-Type': 'application/json'}
+      }).success(function (data) 
+        {
+          $scope.upcoming_movies=data; 
+        }); 
  });
  
  moviezApp.controller("GameController",function($scope,$routeParams,$http,gameService)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 	<servlet>
 		<servlet-name>Moviez</servlet-name>
 		<servlet-class>com.movieztalk.server.HomeCarouselServlet</servlet-class>
@@ -12,38 +12,38 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Moviez</servlet-name>
 		<url-pattern>/carousel</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-        <servlet-name>MoviezPlot</servlet-name>
-        <servlet-class>com.movieztalk.server.MoviePlotServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MoviezPlot</servlet-name>
-        <url-pattern>/movieplot</url-pattern>
-    </servlet-mapping>
-    MoviePopulateServlet
-	
-	
+		<servlet-name>MoviezPlot</servlet-name>
+		<servlet-class>com.movieztalk.server.MoviePlotServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MoviezPlot</servlet-name>
+		<url-pattern>/movieplot</url-pattern>
+	</servlet-mapping>
+	MoviePopulateServlet
+
+
 	<servlet>
-    <servlet-name>MoviePopulateServlet</servlet-name>
-    <servlet-class>com.movieztalk.server.MoviePopulateServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MoviePopulateServlet</servlet-name>
-    <url-pattern>/moviepopulate</url-pattern>
-  </servlet-mapping>
-	
-	
+		<servlet-name>MoviePopulateServlet</servlet-name>
+		<servlet-class>com.movieztalk.server.MoviePopulateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MoviePopulateServlet</servlet-name>
+		<url-pattern>/moviepopulate</url-pattern>
+	</servlet-mapping>
+
+
 	<servlet>
-    <servlet-name>MovieGameInitialize</servlet-name>
-    <servlet-class>com.movieztalk.server.MovieGameInitializerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MovieGameInitialize</servlet-name>
-    <url-pattern>/moviegameinit</url-pattern>
-  </servlet-mapping>
-  
-   <servlet>
+		<servlet-name>MovieGameInitialize</servlet-name>
+		<servlet-class>com.movieztalk.server.MovieGameInitializerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MovieGameInitialize</servlet-name>
+		<url-pattern>/moviegameinit</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>TaskCron</servlet-name>
 		<servlet-class>com.movieztalk.server.cron.CronServlet</servlet-class>
 	</servlet>
@@ -52,7 +52,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/taskCron</url-pattern>
 	</servlet-mapping>
 
-    <servlet>
+	<servlet>
 		<servlet-name>HelloServlet</servlet-name>
 		<servlet-class>com.movieztalk.server.TestServlet</servlet-class>
 	</servlet>
@@ -60,16 +60,25 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>HelloServlet</servlet-name>
 		<url-pattern>/HelloServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-	    <servlet-name>GameManager</servlet-name>
-	    <servlet-class>com.movieztalk.server.MovieGameManagerServlet</servlet-class>
+		<servlet-name>GameManager</servlet-name>
+		<servlet-class>com.movieztalk.server.MovieGameManagerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-	    <servlet-name>GameManager</servlet-name>
-	    <url-pattern>/gamemanager</url-pattern>
+		<servlet-name>GameManager</servlet-name>
+		<url-pattern>/gamemanager</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>UpComingMoviezHome</servlet-name>
+		<servlet-class>com.movieztalk.server.UpComingReleasesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpComingMoviezHome</servlet-name>
+		<url-pattern>/upComingHome</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>LatestMoviezHome</servlet-name>
 		<servlet-class>com.movieztalk.server.LatestReleaseServlet</servlet-class>
@@ -78,7 +87,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>LatestMoviezHome</servlet-name>
 		<url-pattern>/latestHome</url-pattern>
 	</servlet-mapping>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
