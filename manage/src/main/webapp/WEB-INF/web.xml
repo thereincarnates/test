@@ -13,6 +13,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/managemz</url-pattern>
 	</servlet-mapping>
 
+
+
+	<servlet>
+		<servlet-name>NewMovie</servlet-name>
+		<servlet-class>com.movieztalk.server.NewMovieServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewMovie</servlet-name>
+		<url-pattern>/newMovie</url-pattern>
+	</servlet-mapping>
+	
 	<security-constraint>
 	    <web-resource-collection>
 	        <web-resource-name>

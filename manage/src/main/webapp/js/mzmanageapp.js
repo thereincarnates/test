@@ -17,6 +17,18 @@ manageapp.config([ '$routeProvider', function($routeProvider) {
 
 manageapp.controller("NewMovieAdd",
 		function($scope, $routeParams, $http) {
+	$scope.addNewMovie = function(movie) {
+		$http({
+		    url: '/manage/newMovie',
+		    method: "POST",
+		    data: JSON.stringify(movie),
+		    headers: {'Content-Type': 'application/json'}
+		}).success(function (data, status, headers, config) {
+		   console.log(data); 
+		}).error(function (data, status, headers, config) {
+		    console.error('error');
+		});
+	}
 	
 });
 

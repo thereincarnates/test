@@ -1,4 +1,17 @@
-<div>
-	<input type="text" ng-model="sometext" />
-	<h1>Hello {{ sometext }}</h1>
+<div id="outer_container" class="container-fluid">
+	<!-- Inner Container which contains all the page elements -->
+	<div class="container" style='background-color: #FFEBCC;'>
+		<div>
+			<form novalidate class="simple-form">
+				Name: <input type="text" ng-model="movie.name" /><br /> HashTag: <input
+					type="text" ng-model="movie.hashtag" /><br /> WikiUrl: <input
+					type="text" ng-model="movie.wikiurl" /><br /> Songs and Trailers:
+				<input type="text" ng-model="movie.songsandtrailers" /><br />
+				Video Reviews : <input type="text" ng-model="movie.videoreviews" /><br />
+				Interview and Events: <input type="text"
+					ng-model="movie.interviewandevents" /><br /> <input type="submit"
+					ng-click="addNewMovie(movie)" value="Add" />
+			</form>
+		</div>
+	</div>
 </div>
