@@ -1,11 +1,8 @@
 package com.movieztalk.server;
 
-import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
  
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 import com.google.gson.Gson;
-import com.movieztalk.extraction.model.Movie;
 
 
 public class ManagePageServelet extends HttpServlet 
