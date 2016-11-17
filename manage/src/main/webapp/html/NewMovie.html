@@ -1,16 +1,52 @@
+
 <div id="outer_container" class="container-fluid">
 	<!-- Inner Container which contains all the page elements -->
 	<div class="container" style='background-color: #FFEBCC;'>
 		<div>
+			<h1>Add Movie</h1>
+			<hr>
+		</div>
+		<div>
 			<form novalidate class="simple-form">
-				Name: <input type="text" ng-model="movie.name" /><br /> HashTag: <input
-					type="text" ng-model="movie.hashtag" /><br /> WikiUrl: <input
-					type="text" ng-model="movie.wikiurl" /><br /> Songs and Trailers:
-				<input type="text" ng-model="movie.songsandtrailers" /><br />
-				Video Reviews : <input type="text" ng-model="movie.videoreviews" /><br />
-				Interview and Events: <input type="text"
-					ng-model="movie.interviewandevents" /><br /> <input type="submit"
-					ng-click="addNewMovie(movie)" value="Add" />
+				<table>
+					<tr>
+						<td>Name</td>
+						<td></td>
+						<td><input type="text" ng-model="movie.name" /></td>
+					</tr>
+
+					<tr>
+						<td>Hashtag</td>
+						<td></td>
+						<td><input type="text" ng-model="movie.hashTag" /></td>
+					</tr>
+
+					<tr>
+						<td>Wiki Url</td>
+						<td></td>
+						<td><input type="text" ng-model="movie.wikiUrl" /></td>
+					</tr>
+
+					<tr>
+						<td>Songs and Trailers</td>
+						<td></td>
+						<td><input type="text" ng-model="movie.songsAndTrailers" /></td>
+					</tr>
+
+					<tr>
+						<td>Video Reviews</td>
+						<td></td>
+						<td><input type="text" ng-model="movie.videoReviews" /></td>
+					</tr>
+
+					<tr>
+						<td>Interview and Events</td>
+						<td></td>
+						<td><input type="text" ng-model="movie.interviewsAndEvents" /></td>
+					</tr>
+				</table>
+				<br /> <input type="submit" ng-click="addNewMovie(movie)"
+					value="Add" />
 			</form>
 		</div>
 	</div>
