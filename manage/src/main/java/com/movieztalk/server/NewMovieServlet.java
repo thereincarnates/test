@@ -52,7 +52,8 @@ public class NewMovieServlet extends HttpServlet {
 			preparedStatement.setString(4, movieInputRequest.getSongsAndTrailers());
 			preparedStatement.setString(5, movieInputRequest.getVideoReviews());
 			preparedStatement.setString(6, movieInputRequest.getInterviewsAndEvents());
-			result = preparedStatement.execute();
+			preparedStatement.execute();
+			result = true;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

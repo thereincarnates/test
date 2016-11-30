@@ -16,16 +16,20 @@ manageapp.config([ '$routeProvider', function($routeProvider) {
 } ]);
 
 manageapp.controller("NewMovieAdd",
-		function($scope, $routeParams, $http) {
+		function($scope, $routeParams, $http, $window) {
 	$scope.addNewMovie = function(movie) {
+		
 		$http({
 		    url: '/manage/newMovie',
 		    method: "POST",
 		    data: JSON.stringify(movie),
 		    headers: {'Content-Type': 'application/json'}
 		}).success(function (data, status, headers, config) {
-		   console.log(data); 
+			window.alert("Done saving movie into database");
+			$scope.movie.name='';
+		    console.log(data); 
 		}).error(function (data, status, headers, config) {
+			window.alert("There was an error saving movie into data base");
 		    console.error('error');
 		});
 	}
