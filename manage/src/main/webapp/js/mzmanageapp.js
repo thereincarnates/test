@@ -27,6 +27,11 @@ manageapp.controller("NewMovieAdd",
 		}).success(function (data, status, headers, config) {
 			window.alert("Done saving movie into database");
 			$scope.movie.name='';
+			$scope.movie.hashTag='';
+			$scope.movie.wikiUrl='';
+			$scope.movie.songsAndTrailers='';
+			$scope.movie.videoReviews='';
+			$scope.movie.interviewsAndEvents='';
 		    console.log(data); 
 		}).error(function (data, status, headers, config) {
 			window.alert("There was an error saving movie into data base");
