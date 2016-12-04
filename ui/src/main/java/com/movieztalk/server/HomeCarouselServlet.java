@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Movie;
+import com.movieztalk.movieaspects.model.MovieAspect;
 import com.movieztalk.task.TaskState;
 
 public class HomeCarouselServlet extends HttpServlet {
@@ -64,7 +65,7 @@ public class HomeCarouselServlet extends HttpServlet {
 			Instant before = Instant.now();
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 			Instant after = Instant.now();
-			logger.warning("done creating connection in:" + Duration.between(before, after).toMillis() +" ms.");
+			logger.warning("done creating connection in:" + Duration.between(before, after).toMillis() + " ms.");
 			statement = connect.createStatement();
 			resultSet = statement
 					.executeQuery("select * from movie where movieid in (select movieid from carousel_movies)");
@@ -73,6 +74,16 @@ public class HomeCarouselServlet extends HttpServlet {
 				movie.setName(resultSet.getString("name"));
 				movie.setBudget(resultSet.getString("budget"));
 				movie.setBoxOffice(resultSet.getString("boxoffice"));
+				movie.setOverall(new MovieAspect().setRating(resultSet.getString("overallrating") == null ? 1
+						: Double.parseDouble(resultSet.getString("overallrating"))));
+				movie.setStory(new MovieAspect().setRating(resultSet.getString("storyrating") == null ? 1
+						: Double.parseDouble(resultSet.getString("storyrating"))));
+				movie.setActing(new MovieAspect().setRating(resultSet.getString("actingrating") == null ? 1
+						: Double.parseDouble(resultSet.getString("actingrating"))));
+				movie.setDirection(new MovieAspect().setRating(resultSet.getString("directionrating") == null ? 1
+						: Double.parseDouble(resultSet.getString("overallrating"))));
+				movie.setMusic(new MovieAspect().setRating(resultSet.getString("musicrating") == null ? 1
+						: Double.parseDouble(resultSet.getString("musicrating"))));
 				movies.add(movie);
 			}
 		} catch (SQLException e) {

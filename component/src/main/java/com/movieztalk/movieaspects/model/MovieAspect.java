@@ -9,24 +9,27 @@ import java.util.Set;
  */
 public class MovieAspect {
 
-  // Rating of the movie aspect
-  private double rating;
-  // Positive comments about the aspect
-  private final Set<String> positiveReviews = new LinkedHashSet<>();
-  // Negative comments about the aspect
-  private final Set<String> negativeReviews = new LinkedHashSet<>();
+	// Rating of the movie aspect
+	private double rating;
+	// Positive comments about the aspect
+	private final Set<String> positiveReviews = new LinkedHashSet<>();
+	// Negative comments about the aspect
+	private final Set<String> negativeReviews = new LinkedHashSet<>();
+	
+	public double getRating() {
+		return rating;
+	}
 
-  public double getRating() {
-    return rating;
-  }
-  public void setRating(double rating) {
-    this.rating = rating;
-  }
-  public Set<String> getPositiveReviews() {
-    return positiveReviews;
-  }
-  public Set<String> getNegativeReviews() {
-    return negativeReviews;
-  }
+	public MovieAspect setRating(double rating) {
+		this.rating = rating;
+		return this;
+	}
 
+	public Set<String> getPositiveReviews() {
+		return positiveReviews;
+	}
+
+	public Set<String> getNegativeReviews() {
+		return negativeReviews;
+	}
 }
