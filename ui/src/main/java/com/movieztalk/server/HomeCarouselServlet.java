@@ -33,7 +33,7 @@ public class HomeCarouselServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html");
+		response.setContentType("applicaton/json");
 		logger.info("Testing the data");
 
 		// List<Movie> movies = getListOfMovies();
