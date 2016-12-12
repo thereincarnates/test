@@ -43,6 +43,22 @@ moviezApp.config(['$routeProvider',
 
  moviezApp.controller("LoadHomePageCont",function($scope,$routeParams,$http)
  {
+	 
+	 $scope.movienamelist = [];
+	 $scope.dostuff = function(moviename)
+	 {
+		 console.log("do stuff called1" + moviename);
+		
+		 $http({
+             method: 'GET',
+             url: '/movieSuggestServlet?mvNameInitials='+ moviename ,
+             headers: {'Content-Type': 'application/json'}
+         }).success(function (option) 
+         {
+        	 $scope.movienamelist = option;     
+         })
+	 }
+	 
     $http({
           method: 'GET',
           url: '/carousel',
@@ -68,7 +84,23 @@ moviezApp.config(['$routeProvider',
       }).success(function (data) 
         {
           $scope.upcoming_movies=data; 
-        }); 
+        });
+    
+    
+    
+
+		/*$scope.selFunction = function(movieInitials) {
+			$http({
+				method : 'GET',
+				url : '/manage/managemz?movieInitals=' + movieInitials,
+				headers : {
+					'Content-Type' : 'application/json'
+				}
+			}).success(function(data) {
+				$scope.movieSearchNames = data;
+			});
+		}*/
+
  });
  
  moviezApp.controller("GameController",function($scope,$routeParams,$http,gameService)

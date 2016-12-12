@@ -1,236 +1,41 @@
-
-<div
-	class="container-fluid padding_container container-fluid-background">
-
+<!--  Movie Page Outer Container which contains the background image and inner container -->
+<div class="container-fluid padding_container container-fluid-background">
+	<!-- Inner Container which contains all the page elements -->
 	<div class="container padding_container">
+	   
+	    <!-- Row Which contains movieztalk name ,search bar and navigation tabs -->
+	    <div class="row">
+		    <div class="row" >
+				<div class="col-lg-3 col-md-3 col-sm-3 col-sm-3 "
+					ng-include="'MovieLabel.html'"></div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-sm-6 padding_top_10"
+					 ng-include="'SearchBar.html'" ></div>
+		    </div>
+		    <br>
+		    <div ng-include="'NavBar.html'"></div>
+		</div>
 
 
+        <!-- Row Containing movie panel with ratings and plot -->
+		<div class="row ">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 padding_container">
+				<div class="col-lg-7 col-md-7 col-sm-7 col-sm-12 padding" 
+				     ng-include="'Movie_Panel.html'"></div>
+				<div class="col-lg-5 col-md-5 col-sm-5 col-sm-12 padding mycontent-left"
+				     ng-include="'Movie_plot.html'"></div>
+			</div>
+		</div>
+  
+        
+        <!-- Panel for USer to enter there rating and comments -->
+         <div class=row>
+         
+         </div>
+		
+		<!-- Row Containing movie reviews and videos -->
 		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<h2 class="text-center color-background">MoviezTalk</h2>
-			</div>
-		</div>
-
-
-
-		<div class="row   row-eq-height padding_container well ">
-			<div
-				class="col-lg-12 col-md-12 col-sm-12 col-sm-12 padding_container">
-
-				<div class="col-lg-7 col-md-7 col-sm-7 col-sm-12 padding">
-
-
-
-					<div class="panel-body ">
-						<div class="row">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
-								<img src="../Images/movie.jpg"
-									class="img-responsive center-block"></img>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-								<div class="row">
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
-										<span class=" starRating"> <input id="rating5"
-											type="radio" name="rating1" value="5"> <label
-											for="rating5">5</label> <input id="rating4" type="radio"
-											name="rating1" value="4"> <label for="rating4">4</label>
-											<input id="rating3" type="radio" name="rating1" value="3"
-											checked> <label for="rating3">3</label> <input
-											id="rating2" type="radio" name="rating1" value="2"> <label
-											for="rating2">2</label> <input id="rating1" type="radio"
-											name="rating1" value="1"> <label for="rating1">1</label>
-										</span>
-									</div>
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
-										<span class=" starRating"> <input id="rating5"
-											type="radio" name="rating1" value="5"> <label
-											for="rating5">5</label> <input id="rating4" type="radio"
-											name="rating1" value="4"> <label for="rating4">4</label>
-											<input id="rating3" type="radio" name="rating1" value="3"
-											checked> <label for="rating3">3</label> <input
-											id="rating2" type="radio" name="rating1" value="2"> <label
-											for="rating2">2</label> <input id="rating1" type="radio"
-											name="rating1" value="1"> <label for="rating1">1</label>
-										</span>
-									</div>
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
-										<span class=" starRating"> <input id="rating5"
-											type="radio" name="rating1" value="5"> <label
-											for="rating5">5</label> <input id="rating4" type="radio"
-											name="rating1" value="4"> <label for="rating4">4</label>
-											<input id="rating3" type="radio" name="rating1" value="3"
-											checked> <label for="rating3">3</label> <input
-											id="rating2" type="radio" name="rating1" value="2"> <label
-											for="rating2">2</label> <input id="rating1" type="radio"
-											name="rating1" value="1"> <label for="rating1">1</label>
-										</span>
-									</div>
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Overall</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">
-										<span class=" starRating"> <input id="rating5"
-											type="radio" name="rating1" value="5"> <label
-											for="rating5">5</label> <input id="rating4" type="radio"
-											name="rating1" value="4"> <label for="rating4">4</label>
-											<input id="rating3" type="radio" name="rating1" value="3"
-											checked> <label for="rating3">3</label> <input
-											id="rating2" type="radio" name="rating1" value="2"> <label
-											for="rating2">2</label> <input id="rating1" type="radio"
-											name="rating1" value="1"> <label for="rating1">1</label>
-										</span>
-									</div>
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Budget</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">500
-										Million</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Earning</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">500
-										Million</div>
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Release
-										Date</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
-
-								</div>
-							</div>
-
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
-								<div class="row ">
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center ">Director</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Director</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
-
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Director</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">Director</div>
-									<div
-										class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer text-center">2015-10-11</div>
-
-								</div>
-
-							</div>
-
-
-
-
-						</div>
-					</div>
-				</div>
-
-
-
-				<div
-					class="col-lg-5 col-md-5 col-sm-5 col-sm-12 padding mycontent-left">
-					<div ng-include="'Movie_plot.html'"></div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-		<div class="row padding_container">
-			<div class="col-lg-9 col-md-9 col-sm-9 col-sm-12 padding_container">
-
-				<div class="panel-heading  padding_container">
-					<nav class="navbar navbar-default  padding_container">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed"
-								data-toggle="collapse"
-								data-target="#bs-example-navbar-collapse-2"
-								aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span> <span
-									class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand" href="#">About Movie:</a>
-						</div>
-
-						<div class="collapse navbar-collapse"
-							id="bs-example-navbar-collapse-2">
-							<ul class="nav navbar-nav">
-
-								<li class="dropdown"><a data-target="#tab1success"
-									class="dropdown-toggle" data-toggle="dropdown" role="button"
-									aria-haspopup="true" aria-expanded="false">User Reviews <span
-										class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a data-target="#reviews" data-toggle="tab" ng-click="fillReviewType('overall')">Overall</a></li>
-										<li><a data-target="#reviews" data-toggle="tab" ng-click="fillReviewType('story')">Story</a></li>
-										<li><a data-target="#reviews" data-toggle="tab" ng-click="fillReviewType('acting')">Acting</a></li>
-										<li><a data-target="#reviews" data-toggle="tab" ng-click="fillReviewType('direction')">Direction</a></li>
-										<li><a data-target="#reviews" data-toggle="tab" ng-click="fillReviewType('music')">Music</a></li>
-									</ul></li>
-
-								<li><a data-target="#tab2success" data-toggle="tab"
-									ng-click="buldDefaultList('songAndTrailers')">Songs &
-										Trailers</a></li>
-								<li><a data-target="#tab3success" data-toggle="tab"
-									ng-click="buldDefaultList('videoReviews')">Video Reviews</a></li>
-								<li><a data-target="#tab4success" data-toggle="tab"
-									ng-click="buldDefaultList('interviewAndEvents')">Interview
-										& Events</a></li>
-
-
-							</ul>
-						</div>
-					</nav>
-				</div>
-
-				<div class="panel-body">
-					<div class="tab-content">
-
-
-						<div class="tab-pane fade" id="tab2success">
-
-							<div ng-include="'videoimage.html'"></div>
-						</div>
-						<div class="tab-pane fade" id="tab3success">
-							<div ng-include="'videoimage.html'"></div>
-						</div>
-
-						<div class="tab-pane fade" id="tab4success">
-							<div ng-include="'videoimage.html'"></div>
-						</div>
-
-						<div class="tab-pane fade  in active" id="reviews">
-							<div class="panel panel-default">
-								<div ng-include="'movie_review.html'"></div>
-							</div>
-						</div>
-					</div>
-					<div ng-include="'videomodal.html'"></div>
-				</div>
-
-			</div>
+		<div class="col-lg-9 col-md-9 col-sm-9 col-sm-12 padding_container"
+		     ng-include="'Movie_Review_Video.html'"></div>		
 		</div>
 	</div>
 </div>

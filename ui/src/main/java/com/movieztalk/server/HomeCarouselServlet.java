@@ -55,6 +55,7 @@ public class HomeCarouselServlet extends HttpServlet {
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
+		ServerConfiguration mysqlserver =  new ServerConfiguration();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -63,7 +64,8 @@ public class HomeCarouselServlet extends HttpServlet {
 		}
 		try {
 			Instant before = Instant.now();
-			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+			connect = DriverManager.getConnection("jdbc:mysql://"+mysqlserver.mysqlServerName+":"+mysqlserver.mysqlServerPort+"/"+mysqlserver.mysqlDBName+"?user="+ mysqlserver.mysqlServerUserName+"&password="+mysqlserver.mysqlServerPassword);
+			System.out.println("jdbc:mysql://"+mysqlserver.mysqlServerName+":"+mysqlserver.mysqlServerPort+"/"+mysqlserver.mysqlDBName+"?user="+ mysqlserver.mysqlServerUserName+"&password="+mysqlserver.mysqlServerPassword);
 			Instant after = Instant.now();
 			logger.warning("done creating connection in:" + Duration.between(before, after).toMillis() + " ms.");
 			statement = connect.createStatement();
@@ -87,6 +89,7 @@ public class HomeCarouselServlet extends HttpServlet {
 				movies.add(movie);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
 		}
