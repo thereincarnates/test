@@ -7,6 +7,9 @@ manageapp.config([ '$routeProvider', function($routeProvider) {
 	}).when('/manage/:optionid', {
 		templateUrl : 'Home.html',
 		controller : 'LoadManagePageCont'
+	}).when('/newMovie/:movieid', {
+		templateUrl : 'NewMovie.html',
+		controller : 'NewMovieAdd'
 	}).when('/newMovie', {
 		templateUrl : 'NewMovie.html',
 		controller : 'NewMovieAdd'
@@ -15,25 +18,28 @@ manageapp.config([ '$routeProvider', function($routeProvider) {
 	});
 } ]);
 
-manageapp.controller("NewMovieAdd",
-		function($scope, $routeParams, $http, $window) {
+manageapp.controller("NewMovieAdd", function($scope, $routeParams, $http,
+		$window) {
+	$scope.movie = {name :+ $routeParams.movieid };
 	$scope.addNewMovie = function(movie) {
-		
+		console.log(movie);
 		$http({
-		    url: '/manage/newMovie',
-		    method: "POST",
-		    data: JSON.stringify(movie),
-		    headers: {'Content-Type': 'application/json'}
-		}).success(function (data, status, headers, config) {
+			url : '/manage/newMovie',
+			method : "POST",
+			data : JSON.stringify(movie),
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).success(function(data, status, headers, config) {
 			window.alert("Done saving movie into database");
-			$scope.movie={};
-		    console.log(data); 
-		}).error(function (data, status, headers, config) {
+			$scope.movie = {};
+			console.log(data);
+		}).error(function(data, status, headers, config) {
 			window.alert("There was an error saving movie into data base");
-		    console.error('error');
+			console.error('error');
 		});
 	}
-	
+
 });
 
 manageapp.controller("LoadManagePageCont",
