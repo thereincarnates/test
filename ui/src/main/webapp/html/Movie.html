@@ -28,9 +28,24 @@
   
         
         <!-- Panel for USer to enter there rating and comments -->
-         <div class=row>
          
-         </div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-hide="isNotClicked">
+				<textarea rows="1" class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-focus="commentClick()" 
+				          placeholder="Enter Your Comments" ng-model="UserComment"></textarea>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-hide="isClicked">
+				<textarea rows="3" class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-focus="commentClick()" 
+				          placeholder="Enter Your Comments" ng-model="UserComment"></textarea>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-sm-3">
+			     <button type="button" class="btn btn-primary" ng-hide="isClicked" 
+			             ng-click="submitComment()" ng-model="submit">Submit</button>	
+			</div>
+		</div>
+
+
+		<br>
 		
 		<!-- Row Containing movie reviews and videos -->
 		<div class="row">

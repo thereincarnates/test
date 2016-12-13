@@ -106,5 +106,20 @@ moviezApp.controller("LoadMoviePageCont", function($scope, $routeParams, $http,
 			$scope.negativeReviews = $scope.movieobj.music.negativeReviews;
 		}
 	}
+	
+	$scope.isClicked = true;
+	$scope.isNotClicked = false;
+
+	$scope.commentClick = function()
+	{
+		console.log("Commit Column Clicked");
+		$scope.isClicked = false;
+		$scope.isNotClicked = true;
+	}
+	$scope.submitComment = function()
+	{
+		$scope.isClicked = true;
+		$scope.isNotClicked= true;		
+	}
 
 });
