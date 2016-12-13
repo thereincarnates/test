@@ -62,6 +62,33 @@ public class NewMovieServlet extends HttpServlet {
 		} finally {
 			DatabaseHelper.getInstance().closeResources(connect, preparedStatement, resultSet);
 		}
+
+		pushHashWordInMovieClassificationTable(movieInputRequest.getId(), movieInputRequest.getHashTag(),
+				movieInputRequest.getName());
+
 		return result;
+	}
+
+	public void pushHashWordInMovieClassificationTable(String movieId, String hashWord, String movieName) {
+		Connection connect = null;
+		ResultSet resultSet = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+
+			preparedStatement = connect.prepareStatement(
+					"insert into movieclassification (movieid, moviename, moviekeywords) values(?,?,?)");
+			preparedStatement.setString(1, movieId);
+			preparedStatement.setString(2, hashWord);
+			preparedStatement.setString(3, movieName);
+			preparedStatement.execute();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHelper.getInstance().closeResources(connect, preparedStatement, resultSet);
+		}
 	}
 }

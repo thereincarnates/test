@@ -86,6 +86,7 @@ public class HomeCarouselServlet extends HttpServlet {
 						: Double.parseDouble(resultSet.getString("overallrating"))));
 				movie.setMusic(new MovieAspect().setRating(resultSet.getString("musicrating") == null ? 1
 						: Double.parseDouble(resultSet.getString("musicrating"))));
+				movie.setImageUrl(resultSet.getString("imageurl"));
 				movies.add(movie);
 			}
 		} catch (SQLException e) {
