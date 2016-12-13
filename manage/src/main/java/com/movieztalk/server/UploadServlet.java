@@ -5,7 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import com.dropbox.core.DbxException;
+import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.dropbox.DropBoxHelper;
 
 @WebServlet("/upload")
@@ -26,7 +32,7 @@ public class UploadServlet extends HttpServlet {
 		OutputStream outputStream = null;
 		InputStream inputStream = null;
 		try {
-			String movieId = request.getParameter("movieid");
+			int movieId = findNextMovieId();
 			String extension = request.getParameter("extension");
 			String fileName = movieId + "." + extension;
 			System.err.println("SOMETHING IS WRONG");
@@ -40,10 +46,13 @@ public class UploadServlet extends HttpServlet {
 			while ((read = inputStream.read(bytes)) != -1) {
 				outputStream.write(bytes, 0, read);
 			}
-			new DropBoxHelper().uploadFile(fileName, "/images/" + movieId + "/" + fileName);
+			String shareableUrl = new DropBoxHelper().uploadFile(fileName, "/images/" + movieId + "/" + fileName);
+			shareableUrl = shareableUrl.replaceAll("0$", "1");
+			insertMovieIntoDb(movieId, shareableUrl);
+			System.out.println(shareableUrl);
 			File file = new File(fileName);
 			file.delete();
-			response.sendRedirect("/manage/html/Manage.html#/newMovie");
+			response.sendRedirect("/manage/html/Manage.html#/newMovie/" + movieId);
 		} catch (DbxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,6 +77,41 @@ public class UploadServlet extends HttpServlet {
 			} finally {
 
 			}
+		}
+	}
+
+	public int findNextMovieId() throws ClassNotFoundException, SQLException {
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("select max(movieid) from movie");
+			resultSet.next();
+			result = resultSet.getInt(1) + 1;
+		} finally {
+			DatabaseHelper.getInstance().closeResources(connection, statement, resultSet);
+		}
+		return result;
+	}
+
+	public void insertMovieIntoDb(int movieid, String url) throws ClassNotFoundException, SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+			statement = connection.prepareStatement("insert into movie(movieid, imageurl) values(?, ?)");
+			statement.setString(1, String.valueOf(movieid));
+			statement.setString(2, url);
+			statement.execute();
+		} finally {
+			DatabaseHelper.getInstance().closeResources(connection, statement, resultSet);
 		}
 	}
 }

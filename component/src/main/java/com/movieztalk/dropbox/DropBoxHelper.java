@@ -15,7 +15,7 @@ import com.movieztalk.configuration.ConfigurationHelper;
 
 public class DropBoxHelper {
 
-	public void uploadFile(String sourcePath, String destinationPath)
+	public String uploadFile(String sourcePath, String destinationPath)
 			throws DbxException, IOException, ClassNotFoundException, SQLException {
 		DbxRequestConfig config = new DbxRequestConfig("JavaTutorial/1.0", Locale.getDefault().toString());
 
@@ -36,5 +36,6 @@ public class DropBoxHelper {
 		} finally {
 			inputStream.close();
 		}
+		return client.createShareableUrl(destinationPath);
 	}
 }

@@ -20,7 +20,7 @@ manageapp.config([ '$routeProvider', function($routeProvider) {
 
 manageapp.controller("NewMovieAdd", function($scope, $routeParams, $http,
 		$window) {
-	$scope.movie = {name :+ $routeParams.movieid };
+	$scope.movie = {id :+$routeParams.movieid };
 	$scope.addNewMovie = function(movie) {
 		console.log(movie);
 		$http({

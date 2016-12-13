@@ -7,6 +7,15 @@ public class NewMovieInputRequest {
 	private String songsAndTrailers;
 	private String videoReviews;
 	private String interviewsAndEvents;
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -62,7 +71,5 @@ public class NewMovieInputRequest {
 				+ ", songsAndTrailers=" + songsAndTrailers + ", videoReviews=" + videoReviews + ", interviewsAndEvents="
 				+ interviewsAndEvents + "]";
 	}
-	
-	
 
 }

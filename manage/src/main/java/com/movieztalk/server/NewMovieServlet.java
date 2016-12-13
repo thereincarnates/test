@@ -20,7 +20,7 @@ import com.movieztalk.task.TaskState;
 import com.movieztalk.db.DatabaseHelper;
 
 public class NewMovieServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
 
@@ -34,25 +34,26 @@ public class NewMovieServlet extends HttpServlet {
 		out.flush();
 		out.close();
 	}
-	
-	public boolean insertNewMovieIntoDB(NewMovieInputRequest movieInputRequest){
+
+	public boolean insertNewMovieIntoDB(NewMovieInputRequest movieInputRequest) {
 		boolean result = false;
 		Connection connect = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager
-					.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
-			preparedStatement = connect
-					.prepareStatement("insert into  movieztalk.movie (name, hashtag, wikiurl, songsandtrailers, videoreviews, interviewsandevents) values(?,?,?,?,?,?)");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+
+			preparedStatement = connect.prepareStatement(
+					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=? where movieid=?");
 			preparedStatement.setString(1, movieInputRequest.getName());
 			preparedStatement.setString(2, movieInputRequest.getHashTag());
 			preparedStatement.setString(3, movieInputRequest.getWikiUrl());
 			preparedStatement.setString(4, movieInputRequest.getSongsAndTrailers());
 			preparedStatement.setString(5, movieInputRequest.getVideoReviews());
 			preparedStatement.setString(6, movieInputRequest.getInterviewsAndEvents());
-			preparedStatement.execute();
+			preparedStatement.setString(7, movieInputRequest.getId());
+			preparedStatement.executeUpdate();
 			result = true;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
