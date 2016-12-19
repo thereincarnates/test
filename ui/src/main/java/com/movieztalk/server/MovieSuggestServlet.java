@@ -32,7 +32,7 @@ public class MovieSuggestServlet extends HttpServlet {
 		response.setContentType("application/json");
 		String movieNameInitials = request.getParameter("mvNameInitials");
 
-		List<String> movieNameList = new ArrayList<>();
+		List<List<String>> movieNameList = new ArrayList<List<String>>();
 		Connection connect = null;
 		ResultSet resultSet = null;
 		Statement statement = null;
@@ -48,10 +48,12 @@ public class MovieSuggestServlet extends HttpServlet {
 			Instant after = Instant.now();
 
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("select distinct(name) from movie where name like '" +movieNameInitials+"%'");
+			resultSet = statement.executeQuery("select name,movieid from movie where name like '" +movieNameInitials+"%'");
 			while (resultSet.next()) {
-				movieNameList.add(resultSet.getString("name"));
-
+				List<String> movieName = new ArrayList<String>();
+				movieName.add(resultSet.getString("name"));
+				movieName.add(resultSet.getString("movieid"));
+				movieNameList.add(movieName);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

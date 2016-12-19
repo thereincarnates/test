@@ -45,9 +45,9 @@ moviezApp.config(['$routeProvider',
  {
 	 
 	 $scope.movienamelist = [];
-	 $scope.dostuff = function(moviename)
+	 $scope.getMovieNames = function(moviename)
 	 {
-		 console.log("do stuff called1" + moviename);
+		 console.log("getMovieNames called" + moviename);
 		
 		 $http({
              method: 'GET',
@@ -55,7 +55,7 @@ moviezApp.config(['$routeProvider',
              headers: {'Content-Type': 'application/json'}
          }).success(function (option) 
          {
-        	 $scope.movienamelist = option;     
+        	 $scope.movienamelist = option;
          })
 	 }
 	 
