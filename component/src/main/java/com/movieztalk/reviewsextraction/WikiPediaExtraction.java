@@ -8,58 +8,62 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.google.common.base.Strings;
+
 public class WikiPediaExtraction {
 	public static void main(String args[]) throws IOException {
-		File input = new File("/tmp/input.html");
-		// Document doc=
-		// Jsoup.parse("http://en.wikipedia.org/wiki/List_of_Telugu_films_of_2015",
-		// "10000");
+		String plot = null;
 
-		Document doc = Jsoup
-				.connect(
-						"https://en.wikipedia.org/wiki/Advantageous")
-				.get();
+		String url = "https://en.wikipedia.org/wiki/Moh_Maya_Money";
+		Document doc = Jsoup.connect(url).get();
 		Elements es = doc.getAllElements();
 		boolean flag = false;
-		for(Element e: es){
-			//System.out.println(e.id());
-			if(flag){
-				if(e.tagName().equalsIgnoreCase("p")){
-					System.out.println(e);
+		for (Element e : es) {
+			// System.out.println(e.id());
+			if (flag) {
+				if (e.tagName().equalsIgnoreCase("p")) {
+					plot = plot + "\n" + Jsoup.parse(e.toString()).text();
 				}
 			}
-			if(flag){
-				if(e.tagName().toLowerCase().contains("h2")){
-					flag=false;
+			if (flag) {
+				if (e.tagName().toLowerCase().contains("h2")) {
+					flag = false;
 				}
 			}
-			if(e.id().toLowerCase().contains("plot")){
+			if (e.id().toLowerCase().contains("plot")) {
 				flag = true;
-				//System.out.println("macteh");
-				//System.out.println(e);
 			}
-
 		}
 
-		//System.out.println(doc);
-		Elements resultLinks=doc.select(".infobox.vevent");
-		//System.out.println(resultLinks);
-		//Elements resultLinks = doc.getElementsByAttributeValueContaining("class", "infobox venevt");
-		//doc.getElementsByClass("infobox vevent");
+		if (Strings.isNullOrEmpty(plot)) {
+			boolean randomFlag = false;
+			for (Element element : es) {
+				if (randomFlag) {
+					if (element.tagName().equalsIgnoreCase("p")) {
+						plot = Jsoup.parse(element.toString()).text();
+						randomFlag = false;
+					}
+				}
+				if (element.id().equalsIgnoreCase("mw-content-text")) {
+					randomFlag = true;
+				}
+				// System.out.println(element.tagName() + "\t" + element.id());
+			}
+		}
 
-/*		Element x = doc.getElementById("infobox vevent");
-		System.out.println(x);
-*/
-																													// a
-																													// after
+		System.out.println(plot.replaceAll("\\[\\d\\]", "").trim());
 
-		//System.out.println(resultLinks.get(0));
-		// h3
 		// System.out.println(doc);
+		// Elements resultLinks = doc.select(".infobox.vevent");
+		// System.out.println(resultLinks);
+		// Elements resultLinks =
+		// doc.getElementsByAttributeValueContaining("class", "infobox venevt");
+		// doc.getElementsByClass("infobox vevent");
 
-		for (int i = 0; i < resultLinks.size(); i++) {
-			System.out.println(resultLinks.get(i));
-		}
+		/*
+		 * Element x = doc.getElementById("infobox vevent");
+		 * System.out.println(x);
+		 */
 
 	}
 }

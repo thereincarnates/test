@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.movieztalk.model.NewMovieInputRequest;
+import com.movieztalk.reviewsextraction.WikiPediaExtraction;
 import com.movieztalk.task.TaskState;
+import com.movieztalk.wikipedia.WikipediaExtractor;
 import com.movieztalk.db.DatabaseHelper;
 
 public class NewMovieServlet extends HttpServlet {
@@ -35,7 +37,9 @@ public class NewMovieServlet extends HttpServlet {
 		out.close();
 	}
 
-	public boolean insertNewMovieIntoDB(NewMovieInputRequest movieInputRequest) {
+	public boolean insertNewMovieIntoDB(NewMovieInputRequest movieInputRequest) throws IOException {
+		String plot = new WikipediaExtractor().fetchPlotString(movieInputRequest.getWikiUrl());
+		
 		boolean result = false;
 		Connection connect = null;
 		ResultSet resultSet = null;
@@ -45,14 +49,15 @@ public class NewMovieServlet extends HttpServlet {
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 
 			preparedStatement = connect.prepareStatement(
-					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=? where movieid=?");
+					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=?, plot=? where movieid=?");
 			preparedStatement.setString(1, movieInputRequest.getName());
 			preparedStatement.setString(2, movieInputRequest.getHashTag());
 			preparedStatement.setString(3, movieInputRequest.getWikiUrl());
 			preparedStatement.setString(4, movieInputRequest.getSongsAndTrailers());
 			preparedStatement.setString(5, movieInputRequest.getVideoReviews());
 			preparedStatement.setString(6, movieInputRequest.getInterviewsAndEvents());
-			preparedStatement.setString(7, movieInputRequest.getId());
+			preparedStatement.setString(8, movieInputRequest.getId());
+			preparedStatement.setString(7, plot);
 			preparedStatement.executeUpdate();
 			result = true;
 		} catch (ClassNotFoundException e) {
