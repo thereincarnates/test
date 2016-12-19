@@ -39,7 +39,7 @@ public class NewMovieServlet extends HttpServlet {
 
 	public boolean insertNewMovieIntoDB(NewMovieInputRequest movieInputRequest) throws IOException {
 		String plot = new WikipediaExtractor().fetchPlotString(movieInputRequest.getWikiUrl());
-		
+
 		boolean result = false;
 		Connection connect = null;
 		ResultSet resultSet = null;
@@ -49,15 +49,22 @@ public class NewMovieServlet extends HttpServlet {
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 
 			preparedStatement = connect.prepareStatement(
-					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=?, plot=? where movieid=?");
+					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=?, plot=?,"
+					+ " director=?, actors=?,release_date=?, box_office=?, budget=?,writers=? where movieid=?");
 			preparedStatement.setString(1, movieInputRequest.getName());
 			preparedStatement.setString(2, movieInputRequest.getHashTag());
 			preparedStatement.setString(3, movieInputRequest.getWikiUrl());
 			preparedStatement.setString(4, movieInputRequest.getSongsAndTrailers());
 			preparedStatement.setString(5, movieInputRequest.getVideoReviews());
 			preparedStatement.setString(6, movieInputRequest.getInterviewsAndEvents());
-			preparedStatement.setString(8, movieInputRequest.getId());
 			preparedStatement.setString(7, plot);
+			preparedStatement.setString(8, movieInputRequest.getDirector());
+			preparedStatement.setString(9, movieInputRequest.getActors());
+			preparedStatement.setString(10, movieInputRequest.getReleaseDate());
+			preparedStatement.setString(11, movieInputRequest.getBoxOffice());
+			preparedStatement.setString(12, movieInputRequest.getBudget());
+			preparedStatement.setString(13, movieInputRequest.getWriters());
+			preparedStatement.setString(14, movieInputRequest.getId());
 			preparedStatement.executeUpdate();
 			result = true;
 		} catch (ClassNotFoundException e) {

@@ -8,6 +8,12 @@ public class NewMovieInputRequest {
 	private String videoReviews;
 	private String interviewsAndEvents;
 	private String id;
+	private String director;
+	private String writers;
+	private String actors;
+	private String boxOffice;
+	private String budget;
+	private String releaseDate;
 
 	public String getId() {
 		return id;
@@ -65,11 +71,51 @@ public class NewMovieInputRequest {
 		this.interviewsAndEvents = interviewsAndEvents;
 	}
 
-	@Override
-	public String toString() {
-		return "NewMovieInputRequest [name=" + name + ", hashTag=" + hashTag + ", wikiUrl=" + wikiUrl
-				+ ", songsAndTrailers=" + songsAndTrailers + ", videoReviews=" + videoReviews + ", interviewsAndEvents="
-				+ interviewsAndEvents + "]";
+	public String getDirector() {
+		return director;
 	}
 
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getWriters() {
+		return writers;
+	}
+
+	public void setWriters(String writers) {
+		this.writers = writers;
+	}
+
+	public String getActors() {
+		return actors;
+	}
+
+	public void setActors(String actors) {
+		this.actors = actors;
+	}
+
+	public String getBoxOffice() {
+		return boxOffice;
+	}
+
+	public void setBoxOffice(String boxOffice) {
+		this.boxOffice = boxOffice;
+	}
+
+	public String getBudget() {
+		return budget;
+	}
+
+	public void setBudget(String budget) {
+		this.budget = budget;
+	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
+	}
 }
