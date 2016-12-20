@@ -1,13 +1,14 @@
 
 <div   class="input-group"  >   
 	<input type="text"  class="input-lg  form-control col-" name="search" id="search"  autocomplete="off"  ng-model="moviesearch"
-		placeholder="Enter Movie Name" list="movielist" ng-change='getMovieNames(moviesearch)'> 
+		placeholder="Enter Movie Name" list="movielist" ng-change='getMovieNames(moviesearch)' ng-enter="doSearch(moviesearch)"> 
 		<span
 		class="input-group-btn">
 		<datalist id="movielist">
   <option ng-repeat="moviename in movienamelist" value={{moviename[0]}}>
 </datalist>
 		<a class="btn btn-default btn-lg  glyphicon glyphicon-search"
-			 href="#movie/{{moviename[1]}}"></a>
+			 href="#movie/{{moviesearch}}"></a>
 	</span>	
+	
 </div>

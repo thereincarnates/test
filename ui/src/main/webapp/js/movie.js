@@ -1,10 +1,35 @@
 moviezApp.controller("LoadMoviePageCont", function($scope, $routeParams, $http,
-		$sce) {
+		$sce, $window) {
 	
 	$scope.modalID = 'myModal0';
 	$scope.posIndex = 0;
 	$scope.negIndex = 0;
 	$scope.commentWindowSize = 5;
+	
+	console.log("printing the roureparams:" + $routeParams.movieid);
+	
+    $scope.movienamelist = [];
+	 
+	 $scope.getMovieNames = function(moviename)
+	 {
+		 console.log("getMovieNames called" + moviename);
+		
+		 $http({
+             method: 'GET',
+             url: '/movieSuggestServlet?mvNameInitials='+ moviename ,
+             headers: {'Content-Type': 'application/json'}
+         }).success(function (option) 
+         {
+        	 $scope.movienamelist = option;
+         })
+	 }
+	
+	 $scope.doSearch = function(movieSearch)
+	 {
+		 console.log("moviesearch callled : " + movieSearch);
+		 $window.location.href = '#movie/'+movieSearch;
+	 }
+	 
 	$http({
 		method : 'GET',
 		url : '/movieplot',

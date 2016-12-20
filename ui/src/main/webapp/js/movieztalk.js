@@ -41,10 +41,11 @@ moviezApp.config(['$routeProvider',
 
 
 
- moviezApp.controller("LoadHomePageCont",function($scope,$routeParams,$http)
+ moviezApp.controller("LoadHomePageCont",function($scope,$routeParams,$http,$window)
  {
 	 
 	 $scope.movienamelist = [];
+	 
 	 $scope.getMovieNames = function(moviename)
 	 {
 		 console.log("getMovieNames called" + moviename);
@@ -57,6 +58,12 @@ moviezApp.config(['$routeProvider',
          {
         	 $scope.movienamelist = option;
          })
+	 }
+	 
+	 $scope.doSearch = function(movieSearch)
+	 {
+		 console.log("moviesearch callled : " + movieSearch);
+		 $window.location.href = '#movie/'+movieSearch;
 	 }
 	 
     $http({
@@ -88,7 +95,25 @@ moviezApp.config(['$routeProvider',
     
     
     
-
+    $scope.buildDefaultTrailerList = function(type) {
+		console.log('typs is' + type);
+		if (type == 'hindiTrailers') {
+			$scope.subtype = 'hindiTrailers';
+			//$scope.list = $scope.movieobj.songAndTrailers;
+		} else if (type == 'englishTrailers') {
+			$scope.subtype = 'englishTrailers';
+			//$scope.list = $scope.movieobj.videoReviews;
+		} else if (type == 'telguTrailers') {
+			$scope.subtype = 'telguTrailers';
+			//$scope.list = $scope.movieobj.interviewAndEvents;
+		}else if (type == 'tamilTrailers') {
+			$scope.subtype = 'tamilTrailers';
+			//$scope.list = $scope.movieobj.interviewAndEvents;
+		}else if (type == 'kannadaTrailers') {
+			$scope.subtype = 'kannadaTrailers';
+			//$scope.list = $scope.movieobj.interviewAndEvents;
+		}
+	}
 		/*$scope.selFunction = function(movieInitials) {
 			$http({
 				method : 'GET',
@@ -187,8 +212,22 @@ moviezApp.config(['$routeProvider',
     });
 
  
+ moviezApp.directive('ngEnter', function () {
+	    return function (scope, element, attrs) {
+	        element.bind("keydown keypress", function (event) {
+	            if(event.which === 13) {
+	                scope.$apply(function (){
+	                    scope.$eval(attrs.ngEnter);
+	                });
+	 
+	                event.preventDefault();
+	            }
+	        });
+	    };
+	});
 
-
+ 
+ 
 moviezApp.directive('indicatorWidget', [function (){
   return {
     restrict: 'A',
@@ -363,7 +402,7 @@ moviezApp.directive('outerPath', function(){
     return {
       restrict : 'A',
       template : '<ul class="rating">'
-           + '  <li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">'
+           + '  <li ng-repeat="star in stars" ng-class="star" >'
            + '  <i class="fa fa-star fa-lg"> </i> '
            + '</li>'
            + '</ul>',
