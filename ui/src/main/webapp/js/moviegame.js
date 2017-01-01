@@ -1,5 +1,5 @@
 moviezApp.controller("LoadMovieGame",function($scope,$routeParams,$http,gameService)
- { 
+ {
      console.log("userchoice get: "+gameService.getUserChoice());
      console.log("route param id : "+ $routeParams.gameid);
      $scope.color="bgcolorwhite";

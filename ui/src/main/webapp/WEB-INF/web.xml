@@ -34,14 +34,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 
 
-	<servlet>
-		<servlet-name>MovieGameInitialize</servlet-name>
-		<servlet-class>com.movieztalk.server.MovieGameInitializerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MovieGameInitialize</servlet-name>
-		<url-pattern>/moviegameinit</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>TaskCron</servlet-name>
@@ -61,14 +53,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/HelloServlet</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>GameManager</servlet-name>
-		<servlet-class>com.movieztalk.server.MovieGameManagerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GameManager</servlet-name>
-		<url-pattern>/gamemanager</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>UpComingMoviezHome</servlet-name>
