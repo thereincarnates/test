@@ -36,6 +36,7 @@ public class MovieHelper {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
+			System.out.println("fetching the names of movies of a industry type" + industryType);
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 			statement = connect.createStatement();

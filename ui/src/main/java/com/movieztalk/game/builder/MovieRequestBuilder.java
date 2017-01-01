@@ -13,11 +13,14 @@ import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import javax.annotation.Nonnull;
+
 import com.google.api.client.repackaged.com.google.common.base.Strings;
 import com.google.api.services.datastore.DatastoreV1.Entity;
 import com.google.api.services.datastore.DatastoreV1.Property;
 import com.google.api.services.datastore.DatastoreV1.Value;
 import com.google.api.services.datastore.client.DatastoreException;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.gson.Gson;
@@ -136,7 +139,8 @@ public class MovieRequestBuilder {
 	 *            industry type to fetch new movies
 	 * @return new random movie which has not been played by user.
 	 */
-	private String buildNewMovieForPlayer(Set<String> alreadyUsedMovies, String industryType) {
+	private String buildNewMovieForPlayer(Set<String> alreadyUsedMovies, @Nonnull String industryType) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(industryType), "industry type cannot be null or empty");
 		SetView<String> difference = Sets.difference(MovieHelper.getInstance().fetchMovieNamesFromDB(industryType),
 				alreadyUsedMovies);
 		int diffSize = difference.size();
