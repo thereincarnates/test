@@ -48,11 +48,11 @@ public class MovieSuggestServlet extends HttpServlet {
 			Instant after = Instant.now();
 
 			statement = connect.createStatement();
-			resultSet = statement.executeQuery("select name,movieid,dateofrelease from movie where name like '" +movieNameInitials+"%'");
+			resultSet = statement.executeQuery("select name,movieid,release_date from movie where name like '" +movieNameInitials+"%'");
 			while (resultSet.next()) {
 				List<String> movieName = new ArrayList<String>();
 				movieName.add(resultSet.getString("movieid") );
-				movieName.add(resultSet.getString("name") +"("+ resultSet.getString("dateofrelease") +")");
+				movieName.add(resultSet.getString("name") +"("+ resultSet.getString("release_date") +")");
 				movieNameList.add(movieName);
 			}
 		} catch (SQLException e) {

@@ -64,7 +64,7 @@ moviezApp.config(['$routeProvider',
 	 $scope.doSearch = function(movieSearch)
 	 {
 		 console.log("moviesearch callled : " + movieSearch);
-		 
+		 var movieid = 0;
 		 
 		 for (i=0; i< $scope.movienamelist.length ; i++)
 	     {
