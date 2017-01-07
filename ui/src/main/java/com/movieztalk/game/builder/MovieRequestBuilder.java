@@ -97,7 +97,7 @@ public class MovieRequestBuilder {
 			preparedStatement = connect.prepareStatement(
 					"update guessmoviename set moviename = if(moviename is null, ?, concat(moviename, ?)),"
 							+ "score=if(score is null, ?,concat(score, ?)) where playerid=?");
-			preparedStatement.setString(1, movieRequest.getMoviename());
+			preparedStatement.setString(1, movieRequest.getMoviename().replaceAll(",", " "));
 			preparedStatement.setString(2, "," + movieRequest.getMoviename());
 			preparedStatement.setString(3, score);
 			preparedStatement.setString(4, "," + score);
