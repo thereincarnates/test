@@ -46,6 +46,7 @@ moviezApp.config(['$routeProvider',
 	 
 	 $scope.movienamelist = [];
 	 
+	 
 	 $scope.getMovieNames = function(moviename)
 	 {
 		 console.log("getMovieNames called" + moviename);
@@ -63,7 +64,18 @@ moviezApp.config(['$routeProvider',
 	 $scope.doSearch = function(movieSearch)
 	 {
 		 console.log("moviesearch callled : " + movieSearch);
-		 $window.location.href = '#movie/'+movieSearch;
+		 
+		 
+		 for (i=0; i< $scope.movienamelist.length ; i++)
+	     {
+			 if(!(($scope.movienamelist[i][1]).localeCompare(movieSearch)))
+				 {
+                     movieid = $scope.movienamelist[i][0];
+                     console.log("printing movie id on select " + movieid);
+				 }
+	     }
+		 
+		 $window.location.href = '#movie/'+movieid;
 	 }
 	 
     $http({
@@ -93,25 +105,49 @@ moviezApp.config(['$routeProvider',
           $scope.upcoming_movies=data; 
         });
     
+    $http({
+        method: 'GET',
+        url: '/latestTrailerServlet',
+        headers: {'Content-Type': 'application/json'}
+      }).success(function (data) 
+        {
+          $scope.latestTrailer = data;
+        });
+    
     
     
     $scope.buildDefaultTrailerList = function(type) {
 		console.log('typs is' + type);
 		if (type == 'hindiTrailers') {
 			$scope.subtype = 'hindiTrailers';
-			//$scope.list = $scope.movieobj.songAndTrailers;
+			if(!($scope.latestTrailer[0].language).localeCompare("hindi"))
+			{
+			   $scope.list = $scope.latestTrailer[0].tailorList;
+			}
 		} else if (type == 'englishTrailers') {
 			$scope.subtype = 'englishTrailers';
-			//$scope.list = $scope.movieobj.videoReviews;
+			if(!($scope.latestTrailer[1].language).localeCompare("english"))
+			{
+			   $scope.list = $scope.latestTrailer[1].tailorList;
+			}
 		} else if (type == 'telguTrailers') {
 			$scope.subtype = 'telguTrailers';
-			//$scope.list = $scope.movieobj.interviewAndEvents;
+			if(!($scope.latestTrailer[2].language).localeCompare("telgu"))
+			{
+			   $scope.list = $scope.latestTrailer[2].tailorList;
+			}
 		}else if (type == 'tamilTrailers') {
 			$scope.subtype = 'tamilTrailers';
-			//$scope.list = $scope.movieobj.interviewAndEvents;
+			if(!($scope.latestTrailer[3].language).localeCompare("tamil"))
+			{
+			   $scope.list = $scope.latestTrailer[3].tailorList;
+			}
 		}else if (type == 'kannadaTrailers') {
 			$scope.subtype = 'kannadaTrailers';
-			//$scope.list = $scope.movieobj.interviewAndEvents;
+			if(!($scope.latestTrailer[4].language).localeCompare("kannada"))
+			{
+			   $scope.list = $scope.latestTrailer[4].tailorList;
+			}
 		}
 	}
 		/*$scope.selFunction = function(movieInitials) {
