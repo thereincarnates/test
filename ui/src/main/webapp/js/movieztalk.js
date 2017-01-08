@@ -31,7 +31,11 @@ moviezApp.config(['$routeProvider',
           controller: 'LoadMovieGame'
         }).
       when('/hello', {
-          templateUrl: 'Hello.html'
+            templateUrl: 'Hello.html'
+          }).  
+      when('/spotthedifference', {
+          templateUrl: 'spothedifference.html',
+          controller: 'LoadSpotDifferenceCont'
         }).
      otherwise({
         redirectTo: '/game'
