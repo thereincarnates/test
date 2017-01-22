@@ -2,6 +2,8 @@ package com.movieztalk.wikipedia;
 
 import java.io.IOException;
 
+import javax.annotation.Nullable;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,7 +13,10 @@ import com.google.common.base.Strings;
 
 public class WikipediaExtractor {
 
-	public String fetchPlotString(String url) throws IOException {
+	public String fetchPlotString(@Nullable String url) throws IOException {
+		if(Strings.isNullOrEmpty(url)){
+			return "";
+		}
 		String plot = "";
 
 		Document doc = Jsoup.connect(url).get();

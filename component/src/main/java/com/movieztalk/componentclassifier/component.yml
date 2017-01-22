@@ -1,19 +1,17 @@
 componentDictionary:
    story:
       - story
-      - storyLine
+      - storyline
+      - screenplay
       
    direction:
       - direction
       - director
       
-   actor:
-      - actor
+   acting:
+      - acting
     
    music:
       - music
       - song
-      
-   entertainment:
-      - entertainment
   

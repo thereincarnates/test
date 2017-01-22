@@ -1,6 +1,11 @@
 package com.movieztalk.twitterapi;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +15,7 @@ import com.movieztalk.cosinesimilarity.CosineSimilarityOnWords;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
 import com.movieztalk.spamremoval.URLSpamRemoval;
+import com.mysql.cj.api.x.Result;
 
 import twitter4j.FilterQuery;
 import twitter4j.Query;
@@ -25,14 +31,14 @@ import twitter4j.auth.RequestToken;
 
 public class TweetExtractor {
 
-	public static int BATCH_SIZE = 10	;
-	
+	public static int BATCH_SIZE = 10;
+
 	public static void main(String[] args) throws TwitterException, IOException {
 		final List<Tweet> tweets = new ArrayList<>();
 		StatusListener listener = new StatusListener() {
 
 			public void onStatus(Status status) {
-				
+
 				Tweet tweet = new Tweet();
 				tweet.setTweetId(Long.toString(status.getId())).setTweetStr(status.getText());
 				if (tweets.size() < BATCH_SIZE) {
@@ -53,7 +59,7 @@ public class TweetExtractor {
 
 			private void addTaskIdIntoTweets(List<Tweet> clonedList) {
 				String taskId = UUIDGenerator.getInstance().fetchUUID();
-				for(Tweet tweet : clonedList){
+				for (Tweet tweet : clonedList) {
 					tweet.setTaskid(taskId);
 				}
 			}
@@ -95,11 +101,36 @@ public class TweetExtractor {
 
 		twitterStream.addListener(listener);
 		FilterQuery fquery = new FilterQuery();
-		String keywords[] = { "#banjo, #daysoftafree" , "#pink", "#MSDhoniTheUntoldStory"};
+		String keywords[] = getTweetHashWordsForMoviesInProcessing();
 
 		fquery.track(keywords);
 
 		twitterStream.filter(fquery);
 	}
 
+	private static String[] getTweetHashWordsForMoviesInProcessing() {
+		List<String> result = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		Connection connect = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connect = DriverManager.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
+			statement = connect.createStatement();
+			resultSet = statement.executeQuery("select hashtag from movie where currently_processed=\"Y\"");
+			while (resultSet.next()) {
+				String hashtag = resultSet.getString("hashtag");
+				result.add(hashtag);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
+		}
+		return (String[]) result.toArray();
+	}
 }

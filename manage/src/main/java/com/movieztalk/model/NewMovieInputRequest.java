@@ -14,6 +14,7 @@ public class NewMovieInputRequest {
 	private String boxOffice;
 	private String budget;
 	private String releaseDate;
+	private String currentlyComputed;
 
 	public String getId() {
 		return id;
@@ -117,5 +118,13 @@ public class NewMovieInputRequest {
 
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	public String getCurrentlyComputed() {
+		return currentlyComputed;
+	}
+
+	public void setCurrentlyComputed(String currentlyComputed) {
+		this.currentlyComputed = currentlyComputed;
 	}
 }

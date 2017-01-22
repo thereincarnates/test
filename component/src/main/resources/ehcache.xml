@@ -38,8 +38,7 @@
 	<defaultCache maxElementsInMemory="0" eternal="false"
 		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true" memoryStoreEvictionPolicy="LRU" />
 
-	<!-- This will cache the review summary for hotels, with hotelid as the 
-		key. NEed to check since abstract hashmap of SOLR is  not serializable. -->
+
 	<cache name="gameManager" maxElementsInMemory="50000" eternal="false"
 		timeToIdleSeconds="180" timeToLiveSeconds="3600" overflowToDisk="true"
 		maxElementsOnDisk="60000" memoryStoreEvictionPolicy="LRU" />

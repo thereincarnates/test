@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.movieztalk.componentclassifier.ComponentClassifier;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Tweet;
 import com.movieztalk.spamremoval.BlackListTweetRemoval;
@@ -96,6 +97,7 @@ public class TaskRunner {
 				List<Tweet> tweets = fetchTweetFromTaskId(taskId);
 				MovieClassifier.getInstance().processTweets(tweets);
 				BlackListTweetRemoval.getInstance().processTweets(tweets);
+				ComponentClassifier.getInstance().processTweets(tweets);
 				storeUpdatedTweets(tweets);
 				return taskId;
 			}
