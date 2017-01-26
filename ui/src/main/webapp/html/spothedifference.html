@@ -2,9 +2,23 @@
       <div id="outer_container" class="container-fluid {{color}} height" ng-controller="LoadSpotDifferenceCont">
 
 	   <div class="container">
-	     <div class="row text-center"><h2><b>SPOT THE DIFFERENCE</b></h2></div>
-         <div class="row text-center">Click Modified Image to verify the difference</div>
-         <br>
+	       <div class="row">
+		    <div class="row" >
+				<div class="col-lg-3 col-md-3 col-sm-3 col-sm-3 "
+					ng-include="'MovieLabel.html'"></div>
+				<div class="col-lg-2 col-md-2 col-sm-2 col-sm-2 "></div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-sm-6 padding_top_10"><h2><b>SPOT THE DIFFERENCE</b></h2></div>
+		    </div>
+		    <div class="row">
+		    <div class="col-lg-5 col-md-5 col-sm-5 col-sm-5 "></div>
+		    <div class="col-lg-6 col-md-6 col-sm-6 col-sm-6 padding_top_10">Click Modified Image to verify the difference</div>
+		    </div>
+		    
+		    <br>
+		    <div ng-include="'NavBar.html'"></div>
+		</div>
+
+	     
          
          <div class="row"  > 
              <div class="col-lg-6 scol-md-6 col-sm-6 col-xs-12  img-holder "  >

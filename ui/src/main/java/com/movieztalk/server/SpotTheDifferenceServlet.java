@@ -50,7 +50,7 @@ public class SpotTheDifferenceServlet extends HttpServlet {
 
 			statement = connect.createStatement();
 			resultSet = statement
-					.executeQuery("select * from spotthedifference limit 1");
+					.executeQuery("select * from spotthedifference where is_used='false' limit 1 ");
 			while (resultSet.next()) {
 				spotImage.setActualImageUrl(resultSet
 						.getString("actual_img_url"));
