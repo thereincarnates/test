@@ -24,8 +24,7 @@ public final class ComponentDictionary {
 	public static synchronized ComponentDictionary getInstance() {
 		if (instance == null) {
 			Yaml yaml = new Yaml();
-			File componentYamlFile = new File("src/main/java/com/movieztalk/componentclassifier/component.yml");
-			try (InputStream in = new FileInputStream(componentYamlFile)) {
+			try (InputStream in = ComponentDictionary.class.getResourceAsStream("/component.yml")) {
 				instance = yaml.loadAs(in, ComponentDictionary.class);
 			} catch (Exception e) {
 				System.out.println("received following error" + e.getMessage());

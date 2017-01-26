@@ -15,7 +15,7 @@ public class NLPHelper {
 
 	public static Tokenizer getOpenNLPTextTokenizer() throws InvalidFormatException, IOException {
 		if (tokenizerInstance == null) {
-			InputStream is = new FileInputStream("modelfiles/en-token.bin");
+			InputStream is = NLPHelper.class.getResourceAsStream("/en-token.bin");
 			TokenizerModel model = new TokenizerModel(is);
 			tokenizerInstance = new TokenizerME(model);
 		}

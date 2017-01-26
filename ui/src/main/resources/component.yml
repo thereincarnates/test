@@ -10,8 +10,11 @@ componentDictionary:
       
    acting:
       - acting
+      - performance
+      - perfromances
     
    music:
       - music
       - song
+      - songs
   

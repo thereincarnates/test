@@ -15,7 +15,7 @@ import com.movieztalk.util.NLPHelper;
 
 import opennlp.tools.util.InvalidFormatException;
 
-public class ComponentClassifier implements TweetProcessor {
+public class ComponentClassifier {
 
 	private ComponentDictionary componentDictionary = ComponentDictionary.getInstance();
 
@@ -28,18 +28,13 @@ public class ComponentClassifier implements TweetProcessor {
 	private ComponentClassifier() {
 	}
 
-	@Override
-	public void processTweets(List<Tweet> tweets) {
+	public void processTweets(List<Tweet> tweets) throws InvalidFormatException, IOException {
 		for (Tweet tweet : tweets) {
-			try {
-				Set<String> componentName = classify(tweet.getTweetStr());
+			Set<String> componentName = classify(tweet.getTweetStr());
+			if (componentName.iterator().hasNext()) {
 				tweet.setCompName(componentName.iterator().next());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
-
 	}
 
 	/* Classifies the given tweet into its respective component. */

@@ -50,7 +50,7 @@ public class MovieClassifier implements TweetProcessor{
 		while (resultSet.next()) {
 			String movieId = resultSet.getString("movieid");
 			instance.movieIdToKeyWordsMapping.putAll(movieId,
-					Arrays.asList(regexHelper.commaPattern.split(resultSet.getString("moviekeywords"))));
+					Arrays.asList(regexHelper.commaPattern.split(resultSet.getString("moviekeywords").toLowerCase())));
 		}
 		dbHelper.closeResources(connect, statement, resultSet);
 	}
@@ -68,7 +68,7 @@ public class MovieClassifier implements TweetProcessor{
 		if (!Strings.isNullOrEmpty(tweetStr)) {
 			for (String token : regexHelper.spacePattern.split(tweetStr)) {
 				for (String movieId : movieIdToKeyWordsMapping.keys()) {
-					if (movieIdToKeyWordsMapping.get(movieId).contains(token)) {
+					if (movieIdToKeyWordsMapping.get(movieId).contains(token.toLowerCase())) {
 						tweet.setMovieId(movieId);
 						return;
 					}

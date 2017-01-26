@@ -38,12 +38,13 @@ public class TweetExtractor {
 		StatusListener listener = new StatusListener() {
 
 			public void onStatus(Status status) {
-
+				
 				Tweet tweet = new Tweet();
 				tweet.setTweetId(Long.toString(status.getId())).setTweetStr(status.getText());
 				if (tweets.size() < BATCH_SIZE) {
-					if (!URLSpamRemoval.getInstance().isSpam(tweet.getTweetStr())) {
+					if (!URLSpamRemoval.getInstance().isSpam(tweet.getTweetStr()) && !status.isRetweet()) {
 						tweets.add(tweet);
+						System.out.println(status.getText());
 					}
 				} else {
 					List<Tweet> cosinedTweets = CosineSimilarityOnWords.getInstance().getNonRepeatingTweets(tweets);
@@ -54,7 +55,7 @@ public class TweetExtractor {
 					tweets.clear();
 					cosinedTweets.clear();
 				}
-				System.out.println(status.getText());
+				
 			}
 
 			private void addTaskIdIntoTweets(List<Tweet> clonedList) {
@@ -131,6 +132,6 @@ public class TweetExtractor {
 		} finally {
 			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
 		}
-		return (String[]) result.toArray();
+		return result.toArray(new String[result.size()]);
 	}
 }
