@@ -45,7 +45,7 @@ moviezApp.config(['$routeProvider',
 
 
 
- moviezApp.controller("LoadHomePageCont",function($scope,$routeParams,$http,$window)
+ moviezApp.controller("LoadHomePageCont",function($scope,$routeParams,$http,$sce,$window)
  {
 	 
 	 $scope.movienamelist = [];
@@ -134,7 +134,7 @@ moviezApp.config(['$routeProvider',
 			{
 			   $scope.list = $scope.latestTrailer[1].tailorList;
 			}
-		} else if (type == 'telguTrailers') {
+		} else if (type == 'telguTrailers') { 
 			$scope.subtype = 'telguTrailers';
 			if(!($scope.latestTrailer[2].language).localeCompare("telgu"))
 			{
@@ -154,7 +154,66 @@ moviezApp.config(['$routeProvider',
 			}
 		}
 	}
-		/*$scope.selFunction = function(movieInitials) {
+    
+    $scope.buildDefaultSongList = function(type) {
+		console.log('typs is' + type);
+		if (type == 'hindiSongs') {
+			$scope.subtype = 'hindiSongs';
+			if(!($scope.latestTrailer[0].language).localeCompare("hindi"))
+			{
+			   $scope.list = $scope.latestTrailer[0].tailorList;
+			}
+		} else if (type == 'englishSongs') {
+			$scope.subtype = 'englishSongs';
+			if(!($scope.latestTrailer[1].language).localeCompare("english"))
+			{
+			   $scope.list = $scope.latestTrailer[1].tailorList;
+			}
+		} else if (type == 'telguSongs') { 
+			$scope.subtype = 'telguSongs';
+			if(!($scope.latestTrailer[2].language).localeCompare("telgu"))
+			{
+			   $scope.list = $scope.latestTrailer[2].tailorList;
+			}
+		}else if (type == 'tamilSongs') {
+			$scope.subtype = 'tamilSongs';
+			if(!($scope.latestTrailer[3].language).localeCompare("tamil"))
+			{
+			   $scope.list = $scope.latestTrailer[3].tailorList;
+			}
+		}else if (type == 'kannadaSongs') {
+			$scope.subtype = 'kannadaSongs';
+			if(!($scope.latestTrailer[4].language).localeCompare("kannada"))
+			{
+			   $scope.list = $scope.latestTrailer[4].tailorList;
+			}
+		}
+	}
+		
+    $scope.getBuildTrailerDefaultList = function() {
+    	console.log("getBuildTrailerDefaultList");
+		return $scope.list;
+	}
+    
+    
+    $scope.getTrailerImage = function(index) {
+		console.log('get Trailer Image index found is ' + index);
+		return $scope.list[index].replace('embed', 'vi').replace('www', 'img')
+				.replace(new RegExp('$'), '/0.jpg');
+	}
+
+	$scope.initializeModal = function(subtypeStr, index) {
+		console.log('new modal id is ' + 'myModal' + index + subtypeStr);
+		$scope.modalID = 'myModal' + subtypeStr + index;
+		$scope.embeddedURL = $sce.trustAsResourceUrl($scope.list[index]
+				+ '?autoplay=1');
+	}
+
+	$scope.clearEmbeddedURL = function() {
+		$scope.embeddedURL = $sce.trustAsResourceUrl('http://www.example.com');
+	}
+    
+    /*$scope.selFunction = function(movieInitials) {
 			$http({
 				method : 'GET',
 				url : '/manage/managemz?movieInitals=' + movieInitials,

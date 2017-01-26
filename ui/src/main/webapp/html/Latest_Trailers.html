@@ -1,0 +1,48 @@
+<div class="panel  panel-success margin" >
+<div class="panel-heading margin padding">
+	<nav class="navbar navbar-default margin">
+		<div class="navbar-header padding margin">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-2"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#home">Latest Trailers:</a>
+		</div>
+
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-2">
+			<ul class="nav navbar-nav">
+				<li><a data-target="#tab1success active" data-toggle="tab" ng-click="buildDefaultTrailerList('hindiTrailers')">Hindi</a></li>
+				<li><a data-target="#tab2success" data-toggle="tab" ng-click="buildDefaultTrailerList('englishTrailers')">English</a></li>
+				<li><a data-target="#tab3success" data-toggle="tab" ng-click="buildDefaultTrailerList('telguTrailers')">Telugu</a></li>
+				<li><a data-target="#tab4success" data-toggle="tab" ng-click="buildDefaultTrailerList('tamilTrailers')" >Tamil</a></li>
+				<li><a data-target="#tab5success" data-toggle="tab" ng-click="buildDefaultTrailerList('kannadaTrailers')">Kannada</a></li>
+
+			</ul>
+		</div>
+	</nav>
+</div>
+<div class="panel-body ">
+<div id="trailerCarousel" class="carousel slide" data-ride="carousel">
+
+	<div class="carousel-inner">
+         <div class="item"  ng-class="{active:!$index}"  ng-repeat=" " ng-include="'Top_Trailer_Body_Panel.html'" ></div>
+    </div>
+
+	<!-- Left and right controls -->
+	<a class="left carousel-control" style={background-color:none;}  data-target="#trailerCarousel"  data-slide="prev"> 
+		<span class="glyphicon glyphicon-chevron-left " ></span>
+	</a> 
+
+	<a class="right carousel-control" data-target="#trailerCarousel"  data-slide="next" >
+	    <span class="glyphicon glyphicon-chevron-right" ></span> 
+	</a>
+</div>
+</div>
+</div>
+
+

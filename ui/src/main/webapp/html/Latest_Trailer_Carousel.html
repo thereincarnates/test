@@ -1,0 +1,15 @@
+<div id="trailerCarousel" class="carousel slide" data-ride="carousel">
+
+	<div class="carousel-inner">
+         <div class="item"  ng-class="{active:!$index}"  ng-repeat="x in [1,2,3] " ng-include="'Top_Movies.html'" ></div>
+    </div>
+
+	<!-- Left and right controls -->
+	<a class="left carousel-control" style={background-color:none;}  data-target="#trailerCarousel"  data-slide="prev"> 
+		<span class="glyphicon glyphicon-chevron-left " ></span>
+	</a> 
+
+	<a class="right carousel-control" data-target="#trailerCarousel"  data-slide="next" >
+	    <span class="glyphicon glyphicon-chevron-right" ></span> 
+	</a>
+</div>	

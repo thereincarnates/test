@@ -1,34 +1,57 @@
  moviezApp.controller("LoadSpotDifferenceCont",function($scope,$routeParams,$http,$window)
      {
-    	
-    	 var img = document.getElementById('modifiedimage');
-    	 var cnvs = document.getElementById("myCanvas");
+     	 var imagesize;
+	     var defectcoordsactual =[];
+	     var defectcoords = [];
+	     var numOfDefectsGuessed = 0;
+	     var img;
+      	 var cnvs;
+      	 var width;
+      	 var height ;
+      	 var offsetleft;
+      	 var offsettop ;
 
-    	 cnvs.style.position = "absolute";
-    	 cnvs.style.left = img.offsetLeft + "px";
-    	 cnvs.style.top = img.offsetTop + "px";
-    	 cnvs.width = img.clientWidth;
-    	 cnvs.height = img.clientHeight;
+	      $http({
+                  method: 'GET',
+                  url: '/spotdifference' ,
+                  headers: {'Content-Type': 'application/json'}
+                }).success(function (option) 
+                {
+    	           $scope.imageProperty = option;
+    	           console.log("image property: " + $scope.imageProperty.imageWidth);
+    	           
+    	           imagesize = {width:$scope.imageProperty.imageWidth,height:$scope.imageProperty.imageHeight};
+    	  	        	      	 for (var i =0; i<($scope.imageProperty.diffCoordinates).length;i++)
+    	           {
+    	  	         defectcoordsactual[i] = {XCoord:$scope.imageProperty.diffCoordinates[i].xCoord , YCoord:$scope.imageProperty.diffCoordinates[i].yCoord , 
+    	  	        		                  Radius:$scope.imageProperty.diffCoordinates[i].radius, Guessed : "false"};
+    	      	                    
+    	      	     defectcoords[i] = {XCoord:$scope.imageProperty.diffCoordinates[i].xCoord , YCoord:$scope.imageProperty.diffCoordinates[i].yCoord , 
+    	  	                                  Radius:$scope.imageProperty.diffCoordinates[i].radius, Guessed : "false"};
+    	      	
+    	           }
+    	      		
+    	      	     	      	 
+    	      	  img = document.getElementById('modifiedimage');
+    	      	  cnvs = document.getElementById("myCanvas");
 
-    	 
-    	 var defectcoordsactual = [{XCoord:215 , YCoord:169 , Radius:10, Guessed : "false"},
-    	                     {XCoord:372 , YCoord:78, Radius:20, Guessed: "false"}];
-    	 var defectcoords = [{XCoord:215 , YCoord:169 , Radius:10, Guessed : "false"},
-    	                     {XCoord:372 , YCoord:78, Radius:20, Guessed: "false"}];
-    	 var imagesize = {width:445,height:576};
-    	 
-    	 
-    	 
+    	      	 cnvs.style.position = "absolute";
+    	      	 cnvs.style.left = img.offsetLeft + "px";
+    	      	 cnvs.style.top = img.offsetTop + "px";
+    	      	 cnvs.width = img.clientWidth;
+    	      	 cnvs.height = img.clientHeight;
+
+    	      	 
+    	      	 
+    	      	 var width = img.clientWidth;
+    	      	 var height = img.clientHeight;
+    	      	 var offsetleft = $("#modifiedimage").offset().left;
+    	      	 var offsettop = $("#modifiedimage").offset().top;
+
+                })
     	
-    	 var numOfDefectsGuessed = 0;
     	 
-    	
-    	 
-    	 var width = img.clientWidth;
-    	 var height = img.clientHeight;
-    	 var offsetleft = $("#modifiedimage").offset().left;
-    	 var offsettop = $("#modifiedimage").offset().top;
-    	 
+             	 
     	
     
     	 $scope.showCoords = function(event)

@@ -38,16 +38,22 @@ public class LatestTrailerServlet extends HttpServlet {
   private List<LatestTrailer> getLatestTrailerList() {
  
 	  List<String> latestTrailers = Arrays.asList("https://www.youtube.com/embed/k99-vMPh3-A",
-		        "https://www.youtube.com/embed/gIvVcW2_CIs", "https://www.youtube.com/embed/lYNNgGBVtTo",
-		        "https://www.youtube.com/embed/zRtPUIumXcY");
+		        "https://www.youtube.com/embed/gIvVcW2_CIs", "https://www.youtube.com/embed/lYNNgGBVtTo"/*,
+		        "https://www.youtube.com/embed/zRtPUIumXcY"*/);
 
 	  List<LatestTrailer> latestTrailerList = new ArrayList<LatestTrailer>();
 	
 	  LatestTrailer latestTrailer1 = new LatestTrailer("hindi", latestTrailers);
 	  LatestTrailer latestTrailer2 = new LatestTrailer("english", latestTrailers);
+	  LatestTrailer latestTrailer3 = new LatestTrailer("telgu", latestTrailers);
+	  LatestTrailer latestTrailer4 = new LatestTrailer("tamil", latestTrailers);
+	  LatestTrailer latestTrailer5 = new LatestTrailer("kannada", latestTrailers);
 	  
 	  latestTrailerList.add(latestTrailer1);
 	  latestTrailerList.add(latestTrailer2);
+	  latestTrailerList.add(latestTrailer3);
+	  latestTrailerList.add(latestTrailer4);
+	  latestTrailerList.add(latestTrailer5);
 	
    
     return latestTrailerList;

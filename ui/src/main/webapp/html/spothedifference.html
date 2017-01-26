@@ -9,12 +9,12 @@
          <div class="row"  > 
              <div class="col-lg-6 scol-md-6 col-sm-6 col-xs-12  img-holder "  >
                   <h3>Original Image</h3>
-                  <img src="https://www.dropbox.com/s/4zjdz93gh7lp7sz/ice_age1.jpg?dl=1" class="img-responsive" >
+                  <img src={{imageProperty.actualImageUrl}} class="img-responsive" >
              </div>
              
              <div class="col-lg-6 scol-md-6 col-sm-6 col-xs-12  img-holder "  >
                   <h3>Modified Image</h3>
-                  <img src="https://www.dropbox.com/s/m61gprfksacsq84/ice_age2.jpg?dl=1" class="img-responsive"  id="modifiedimage" 
+                  <img src={{imageProperty.modifiedImageUrl}} class="img-responsive"  id="modifiedimage" 
                                ng-click="showCoords($event)" >
                   <canvas id="myCanvas"  width="200" height="100" style="border:1px solid #ff0000;" ng-click="showCoords($event)"></canvas>
              </div> 

@@ -23,6 +23,7 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+
 @WebServlet("/movieSuggestServlet")
 public class MovieSuggestServlet extends HttpServlet {
 
@@ -52,8 +53,16 @@ public class MovieSuggestServlet extends HttpServlet {
 		Connection connect = null;
 		ResultSet resultSet = null;
 		Statement statement = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		ServerConfiguration mysqlserver = new ServerConfiguration();
 		try {
+
 			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
 					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
 					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);

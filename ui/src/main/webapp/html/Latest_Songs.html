@@ -10,17 +10,17 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#home">Latest Songs:</a>
+			<a class="navbar-brand" href="#home">Latest Song:</a>
 		</div>
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav">
-				<li><a href="#tab1success active" data-toggle="tab" ng-click="buildDefaultTrailerList('hindiTrailers')">Hindi</a></li>
-				<li><a href="#tab2success" data-toggle="tab" ng-click="buildDefaultTrailerList('englishTrailers')">English</a></li>
-				<li><a href="#tab3success" data-toggle="tab" ng-click="buildDefaultTrailerList('telguTrailers')">Telugu</a></li>
-				<li><a href="#tab4success" data-toggle="tab" ng-click="buildDefaultTrailerList('tamilTrailers')" >Tamil</a></li>
-				<li><a href="#tab5success" data-toggle="tab" ng-click="buildDefaultTrailerList('kannadaTrailers')">Kannada</a></li>
+				<li><a data-target="#tab1success active" data-toggle="tab" ng-click="buildDefaultSongList('hindiSongs')">Hindi</a></li>
+				<li><a dat-target="#tab2success" data-toggle="tab" ng-click="buildDefaultSongList('englishSongs')">English</a></li>
+				<li><a data-target="#tab3success" data-toggle="tab" ng-click="buildDefaultSongList('telguSongs')">Telugu</a></li>
+				<li><a data-target="#tab4success" data-toggle="tab" ng-click="buildDefaultSongList('tamilSongs')" >Tamil</a></li>
+				<li><a data-target="#tab5success" data-toggle="tab" ng-click="buildDefaultSongList('kannadaSongs')">Kannada</a></li>
 
 			</ul>
 		</div>
@@ -29,42 +29,20 @@
 <div class="panel-body">
 	<div class="tab-content">
 		<div class="tab-pane fade in active" id="tab1success">
-
-
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 " ng-include="'videoimage.html'">
-					
-						
-
-					
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-					
-						
-						<img src="../Images/movie.jpg" class="img-responsive">
-					
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
-					
-						
-						<img src="../Images/movie.jpg" class="img-responsive">
-					
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
-					
-						
-						<img src="../Images/movie.jpg" class="img-responsive">
-					
-				</div>
+			<div class="row" ng-include="'movie_trailer_frontpage.html'">
 			</div>
-
 		</div>
-		<div class="tab-pane fade" id="tab1success">OverAll</div>
-		<div class="tab-pane fade" id="tab2success">Acting</div>
-		<div class="tab-pane fade" id="tab3success">Direction</div>
-		<div class="tab-pane fade" id="tab4success">Music</div>
-		<div class="tab-pane fade" id="tab5success">Success 5</div>
+		
+		<div class="tab-pane fade" id="tab2success"><div class="row" ng-include="'movie_trailer_frontpage.html'">
+			</div></div>
+		<div class="tab-pane fade" id="tab3success"><div class="row" ng-include="'movie_trailer_frontpage.html'">
+			</div></div>
+		<div class="tab-pane fade" id="tab4success"><div class="row" ng-include="'movie_trailer_frontpage.html'">
+			</div></div>
+		<div class="tab-pane fade" id="tab5success"><div class="row" ng-include="'movie_trailer_frontpage.html'">
+			</div></div>
 	</div>
+	<div ng-include="'videomodal.html'"></div>
 </div>
 </div>
 

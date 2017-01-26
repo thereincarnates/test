@@ -1,0 +1,7 @@
+
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="embedded in getBuildTrailerDefaultList()" style="margin-bottom:0px; padding-left:10px; padding-right:0px;">
+			<img
+				ng-src="{{getTrailerImage($index)}}"
+				class="img-responsive " ng-click="initializeModal(subtype, $index)" data-target="#myModal{{subtype}}{{$index}}" data-toggle="modal" />
+	</div>
+	
