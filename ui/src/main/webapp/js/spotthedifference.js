@@ -1,4 +1,4 @@
- moviezApp.controller("LoadSpotDifferenceCont",function($scope,$routeParams,$http,$window)
+ moviezApp.controller("LoadSpotDifferenceCont",function($scope,$routeParams,$http,$window,$location)
      {
      	 var imagesize;
 	     var defectcoordsactual =[];
@@ -113,9 +113,12 @@
     		    	     numOfDefectsGuessed++;
     		    	     
     		    	     if(numOfDefectsGuessed == defectcoords.length)
-    	    		     {
-    	    			     console.log("You Won !!!!!!!!!!!");	 
-    	    			 }
+    		  		     {
+    		  			     if(alert("You Won !!!!!!!!!!!"))
+    		  			     {
+    		  			    	 $location.path("/home"); 
+    		  			     }
+    		  			 }
     		    	     
     		    	     break;
     		         }
@@ -188,6 +191,7 @@
  	    	        ctx.stroke();
      		     }
      		 }
+    		 
     		 
     		
     		 console.log('resize......');
