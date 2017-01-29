@@ -14,17 +14,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>MoviezPlot</servlet-name>
-		<servlet-class>com.movieztalk.server.MoviePlotServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MoviezPlot</servlet-name>
-		<url-pattern>/movieplot</url-pattern>
-	</servlet-mapping>
-	MoviePopulateServlet
-
-
-	<servlet>
 		<servlet-name>MoviePopulateServlet</servlet-name>
 		<servlet-class>com.movieztalk.server.MoviePopulateServlet</servlet-class>
 	</servlet>

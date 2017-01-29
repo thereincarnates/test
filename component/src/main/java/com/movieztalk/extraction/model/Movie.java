@@ -15,13 +15,13 @@ public class Movie {
 	// Name of the movie
 	private String name;
 	// Name of the director
-	private Celebrity director;
+	private String director;
 	// Budget of the movie
 	private String budget;
 	// Box office of the movie
 	private String boxOffice;
 	// Actors and actresses in movie
-	private Set<Celebrity> actors = new HashSet<>();
+	private Set<String> actors = new HashSet<>();
 	// Represents the overall aspect of the movie
 	private MovieAspect overall;
 	// Represents the story aspect of the movie
@@ -71,11 +71,11 @@ public class Movie {
 		return this;
 	}
 
-	public Celebrity getDirector() {
+	public String getDirector() {
 		return director;
 	}
 
-	public Movie setDirector(Celebrity director) {
+	public Movie setDirector(String director) {
 		this.director = director;
 		return this;
 	}
@@ -143,10 +143,6 @@ public class Movie {
 		return this;
 	}
 
-	public Set<Celebrity> getActors() {
-		return actors;
-	}
-
 	public List<String> getSongAndTrailers() {
 		return songAndTrailers;
 	}
@@ -173,11 +169,6 @@ public class Movie {
 		return this;
 	}
 
-	public Movie setActors(Set<Celebrity> actors) {
-		this.actors = actors;
-		return this;
-	}
-
 	public Movie setSongAndTrailers(List<String> songAndTrailers) {
 		this.songAndTrailers.addAll(songAndTrailers);
 		return this;
@@ -185,6 +176,15 @@ public class Movie {
 
 	public Movie setInterviewAndEvents(List<String> interviewAndEvents) {
 		this.interviewAndEvents.addAll(interviewAndEvents);
+		return this;
+	}
+
+	public Set<String> getActors() {
+		return actors;
+	}
+
+	public Movie setActors(Set<String> actors) {
+		this.actors = actors;
 		return this;
 	}
 }

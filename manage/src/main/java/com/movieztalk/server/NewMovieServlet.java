@@ -51,7 +51,7 @@ public class NewMovieServlet extends HttpServlet {
 
 			preparedStatement = connect.prepareStatement(
 					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=?, plot=?,"
-							+ " director=?, actors=?,release_date=?, box_office=?, budget=?,writers=?,currently_processed=? where movieid=?");
+							+ " director=?, actors=?,release_date=?, boxoffice=?, budget=?,writers=?,currently_processed=? where movieid=?");
 			preparedStatement.setString(1,
 					Strings.isNullOrEmpty(movieInputRequest.getName()) ? "" : movieInputRequest.getName());
 			preparedStatement.setString(2,

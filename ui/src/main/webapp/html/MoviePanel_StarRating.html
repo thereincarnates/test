@@ -2,7 +2,7 @@
 
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 		<div>
-			<img src="../Images/movie.jpg" class="img-responsive">
+			<img ng-src="{{movieobj.imageUrl}}" class="img-responsive">
 		</div>
 	</div>
 
@@ -14,8 +14,8 @@
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-				<div ng-init="rating = 5"></div>
-                <div class="star-rating" star-rating star-radius="2px" rating-value="    rating" data-max="5"></div>
+				
+               <div class="star-rating" star-rating star-radius="2px" rating-value="movieobj.overall.rating" data-max="5"></div>
 			</div>
 		</div>
 
@@ -23,8 +23,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Story</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-				<div ng-init="rating2 = 5"></div>
-                <div class="star-rating" star-rating star-radius="2px" rating-value="    rating2" data-max="5" ></div>
+                <div class="star-rating" star-rating star-radius="2px" rating-value="movieobj.story.rating" data-max="5" ></div>
 			</div>
 		</div>
 
@@ -34,8 +33,7 @@
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-				<div ng-init="rating3 = 5"></div>
-                <div class="star-rating" star-rating star-radius="2px" rating-value="    rating3" data-max="5"></div>
+                <div class="star-rating" star-rating star-radius="2px" rating-value="movieobj.acting.rating" data-max="5"></div>
 			</div>
 		</div>
 
@@ -45,8 +43,7 @@
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-				<div ng-init="rating4 = 2"></div>
-                <div class="star-rating" star-rating star-radius="2px" rating-value="    rating4" data-max="5" ></div>
+                <div class="star-rating" star-rating star-radius="2px" rating-value="movieobj.direction.rating" data-max="5" ></div>
 			</div>
 		</div>
 
@@ -54,8 +51,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Music</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-				<div ng-init="rating5 = 1"></div>
-                <div class="star-rating" star-rating star-radius="2px" rating-value="    rating5" data-max="5" ></div>
+                <div class="star-rating" star-rating star-radius="2px" rating-value="movieobj.music.rating" data-max="5" ></div>
 			</div>
 		</div>
 		
@@ -63,13 +59,13 @@
 		
 		<div class="row">
 		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Name</div>
-		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">Tanu Weds Manu
+		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">{{movieobj.name}}
 		    </div>
         </div>
         
         <div class="row">
 		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Director</div>
-		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">Director Name
+		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">{{movieobj.director}}
 		    </div>
         </div>
         
@@ -87,13 +83,13 @@
         
         <div class="row">
 		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Box Office</div>
-		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">500 Million
+		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">{{movieobj.boxOffice}}
 		    </div>
         </div>
         
         <div class="row">
 		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Budget</div>
-		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">500 Million
+		    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 top-buffer ">{{movieobj.budget}}
 		    </div>
         </div>
         
