@@ -32,6 +32,7 @@ public class Movie {
 	private MovieAspect music;
 	// Represents the direction aspect of the movie
 	private MovieAspect direction;
+	private  String releaseDate;
 	// Embeded URLs for songs and trailers of movie
 	private final List<String> songAndTrailers = new ArrayList<>();
 	// Embeded URLs for video reviews.
@@ -187,4 +188,17 @@ public class Movie {
 		this.actors = actors;
 		return this;
 	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public Movie setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
+		return this;
+	}
+	
+	
+	
+	
 }

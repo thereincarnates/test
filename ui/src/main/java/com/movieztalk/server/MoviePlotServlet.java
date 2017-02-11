@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -83,18 +85,26 @@ public class MoviePlotServlet extends HttpServlet {
 				String actors = resultSet.getString("actors");
 				String releaseDate = resultSet.getString("release_date");
 				String writers = resultSet.getString("writers");
+				
+				Set<String> actorsSet = new HashSet<String>();
+				for (String retval: actors.split(",")) {
+			         actorsSet.add(retval);
+			      }
 
 				List<String> songsAndTrailersList = Arrays.asList(songsAndTrailers.split(","));
 				List<String> interviewAndEventsList = Arrays.asList(interviewsAndEvents.split(","));
 				List<String> videoReviewsList = Arrays.asList(videoReviews.split(","));
 				movie.setInterviewAndEvents(interviewAndEventsList).setSongAndTrailers(songsAndTrailersList)
-						.setVideoReviews(videoReviewsList).setPlot(plot).setName(name).setBudget(budget)
+						.setVideoReviews(videoReviewsList).setReleaseDate(releaseDate)
+						.setPlot(plot).setName(name).setBudget(budget).setActors(actorsSet)
 						.setBoxOffice(boxOffice).setImageUrl(imageUrl).setDirector(director)
 						.setOverall(new MovieAspect().setRating(Double.parseDouble(overallRating)))
 						.setStory(new MovieAspect().setRating(Double.parseDouble(storyRating)))
 						.setActing(new MovieAspect().setRating(Double.parseDouble(actingRating)))
 						.setDirection(new MovieAspect().setRating(Double.parseDouble(directionRating)))
 						.setMusic(new MovieAspect().setRating(Double.parseDouble(musicRating)));
+				
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
