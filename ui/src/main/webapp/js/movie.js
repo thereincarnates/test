@@ -172,6 +172,26 @@ moviezApp
 					$scope.submitComment = function() {
 						$scope.isClicked = true;
 						$scope.isNotClicked = true;
+						
+						var data={
+								movieId:$scope.movieId,
+								userId: "test",
+								comment:$scope.UserComment,
+								overallRating :5,
+								storyRating: 4,
+								actingRating:1,
+								directionRating:3,
+								musicRating:2
+								
+						};
+						
+						$http.post('/movieUserComment',JSON.stringify(data))
+						.success(function(option)
+						{
+							console.log("testingpost " + option.movieid);
+						});
+
+						
 					}
 
 				});
