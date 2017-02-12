@@ -34,7 +34,7 @@ public class MoviePlotServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String movieId = request.getParameter("movieid");
+		String movieId = request.getParameter("movieId");
 		response.setContentType("text/html");
 		logger.info("Testing the data");
 		Gson gson = new Gson();
@@ -54,7 +54,7 @@ public class MoviePlotServlet extends HttpServlet {
 		if (Strings.isNullOrEmpty(movieId)) {
 			movieId = fetchLatestMovieId();
 		}
-		
+
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -65,7 +65,7 @@ public class MoviePlotServlet extends HttpServlet {
 					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery("select * from movie where movieid='" + movieId + "'");
-
+			System.out.println("query being called is select * from movie where movieid='" + movieId + "'");
 			while (resultSet.next()) {
 				String name = resultSet.getString("name");
 				movieId = resultSet.getString("movieid");
@@ -85,26 +85,22 @@ public class MoviePlotServlet extends HttpServlet {
 				String actors = resultSet.getString("actors");
 				String releaseDate = resultSet.getString("release_date");
 				String writers = resultSet.getString("writers");
-				
+
 				Set<String> actorsSet = new HashSet<String>();
-				for (String retval: actors.split(",")) {
-			         actorsSet.add(retval);
-			      }
+				for (String retval : actors.split(",")) {
+					actorsSet.add(retval);
+				}
 
 				List<String> songsAndTrailersList = Arrays.asList(songsAndTrailers.split(","));
 				List<String> interviewAndEventsList = Arrays.asList(interviewsAndEvents.split(","));
 				List<String> videoReviewsList = Arrays.asList(videoReviews.split(","));
 				movie.setInterviewAndEvents(interviewAndEventsList).setSongAndTrailers(songsAndTrailersList)
-						.setVideoReviews(videoReviewsList).setReleaseDate(releaseDate)
-						.setPlot(plot).setName(name).setBudget(budget).setActors(actorsSet)
-						.setBoxOffice(boxOffice).setImageUrl(imageUrl).setDirector(director)
-						.setOverall(new MovieAspect().setRating(Double.parseDouble(overallRating)))
-						.setStory(new MovieAspect().setRating(Double.parseDouble(storyRating)))
-						.setActing(new MovieAspect().setRating(Double.parseDouble(actingRating)))
-						.setDirection(new MovieAspect().setRating(Double.parseDouble(directionRating)))
-						.setMusic(new MovieAspect().setRating(Double.parseDouble(musicRating)));
-				
-				
+						.setVideoReviews(videoReviewsList).setReleaseDate(releaseDate).setPlot(plot).setName(name)
+						.setBudget(budget).setActors(actorsSet).setBoxOffice(boxOffice).setImageUrl(imageUrl)
+						.setDirector(director).setOverall(buildMovieAspect(movieId, "overall"))
+						.setStory(buildMovieAspect(movieId, "story")).setActing(buildMovieAspect(movieId, "acting"))
+						.setDirection(buildMovieAspect(movieId, "direction"))
+						.setMusic(buildMovieAspect(movieId, "music")).setMovieId(movieId);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -113,30 +109,67 @@ public class MoviePlotServlet extends HttpServlet {
 			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
 		}
 
-		/*
-		 * MovieAspect ms = new MovieAspect(); Set<String> reviews =	
-		 * Sets.newHashSet("This is test1", "This is test2", "This is test3",
-		 * "This is test4", "This is test5", "This is test 6");
-		 * ms.getNegativeReviews().addAll(reviews);
-		 * ms.getPositiveReviews().addAll(reviews);
-		 * 
-		 * MovieAspect music = new MovieAspect(); reviews =
-		 * Sets.newHashSet("This is music1", "this is music 2",
-		 * "this is music 3"); music.getNegativeReviews().addAll(reviews);
-		 * music.getPositiveReviews().addAll(reviews);
-		 * 
-		 * Movie movie = new Movie();
-		 * movie.setActing(null).setActors(null).setBoxOffice("1 crore").
-		 * setBudget("50 Lakhs") .setPlot(
-		 * "Tanu Weds Manu Returns is a 2015 Indian romantic comedy drama film directed by Anand L. Rai which serves as a sequel to the 2011 film Tanu Weds Manu. R. Madhavan, Kangana Ranaut, Jimmy Shergill, Deepak Dobriyal, Swara Bhaskar and Eijaz Khan reprise their roles from the original film. Ranaut also portrays the additional role of a Haryanvi athlete in it. The story, screenplay and the dialogues were written by Himanshu Sharma. The soundtrack and film score were composed by Krsna Solo and the lyrics were penned by Rajshekhar. Saroj Khan and Bosco–Caesar were the film′s choreographers while the editing was done by Hemal Kothari. The principle photography began on October 2014 and the film was released on 22 May 2015. The film carries the story forward showing the next chapter of the couple's life. Tanu Weds Manu Returns received positive reviews from critics and Ranaut's performance was particularly praised.[3][4] Made on a budget of ₹30 crore (US$4.5 million), the film earned ₹252 crore (US$38 million)"
-		 * +
-		 * " worldwide and became one of the highest grossing Bollywood film.")
-		 * .setOverall(ms).setSongAndTrailers(songsAndTrailers).
-		 * setInterviewAndEvents(interviewAndEvents)
-		 * .setVideoReviews(videoReviews).setStory(ms).setActing(ms).
-		 * setDirection(ms).setMusic(music);
-		 */
 		return movie;
+	}
+
+	private MovieAspect buildMovieAspect(String movieId, String compName) {
+		MovieAspect aspect = new MovieAspect();
+		Connection connect = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		String result = "";
+		try {
+			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
+					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
+					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
+			statement = connect.createStatement();
+			resultSet = statement.executeQuery("select tweetstr, compname, sentiment from Tweet_Table where movieid='"
+					+ movieId + "' and is_visible_on_portal='Y'");
+			System.out.println(
+					"Query being passed is" + "select tweetstr, compname, sentiment from Tweet_Table where movieid='"
+							+ movieId + "' and is_visible_on_portal='Y'");
+
+			while (resultSet.next()) {
+				if (resultSet.getString("compname").contains(compName)) {
+					String sentiments = resultSet.getString("sentiment");
+					if (Strings.isNullOrEmpty(sentiments)) {
+						continue;
+					}
+					String[] sentimentArr = sentiments.split(",");
+					System.out.println(sentiments);
+					for (String sentimentToken : sentimentArr) {
+						System.out.println(sentimentToken);
+						String sentimentComp = sentimentToken.split(":")[0];
+						String sentimentSentiment = sentimentToken.split(":")[1];
+						if (sentimentComp.equalsIgnoreCase(compName)) {
+							if (sentimentSentiment.equalsIgnoreCase("pos")) {
+								aspect.getPositiveReviews().add(resultSet.getString("tweetstr"));
+							} else {
+								aspect.getNegativeReviews().add(resultSet.getString("tweetstr"));
+							}
+						}
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
+		}
+		if (aspect.getPositiveReviews().size() + aspect.getNegativeReviews().size() > 0) {
+			double ratio = (double) aspect.getPositiveReviews().size()
+					/ (double) (aspect.getNegativeReviews().size() + aspect.getPositiveReviews().size());
+			int rating = (int) (ratio * 5);
+			if (rating < 4) {
+				rating = rating + 1;
+			}
+			aspect.setRating(rating);
+
+		} else {
+			aspect.setRating(1);
+		}
+
+		return aspect;
 	}
 
 	private boolean isMovieVisibleOnPortal(String movieId) {

@@ -3,6 +3,8 @@ componentDictionary:
       - story
       - storyline
       - screenplay
+      - plot
+      - plotless
       
    direction:
       - direction
@@ -17,4 +19,4 @@ componentDictionary:
       - music
       - song
       - songs
-  
+      - musical

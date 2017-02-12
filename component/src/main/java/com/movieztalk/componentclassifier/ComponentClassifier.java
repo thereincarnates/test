@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.api.client.repackaged.com.google.common.base.Joiner;
 import com.movieztalk.TweetProcessor;
 import com.movieztalk.extraction.model.Tweet;
 import com.movieztalk.util.NLPHelper;
@@ -32,7 +33,7 @@ public class ComponentClassifier {
 		for (Tweet tweet : tweets) {
 			Set<String> componentName = classify(tweet.getTweetStr());
 			if (componentName.iterator().hasNext()) {
-				tweet.setCompName(componentName.iterator().next());
+				tweet.setCompName(Joiner.on(',').join(componentName));
 			}
 		}
 	}
@@ -50,7 +51,6 @@ public class ComponentClassifier {
 				boolean isPresent = wordList.contains(token);
 				if (isPresent == true) {
 					componentClass.add((String) entry.getKey());
-					return componentClass;
 				}
 			}
 		}

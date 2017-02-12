@@ -44,6 +44,7 @@ public class Movie {
 	// Celebrity tweets
 	private Set<String> tweets = new LinkedHashSet<>();
 	private String imageUrl;
+	private String movieId;
 
 	public String getImageUrl() {
 		return imageUrl;
@@ -197,8 +198,13 @@ public class Movie {
 		this.releaseDate = releaseDate;
 		return this;
 	}
-	
-	
-	
-	
+
+	public String getMovieId() {
+		return movieId;
+	}
+
+	public Movie setMovieId(String movieId) {
+		this.movieId = movieId;
+		return this;
+	}
 }

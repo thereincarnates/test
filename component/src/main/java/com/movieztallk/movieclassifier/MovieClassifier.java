@@ -64,7 +64,7 @@ public class MovieClassifier implements TweetProcessor{
 	}
 
 	private void populateMovieForTweet(Tweet tweet) {
-		String tweetStr = tweet.getTweetStr();
+		String tweetStr = tweet.getTweetStr().replaceAll("[^#0-9a-zA-Z]", " ");
 		if (!Strings.isNullOrEmpty(tweetStr)) {
 			for (String token : regexHelper.spacePattern.split(tweetStr)) {
 				for (String movieId : movieIdToKeyWordsMapping.keys()) {
@@ -79,7 +79,7 @@ public class MovieClassifier implements TweetProcessor{
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		Tweet tweet = new Tweet();
-		tweet.setTweetStr("kya baat hai #pink");
+		tweet.setTweetStr("Its interval #JollyLlb2 nd its housefull..");
 		new MovieClassifier().getInstance().processTweets(Arrays.asList(tweet));
 		System.out.println("movie name " + tweet.getMovieId());
 	}

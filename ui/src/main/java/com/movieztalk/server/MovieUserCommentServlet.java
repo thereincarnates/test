@@ -60,22 +60,13 @@ public class MovieUserCommentServlet extends HttpServlet {
 					+ mysqlserver.mysqlServerPassword);
 
 			statement = connect.createStatement();
-			resultSet = statement
-					.executeUpdate("insert into usercomment (userid,movieid,comment,overallRating,"
-							+ "storyRating,directionRating,musicRating) VALUES ('"
-							+ userComment.getUserId()
-							+ "',"
-							+ userComment.getMovieId()
-							+ ",'"
-							+ userComment.getComment()
-							+ "',"
-							+ userComment.getOverallRating()
-							+ ","
-							+ userComment.getStoryRating()
-							+ ","
-							+ userComment.getDirectionRating()
-							+ ","
-							+ userComment.getMusicRating() + ")");
+			String query = "insert into usercomment (userid,movieId,comment,overallRating,"
+					+ "storyRating,directionRating,musicRating) VALUES ('" + userComment.getUserId() + "',"
+					+ userComment.getMovieId() + ",'" + userComment.getComment() + "'," + userComment.getOverallRating()
+					+ "," + userComment.getStoryRating() + "," + userComment.getDirectionRating() + ","
+					+ userComment.getMusicRating() + ")";
+			System.out.println("query sent is" + query);
+			resultSet = statement.executeUpdate(query);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -25,6 +25,8 @@ moviezApp
 						$scope.movieobj = data;
 						$scope.commentType = 'overall';
 						console.log("ZZZZZZZZZZZZZZZ" + $scope.movieobj);
+						$scope.fillReviewType('overall');
+						
 						// $scope.positiveReviews =
 						// $scope.movieobj.overall.positiveReviews;
 						// $scope.negativeReviews =
@@ -179,7 +181,7 @@ moviezApp
 						
 						
 						var data={
-								movieId:$routeParams.movieid,
+								movieId:$scope.movieobj.movieId,
 								userId: "0",
 								comment:$scope.UserComment,
 								overallRating :0, //$scope.overallRating,
