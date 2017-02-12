@@ -38,5 +38,9 @@
 	<cache name="moviesAutoComplete" maxElementsInMemory="1000" eternal="false"
 		timeToIdleSeconds="1800" timeToLiveSeconds="3600" overflowToDisk="true"
 		maxElementsOnDisk="10000" memoryStoreEvictionPolicy="LRU" />
+		
+	<cache name="moviesDetailPage" maxElementsInMemory="1000" eternal="false"
+		timeToIdleSeconds="1800" timeToLiveSeconds="3600" overflowToDisk="true"
+		maxElementsOnDisk="10000" memoryStoreEvictionPolicy="LRU" />	
 
 </ehcache>

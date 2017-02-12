@@ -25,6 +25,10 @@ import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Movie;
 import com.movieztalk.movieaspects.model.MovieAspect;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+
 @WebServlet("/movieplot")
 public class MoviePlotServlet extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(MoviePlotServlet.class.getName());
@@ -38,7 +42,16 @@ public class MoviePlotServlet extends HttpServlet {
 		response.setContentType("text/html");
 		logger.info("Testing the data");
 		Gson gson = new Gson();
-		String json = gson.toJson(buildMovieObject(movieId));
+		CacheManager cacheManager = CacheManager.getInstance();
+		Cache cache = cacheManager.getCache("moviesDetailPage");
+		Element element = cache.get(movieId);
+		String json;
+		if(element!=null){
+			json = (String)element.getObjectValue();
+		} else{
+			json = gson.toJson(buildMovieObject(movieId));
+			cache.put(new Element(movieId, json));
+		}
 		PrintWriter out = response.getWriter();
 		out.write(json);
 		out.flush();
