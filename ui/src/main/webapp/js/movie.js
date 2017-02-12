@@ -163,32 +163,37 @@ moviezApp
 
 					$scope.isClicked = true;
 					$scope.isNotClicked = false;
+					$scope.showComment =true;
+					
 
 					$scope.commentClick = function() {
 						console.log("Commit Column Clicked");
 						$scope.isClicked = false;
 						$scope.isNotClicked = true;
+					
 					}
 					$scope.submitComment = function() {
 						$scope.isClicked = true;
 						$scope.isNotClicked = true;
+						$scope.showComment =false;
+						
 						
 						var data={
-								movieId:$scope.movieId,
-								userId: "test",
+								movieId:$routeParams.movieid,
+								userId: "0",
 								comment:$scope.UserComment,
-								overallRating :5,
-								storyRating: 4,
-								actingRating:1,
-								directionRating:3,
-								musicRating:2
+								overallRating :0, //$scope.overallRating,
+								storyRating: 0, //$scope.storyRating,
+								actingRating:0, //$scope.actingRating,
+								directionRating:0, //$scope.directionRating,
+								musicRating:0 //$scope.musicRating
 								
 						};
 						
 						$http.post('/movieUserComment',JSON.stringify(data))
 						.success(function(option)
 						{
-							console.log("testingpost " + option.movieid);
+							console.log("testingpost " + option.movieId);
 						});
 
 						

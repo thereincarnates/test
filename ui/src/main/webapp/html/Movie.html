@@ -28,22 +28,29 @@
   
         
         <!-- Panel for USer to enter there rating and comments -->
+        <div class="row">Your Comment:</div>
 		<div class="row">
+		    
 			<div class="col-lg-4 col-md-4 col-sm-4 col-sm-6" ng-hide="isNotClicked">
 				<textarea rows="1"  ng-focus="commentClick()" 
 				          placeholder="Enter Your Comments" ng-model="UserComment"></textarea>
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-sm-6" ng-hide="isClicked">
+			<div class="col-lg-8 col-md-8 col-sm-8 col-sm-6" ng-hide="isClicked">
 				<textarea rows="3" class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-focus="commentClick()" 
 				          placeholder="Enter Your Comments" ng-model="UserComment"></textarea>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-include="'User_StarRating.html'" ng-hide="isClicked">
+			<!--  <div class="col-lg-6 col-md-6 col-sm-6 col-sm-6" ng-include="'User_StarRating.html'" ng-hide="isClicked">
+		
 			
-			</div>
-			<div class="col-lg-2 col-md-2 col-sm-2 col-sm-2">
-			     <button type="button" class="btn btn-primary" ng-hide="isClicked" 
+			</div>-->
+			
+			<div class="col-lg-8 col-md-8 col-sm-8 col-sm-6" ng-hide="showComment" > {{UserComment}} </div>
+			
+			     <button  class="col-lg-2 col-md-2 col-sm-2 col-sm-2" type="button" class="btn btn-primary" ng-hide="isClicked" 
 			             ng-click="submitComment()" ng-model="submit">Submit</button>	
-			</div>
+			
+			
+			
 		</div>
 
 
