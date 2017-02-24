@@ -16,11 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.repackaged.com.google.common.base.Strings;
 import com.google.gson.Gson;
-import com.movieztalk.model.NewMovieInputRequest;
-import com.movieztalk.reviewsextraction.WikiPediaExtraction;
-import com.movieztalk.task.TaskState;
-import com.movieztalk.wikipedia.WikipediaExtractor;
 import com.movieztalk.db.DatabaseHelper;
+import com.movieztalk.model.NewMovieInputRequest;
+import com.movieztalk.wikipedia.MoviesMetaData;
+import com.movieztalk.wikipedia.WikipediaExtractor;
 
 public class NewMovieServlet extends HttpServlet {
 
@@ -39,7 +38,9 @@ public class NewMovieServlet extends HttpServlet {
 	}
 
 	public boolean insertNewMovieIntoDB(NewMovieInputRequest movieInputRequest) throws IOException {
-		String plot = new WikipediaExtractor().fetchPlotString(movieInputRequest.getWikiUrl());
+		WikipediaExtractor wikiExtractor = new WikipediaExtractor();
+		String plot = wikiExtractor.fetchPlotString(movieInputRequest.getWikiUrl());
+		MoviesMetaData metaData = wikiExtractor.fetchMovieMetaData(movieInputRequest.getWikiUrl());
 
 		boolean result = false;
 		Connection connect = null;
@@ -53,7 +54,7 @@ public class NewMovieServlet extends HttpServlet {
 					"update movieztalk.movie set name=?, hashtag=?, wikiurl=?, songsandtrailers=?, videoreviews=?,interviewsandevents=?, plot=?,"
 							+ " director=?, actors=?,release_date=?, boxoffice=?, budget=?,writers=?,currently_processed=? where movieid=?");
 			preparedStatement.setString(1,
-					Strings.isNullOrEmpty(movieInputRequest.getName()) ? "" : movieInputRequest.getName());
+					Strings.isNullOrEmpty(movieInputRequest.getName()) ? "" : metaData.getName());
 			preparedStatement.setString(2,
 					Strings.isNullOrEmpty(movieInputRequest.getHashTag()) ? "" : movieInputRequest.getHashTag());
 			preparedStatement.setString(3,
@@ -65,16 +66,11 @@ public class NewMovieServlet extends HttpServlet {
 			preparedStatement.setString(6, Strings.isNullOrEmpty(movieInputRequest.getInterviewsAndEvents()) ? ""
 					: movieInputRequest.getInterviewsAndEvents());
 			preparedStatement.setString(7, Strings.isNullOrEmpty(plot) ? "" : plot);
-			preparedStatement.setString(8,
-					Strings.isNullOrEmpty(movieInputRequest.getDirector()) ? "" : movieInputRequest.getDirector());
-			preparedStatement.setString(9,
-					Strings.isNullOrEmpty(movieInputRequest.getActors()) ? "" : movieInputRequest.getActors());
-			preparedStatement.setString(10, Strings.isNullOrEmpty(movieInputRequest.getReleaseDate()) ? ""
-					: movieInputRequest.getReleaseDate());
-			preparedStatement.setString(11,
-					Strings.isNullOrEmpty(movieInputRequest.getBoxOffice()) ? "" : movieInputRequest.getBoxOffice());
-			preparedStatement.setString(12,
-					Strings.isNullOrEmpty(movieInputRequest.getBudget()) ? "" : movieInputRequest.getBudget());
+			preparedStatement.setString(8, gson.toJson(metaData.getDirectors()));
+			preparedStatement.setString(9, gson.toJson(metaData.getActors()));
+			preparedStatement.setString(10, metaData.getReleaseDate());
+			preparedStatement.setString(11, metaData.getBoxOfficeCollection());
+			preparedStatement.setString(12, metaData.getBudget());
 			preparedStatement.setString(13,
 					Strings.isNullOrEmpty(movieInputRequest.getWriters()) ? "" : movieInputRequest.getWriters());
 			preparedStatement.setString(14, Strings.isNullOrEmpty(movieInputRequest.getCurrentlyComputed()) ? ""
