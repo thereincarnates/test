@@ -123,7 +123,7 @@ public class WikipediaExtractor {
 	}
 
 	public static void main(String args[]) throws IOException {
-		MoviesMetaData metaData = new WikipediaExtractor().fetchMovieMetaData("https://en.wikipedia.org/wiki/Raees_(film)");
+		MoviesMetaData metaData = new WikipediaExtractor().fetchMovieMetaData("https://en.wikipedia.org/wiki/Kaabil");
 		System.out.println(gson.toJson(metaData));
 	}
 
