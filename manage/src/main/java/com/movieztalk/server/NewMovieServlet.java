@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.repackaged.com.google.common.base.Strings;
+import org.apache.commons.collections4.CollectionUtils;
+
+import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.model.NewMovieInputRequest;
@@ -65,8 +68,10 @@ public class NewMovieServlet extends HttpServlet {
 			preparedStatement.setString(6, Strings.isNullOrEmpty(movieInputRequest.getInterviewsAndEvents()) ? ""
 					: movieInputRequest.getInterviewsAndEvents());
 			preparedStatement.setString(7, Strings.isNullOrEmpty(plot) ? "" : plot);
-			preparedStatement.setString(8, gson.toJson(metaData.getDirectors()));
-			preparedStatement.setString(9, gson.toJson(metaData.getActors()));
+			preparedStatement.setString(8, CollectionUtils
+					.isEmpty(metaData.getDirectors())?"":Joiner.on(',').join(metaData.getDirectors()));
+			preparedStatement.setString(9, CollectionUtils
+					.isEmpty(metaData.getActors())?"":Joiner.on(',').join(metaData.getActors()));
 			preparedStatement.setString(10, metaData.getReleaseDate());
 			preparedStatement.setString(11, metaData.getBoxOfficeCollection());
 			preparedStatement.setString(12, metaData.getBudget());
