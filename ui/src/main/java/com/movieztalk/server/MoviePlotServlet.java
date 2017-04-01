@@ -39,7 +39,7 @@ public class MoviePlotServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String movieId = request.getParameter("movieId");
-		response.setContentType("text/html");
+		response.setContentType("application/json");
 		logger.info("Testing the data");
 		Gson gson = new Gson();
 		CacheManager cacheManager = CacheManager.getInstance();

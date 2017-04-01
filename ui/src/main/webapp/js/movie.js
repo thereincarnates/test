@@ -23,16 +23,25 @@ moviezApp
 					}).success(function(data) {
 						console.log('successfull');
 						$scope.movieobj = data;
-						$scope.commentType = 'overall';
-						console.log("ZZZZZZZZZZZZZZZ" + $scope.movieobj);
-						$scope.fillReviewType('overall');
-						
-						// $scope.positiveReviews =
-						// $scope.movieobj.overall.positiveReviews;
-						// $scope.negativeReviews =
-						// $scope.movieobj.overall.negativeReviews;
-
+						console.log("ZZZZZZZZZZZDDDDDDDDDD" + $scope.movieobj);
 					});
+					
+					$http({
+						method : 'GET',
+						url : '/movieReview?movieId=' + $routeParams.movieid,
+						headers : {
+							'Content-Type' : 'application/json'
+						}
+					}).success(function(data) {
+						console.log('successfull');
+						$scope.moviereviews = data;
+						$scope.commentType = 'overall';
+						console.log("ZZZZZZZZZZZDDDDDDDDDD" + $scope.moviereviews);
+						$scope.fillReviewType('overall');
+					});
+					
+					
+					
 
 					$scope.movienamelist = [];
 
@@ -56,40 +65,16 @@ moviezApp
 						console.log("moviesearch callled : " + movieSearch);
 						$window.location.href = '#movie/' + movieSearch;
 					}
-
-					$scope.posNext = function() {
-						if ($scope.positiveReviews.length > $scope.posIndex
-								+ $scope.commentWindowSize) {
-							console.log("calling posnext with"
-									+ $scope.posIndex
-									+ $scope.commentWindowSize);
-							$scope.posIndex = $scope.posIndex
-									+ $scope.commentWindowSize;
+					
+					$scope.reviewNext = function(){
+						if($scope.reviews.length > $scope.reviewIndex + $scope.commentWindowSize){
+							$scope.reviewIndex = $scope.reviewIndex  + $scope.commentWindowSize;
 						}
 					}
-
-					$scope.posPrev = function() {
-						if ($scope.posIndex - $scope.commentWindowSize >= 0) {
-							$scope.posIndex = $scope.posIndex
-									- $scope.commentWindowSize;
-						}
-					}
-
-					$scope.negNext = function() {
-						if ($scope.negativeReviews.length > $scope.negIndex
-								+ $scope.commentWindowSize) {
-							console.log("calling posnext with"
-									+ $scope.negIndex
-									+ $scope.commentWindowSize);
-							$scope.negIndex = $scope.negIndex
-									+ $scope.commentWindowSize;
-						}
-					}
-
-					$scope.negPrev = function() {
-						if ($scope.negIndex - $scope.commentWindowSize >= 0) {
-							$scope.negIndex = $scope.negIndex
-									- $scope.commentWindowSize;
+					
+					$scope.reviewPrev =  function(){
+						if($scope.reviewIndex - $scope.commentWindowSize >=0){
+							$scope.reviewIndex = $scope.reviewIndex -  $scope.commentWindowSize;
 						}
 					}
 
@@ -140,26 +125,24 @@ moviezApp
 					$scope.fillReviewType = function(reviewtype) {
 						$scope.posIndex = 0;
 						$scope.negIndex = 0;
+						$scope.reviewIndex = 0;
+						console.log("fillReviewType being called");
 						if (reviewtype == 'overall') {
 							$scope.commentType = 'overall';
-							$scope.positiveReviews = $scope.movieobj.overall.positiveReviews;
-							$scope.negativeReviews = $scope.movieobj.overall.negativeReviews;
+							$scope.reviews = $scope.moviereviews.overall;
 						} else if (reviewtype == 'story') {
+							console.log("reviews for story being called");
 							$scope.commentType = 'story';
-							$scope.positiveReviews = $scope.movieobj.story.positiveReviews;
-							$scope.negativeReviews = $scope.movieobj.story.negativeReviews;
+							$scope.reviews = $scope.moviereviews.story;
 						} else if (reviewtype == 'acting') {
 							$scope.commentType = 'acting';
-							$scope.positiveReviews = $scope.movieobj.acting.positiveReviews;
-							$scope.negativeReviews = $scope.movieobj.acting.negativeReviews;
+							$scope.reviews = $scope.moviereviews.acting;
 						} else if (reviewtype == 'direction') {
 							$scope.commentType = 'direction';
-							$scope.positiveReviews = $scope.movieobj.direction.positiveReviews;
-							$scope.negativeReviews = $scope.movieobj.direction.negativeReviews;
+							$scope.reviews = $scope.moviereviews.direction;
 						} else if (reviewtype == 'music') {
 							$scope.commentType = 'music';
-							$scope.positiveReviews = $scope.movieobj.music.positiveReviews;
-							$scope.negativeReviews = $scope.movieobj.music.negativeReviews;
+							$scope.reviews = $scope.moviereviews.music;
 						}
 					}
 
