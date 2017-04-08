@@ -1,9 +1,8 @@
 package com.movieztalk.server;
 
-
 public class ServerConfiguration {
-	
-	public ServerConfiguration(){
+
+	private ServerConfiguration() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
@@ -11,10 +10,21 @@ public class ServerConfiguration {
 			e1.printStackTrace();
 		}
 	}
-	public static final String mysqlServerName = "localhost";
-	public static final String mysqlServerPort = "3306";  //3368 used in mysql server, default is 3306
-	public static final String mysqlServerUserName = "root";
-	public static final String mysqlServerPassword = "root";
-	public static final String mysqlDBName = "movieztalk";
+
+	private static ServerConfiguration instance = null;
+
+	public static synchronized ServerConfiguration getInstance() {
+		if (instance == null) {
+			instance = new ServerConfiguration();
+		}
+		return instance;
+	}
+
+	public final String MYSQL_HOST = "localhost";
+	public final String MYSQL_PORT = "3306"; // 3368 used in mysql
+												// server, default is 3306
+	public final String MYSQL_USER = "root";
+	public final String MYSQL_PASSWD = "root";
+	public final String MYSQL_MOVIE_DB_NAME = "movieztalk";
 
 }

@@ -25,7 +25,6 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
-import com.movieztalk.game.commonstate.MovieCommonState;
 import com.movieztalk.game.model.GuessMovieNameEntity;
 import com.movieztalk.game.model.GuessMovieNameGame;
 import com.movieztalk.game.model.MovieRequest;

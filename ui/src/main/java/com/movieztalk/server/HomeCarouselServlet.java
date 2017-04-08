@@ -55,17 +55,17 @@ public class HomeCarouselServlet extends HttpServlet {
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		ServerConfiguration mysqlserver =  new ServerConfiguration();
+		ServerConfiguration serverConfiguration = ServerConfiguration.getInstance();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			Instant before = Instant.now();
-			connect = DriverManager.getConnection("jdbc:mysql://"+mysqlserver.mysqlServerName+":"+mysqlserver.mysqlServerPort+"/"+mysqlserver.mysqlDBName+"?user="+ mysqlserver.mysqlServerUserName+"&password="+mysqlserver.mysqlServerPassword);
-			System.out.println("jdbc:mysql://"+mysqlserver.mysqlServerName+":"+mysqlserver.mysqlServerPort+"/"+mysqlserver.mysqlDBName+"?user="+ mysqlserver.mysqlServerUserName+"&password="+mysqlserver.mysqlServerPassword);
+			connect = DriverManager.getConnection("jdbc:mysql://" + serverConfiguration.MYSQL_HOST + ":"
+					+ serverConfiguration.MYSQL_PORT + "/" + serverConfiguration.MYSQL_MOVIE_DB_NAME + "?user="
+					+ serverConfiguration.MYSQL_USER + "&password=" + serverConfiguration.MYSQL_PASSWD);
 			Instant after = Instant.now();
 			logger.warning("done creating connection in:" + Duration.between(before, after).toMillis() + " ms.");
 			statement = connect.createStatement();

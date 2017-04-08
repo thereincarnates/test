@@ -60,12 +60,12 @@ public class MovieSuggestServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		ServerConfiguration mysqlserver = new ServerConfiguration();
+		ServerConfiguration serverConfiguration = ServerConfiguration.getInstance();
 		try {
 
-			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
-					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
-					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
+			connect = DriverManager.getConnection("jdbc:mysql://" + serverConfiguration.MYSQL_HOST + ":"
+					+ serverConfiguration.MYSQL_PORT + "/" + serverConfiguration.MYSQL_MOVIE_DB_NAME + "?user="
+					+ serverConfiguration.MYSQL_USER + "&password=" + serverConfiguration.MYSQL_PASSWD);
 
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery(
