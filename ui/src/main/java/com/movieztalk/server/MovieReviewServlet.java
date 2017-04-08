@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.repackaged.com.google.api.client.util.Strings;
 import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
+import com.movieztalk.helper.MovieDetailsHelper;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -28,19 +29,15 @@ import net.sf.ehcache.Element;
 @WebServlet("/movieReview")
 public class MovieReviewServlet extends HttpServlet {
 
-	private ServerConfiguration mysqlserver = new ServerConfiguration();
+	private ServerConfiguration serverConfiguration = ServerConfiguration.getInstance();
+	private MovieDetailsHelper movieDetailHelper = MovieDetailsHelper.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json");
 		String movieId = request.getParameter("movieId");
-		if (Strings.isNullOrEmpty(movieId)) {
-			response.setStatus(400);
-			return;
-		}
 
-		Gson gson = new Gson();
 		CacheManager cacheManager = CacheManager.getInstance();
 		Cache cache = cacheManager.getCache("movieReviews");
 		Element element = cache.get(movieId);
@@ -51,21 +48,32 @@ public class MovieReviewServlet extends HttpServlet {
 			return;
 		}
 
+		String reviewJSon = fetchMovieReviews(movieId);
+		cache.put(new Element(movieId, reviewJSon));
+		response.getWriter().println(reviewJSon);
+		response.getWriter().close();
+	}
+	
+	public String fetchMovieReviews(String movieId){
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		String result = "";
 		Map<String, List<Map<String, String>>> compNameToReviewsSentimentMap = new HashMap<>();
+		
+		if (!movieDetailHelper.isMovieVisibleOnPortal(movieId)) {
+			movieId = "";
+		}
+		
+		if(Strings.isNullOrEmpty(movieId)){
+			movieId = movieDetailHelper.fetchLatestMovieId();
+		}
 		try {
-			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
-					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
-					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
+			connect = DriverManager.getConnection("jdbc:mysql://" + serverConfiguration.MYSQL_HOST + ":"
+					+ serverConfiguration.MYSQL_PORT + "/" + serverConfiguration.MYSQL_MOVIE_DB_NAME + "?user="
+					+ serverConfiguration.MYSQL_USER + "&password=" + serverConfiguration.MYSQL_PASSWD);
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery("select tweetstr, compname, sentiment from Tweet_Table where movieid='"
 					+ movieId + "' and is_visible_on_portal='Y'");
-			System.out.println(
-					"Query being passed is" + "select tweetstr, compname, sentiment from Tweet_Table where movieid='"
-							+ movieId + "' and is_visible_on_portal='Y'");
 			while (resultSet.next()) {
 				String sentiment = resultSet.getString("sentiment");
 				String compName = resultSet.getString("compname");
@@ -95,8 +103,6 @@ public class MovieReviewServlet extends HttpServlet {
 		} finally {
 			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
 		}
-		String jsonReviews = new Gson().toJson(compNameToReviewsSentimentMap);
-		cache.put(new Element(movieId, jsonReviews));
-		response.getWriter().println(jsonReviews);
+		return new Gson().toJson(compNameToReviewsSentimentMap);
 	}
 }

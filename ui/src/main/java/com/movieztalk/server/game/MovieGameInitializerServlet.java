@@ -27,8 +27,6 @@ import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.game.builder.GuessMovieNameGameBuilder;
 import com.movieztalk.game.model.GuessMovieNameGame;
-import com.movieztalk.helper.DataStoreHelper;
-import com.movieztalk.task.TaskState;
 
 @SuppressWarnings("serial")
 @WebServlet("/moviegameinit")

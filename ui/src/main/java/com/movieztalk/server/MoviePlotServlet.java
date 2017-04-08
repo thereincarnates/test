@@ -23,6 +23,7 @@ import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
 import com.movieztalk.extraction.model.Movie;
+import com.movieztalk.helper.MovieDetailsHelper;
 import com.movieztalk.movieaspects.model.MovieAspect;
 
 import net.sf.ehcache.Cache;
@@ -33,7 +34,8 @@ import net.sf.ehcache.Element;
 public class MoviePlotServlet extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(MoviePlotServlet.class.getName());
 	private static final long serialVersionUID = 1L;
-	ServerConfiguration mysqlserver = new ServerConfiguration();
+	private ServerConfiguration serverConfiguration = ServerConfiguration.getInstance();
+	private MovieDetailsHelper movieDetailsHelper = MovieDetailsHelper.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +51,7 @@ public class MoviePlotServlet extends HttpServlet {
 		if(element!=null){
 			json = (String)element.getObjectValue();
 		} else{
-			json = gson.toJson(buildMovieObject(movieId));
+			json = gson.toJson(fetchMovieObject(movieId));
 			cache.put(new Element(movieId, json));
 		}
 		PrintWriter out = response.getWriter();
@@ -58,14 +60,14 @@ public class MoviePlotServlet extends HttpServlet {
 		out.close();
 	}
 
-	private Movie buildMovieObject(String movieId) {
+	private Movie fetchMovieObject(String movieId) {
 
-		if (!isMovieVisibleOnPortal(movieId)) {
+		if (!movieDetailsHelper.isMovieVisibleOnPortal(movieId)) {
 			movieId = "";
 		}
 
 		if (Strings.isNullOrEmpty(movieId)) {
-			movieId = fetchLatestMovieId();
+			movieId = movieDetailsHelper.fetchLatestMovieId();
 		}
 
 		Connection connect = null;
@@ -73,9 +75,9 @@ public class MoviePlotServlet extends HttpServlet {
 		ResultSet resultSet = null;
 		Movie movie = new Movie();
 		try {
-			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
-					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
-					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
+			connect = DriverManager.getConnection("jdbc:mysql://" + serverConfiguration.MYSQL_HOST + ":"
+					+ serverConfiguration.MYSQL_PORT + "/" + serverConfiguration.MYSQL_MOVIE_DB_NAME + "?user="
+					+ serverConfiguration.MYSQL_USER + "&password=" + serverConfiguration.MYSQL_PASSWD);
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery("select * from movie where movieid='" + movieId + "'");
 			System.out.println("query being called is select * from movie where movieid='" + movieId + "'");
@@ -132,9 +134,9 @@ public class MoviePlotServlet extends HttpServlet {
 		ResultSet resultSet = null;
 		String result = "";
 		try {
-			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
-					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
-					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
+			connect = DriverManager.getConnection("jdbc:mysql://" + serverConfiguration.MYSQL_HOST + ":"
+					+ serverConfiguration.MYSQL_PORT + "/" + serverConfiguration.MYSQL_MOVIE_DB_NAME + "?user="
+					+ serverConfiguration.MYSQL_USER + "&password=" + serverConfiguration.MYSQL_PASSWD);
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery("select tweetstr, compname, sentiment from Tweet_Table where movieid='"
 					+ movieId + "' and is_visible_on_portal='Y'");
@@ -185,55 +187,5 @@ public class MoviePlotServlet extends HttpServlet {
 		return aspect;
 	}
 
-	private boolean isMovieVisibleOnPortal(String movieId) {
-		if (Strings.isNullOrEmpty(movieId)) {
-			return false;
-		}
-
-		Connection connect = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		String result = "";
-		try {
-			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
-					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
-					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
-			statement = connect.createStatement();
-			resultSet = statement.executeQuery(
-					"select movieid from movie where movieid='" + movieId + "' and is_visible_on_portal='Y'");
-			if (resultSet.next()) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
-		}
-		return false;
-	}
-
-	private String fetchLatestMovieId() {
-
-		Connection connect = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		String result = "";
-		try {
-			connect = DriverManager.getConnection("jdbc:mysql://" + mysqlserver.mysqlServerName + ":"
-					+ mysqlserver.mysqlServerPort + "/" + mysqlserver.mysqlDBName + "?user="
-					+ mysqlserver.mysqlServerUserName + "&password=" + mysqlserver.mysqlServerPassword);
-			statement = connect.createStatement();
-			resultSet = statement.executeQuery(
-					"select movieid from movie where is_visible_on_portal='Y' order by movieid desc limit 1");
-			while (resultSet.next()) {
-				result = resultSet.getString("movieid");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			DatabaseHelper.getInstance().closeResources(connect, statement, resultSet);
-		}
-		return result;
-	}
+	
 }
