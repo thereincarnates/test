@@ -2,7 +2,6 @@ package com.movieztalk.game.builder;
 
 import com.movieztalk.game.model.GuessMovieNameGame;
 import com.movieztalk.util.UniqueIdGenerator;
-import com.google.api.services.datastore.client.DatastoreException;
 
 public class GuessMovieNameGameBuilder {
 
@@ -22,7 +21,7 @@ public class GuessMovieNameGameBuilder {
 		return this;
 	}
 
-	public GuessMovieNameGameBuilder buildInitiatorId() throws DatastoreException {
+	public GuessMovieNameGameBuilder buildInitiatorId() {
 		String initiatorId = uniqueIdGenerator.generateUniqueId();
 		guessMovieNameGame.setInitiatorId(initiatorId);
 		return this;
@@ -33,7 +32,7 @@ public class GuessMovieNameGameBuilder {
 		return this;
 	}
 
-	public GuessMovieNameGameBuilder buildOtherPlayerId() throws DatastoreException {
+	public GuessMovieNameGameBuilder buildOtherPlayerId() {
 		String otherPlayerId = uniqueIdGenerator.generateUniqueId();
 		guessMovieNameGame.setOtherPlayerId(otherPlayerId);
 		return this;

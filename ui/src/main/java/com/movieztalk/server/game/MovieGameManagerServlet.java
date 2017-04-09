@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.api.services.datastore.client.DatastoreException;
 import com.google.gson.Gson;
 import com.movieztalk.game.builder.MovieRequestBuilder;
 import com.movieztalk.game.model.MovieRequest;
-import com.movieztalk.game.model.ScoreBoard;
 
 @SuppressWarnings("serial")
 @WebServlet("/gamemanager")
@@ -38,19 +36,14 @@ public class MovieGameManagerServlet extends HttpServlet {
 
 		if (((preint != null) && (preint.equalsIgnoreCase("computer")))
 				|| ((gamePostAction != null) && (gamePostAction.equalsIgnoreCase("continue")))) {
-			try {
-				logger.info("input to movie request builder is " + "id\t" + id + "\t" + score + "\t" + industryType);
-				MovieRequest movieRequest = new MovieRequestBuilder(id, score, industryType).buildMovieName()
-						.buildScore().build();
-				Gson gson = new Gson();
-				PrintWriter out = response.getWriter();
-				out.write(gson.toJson(movieRequest));
-				out.flush();
-				out.close();
-			} catch (DatastoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			logger.info("input to movie request builder is " + "id\t" + id + "\t" + score + "\t" + industryType);
+			MovieRequest movieRequest = new MovieRequestBuilder(id, score, industryType).buildMovieName().buildScore()
+					.build();
+			Gson gson = new Gson();
+			PrintWriter out = response.getWriter();
+			out.write(gson.toJson(movieRequest));
+			out.flush();
+			out.close();
 		}
 
 		if (gamePostAction.equalsIgnoreCase("finish")) {

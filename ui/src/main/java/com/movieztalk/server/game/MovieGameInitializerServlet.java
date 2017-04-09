@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.api.services.datastore.client.DatastoreException;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.movieztalk.db.DatabaseHelper;
@@ -42,19 +41,15 @@ public class MovieGameInitializerServlet extends HttpServlet {
 
 		response.setContentType("application/json");
 
-		try {
-			GuessMovieNameGame game = new GuessMovieNameGameBuilder().buildGameState().buildInitiatorId()
-					.buildMovieName().buildOtherPlayerId().build();
-			storeGuessMovieNameGame(game);
-			Gson gson = new Gson();
-			String json = gson.toJson(game);
-			PrintWriter out = response.getWriter();
-			out.write(json);
-			out.flush();
-			out.close();
-		} catch (DatastoreException e) {
-			e.printStackTrace();
-		}
+		GuessMovieNameGame game = new GuessMovieNameGameBuilder().buildGameState().buildInitiatorId().buildMovieName()
+				.buildOtherPlayerId().build();
+		storeGuessMovieNameGame(game);
+		Gson gson = new Gson();
+		String json = gson.toJson(game);
+		PrintWriter out = response.getWriter();
+		out.write(json);
+		out.flush();
+		out.close();
 	}
 
 	public void storeGuessMovieNameGame(GuessMovieNameGame game) {
