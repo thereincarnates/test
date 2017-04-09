@@ -15,12 +15,9 @@ import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 
-import com.google.api.client.repackaged.com.google.common.base.Strings;
-import com.google.api.services.datastore.DatastoreV1.Entity;
-import com.google.api.services.datastore.DatastoreV1.Property;
-import com.google.api.services.datastore.DatastoreV1.Value;
-import com.google.api.services.datastore.client.DatastoreException;
+
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.gson.Gson;
@@ -44,7 +41,7 @@ public class MovieRequestBuilder {
 	private final String score;
 	private GuessMovieNameEntity guessMovieNameEntity;
 
-	public MovieRequestBuilder(String id, String score, String industryType) throws DatastoreException {
+	public MovieRequestBuilder(String id, String score, String industryType) {
 		this.id = id;
 		this.score = score;
 		guessMovieNameEntity = fetchGameStateEntity(id);
@@ -52,7 +49,7 @@ public class MovieRequestBuilder {
 		this.industryType = industryType;
 	}
 
-	public MovieRequestBuilder buildMovieName() throws DatastoreException {
+	public MovieRequestBuilder buildMovieName() {
 		// Set<String> alreadyUsedMovies =
 		// fetchPlayedMoviesFromEntity(gameStateEntity);
 		Set<String> alreadyUsedMovies = (Set<String>) (guessMovieNameEntity.getMovieName() == null ? new HashSet<>()
@@ -63,7 +60,7 @@ public class MovieRequestBuilder {
 		return this;
 	}
 
-	public MovieRequestBuilder buildScore() throws DatastoreException {
+	public MovieRequestBuilder buildScore() {
 		if (Strings.isNullOrEmpty(score)) {
 			movieRequest.setScoreboard(new ScoreBoard());
 			return this;
