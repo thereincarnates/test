@@ -24,6 +24,7 @@ moviezApp
 						console.log('successfull');
 						$scope.movieobj = data;
 						console.log("ZZZZZZZZZZZDDDDDDDDDD" + $scope.movieobj);
+						$scope.buldDefaultList('songAndTrailers');
 					});
 					
 					$http({
