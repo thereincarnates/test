@@ -1,4 +1,4 @@
-var moviezApp=angular.module('movieztalk', ["ngRoute"]);
+var moviezApp=angular.module('movieztalk', ["ngRoute", "ngAnimate","ui.bootstrap"]);
   
 moviezApp.config(['$routeProvider',
   function($routeProvider) {

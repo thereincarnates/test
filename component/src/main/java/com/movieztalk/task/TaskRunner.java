@@ -112,13 +112,12 @@ public class TaskRunner {
 		connect = DriverManager
 				.getConnection("jdbc:mysql://localhost/movieztalk?" + "user=root&password=root");
 		preparedStatement = connect
-				.prepareStatement("update Tweet_Table set movieid =?, compname=?, sentiment=? , status = ? where rowid=?");
+				.prepareStatement("update Tweet_Table set movieid =?, compname=?, status = ? where rowid=?");
 		for (Tweet tweet : tweets) {
 			preparedStatement.setString(1, tweet.getMovieId());
 			preparedStatement.setString(2, tweet.getCompName());
-			preparedStatement.setString(3, tweet.getSentiment());
-			preparedStatement.setString(4, tweet.getStatus());
-			preparedStatement.setInt(5, tweet.getRowId());
+			preparedStatement.setString(3, tweet.getStatus());
+			preparedStatement.setInt(4, tweet.getRowId());
 			preparedStatement.addBatch();
 		}
 		preparedStatement.executeBatch();

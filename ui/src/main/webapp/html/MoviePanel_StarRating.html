@@ -14,17 +14,20 @@
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-               <div star-rating rating-value="movieobj.overall.rating" max="5">
-               </div>
-			</div>
+				
+					<uib-rating ng-model="movieobj.overall.rating" max="5" read-only="true" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+				
+			</div>	
 		</div>
 
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Story</div>
-
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-                <div star-rating  rating-value="movieobj.story.rating" max="5" ></div>
+				
+					<uib-rating ng-model="movieobj.story.rating" max="5" read-only="true" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+				
 			</div>
+
 		</div>
 
 		<div class="row">
@@ -33,7 +36,11 @@
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-                <div star-rating rating-value="movieobj.acting.rating" max="5"></div>
+
+			
+					<uib-rating ng-model="movieobj.acting.rating" max="5" read-only="true" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+			
+                
 			</div>
 		</div>
 
@@ -43,7 +50,10 @@
 			</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-                <div star-rating rating-value="movieobj.direction.rating" max="5" ></div>
+
+			
+					<uib-rating ng-model="movieobj.direction.rating" max="5" read-only="true" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+			
 			</div>
 		</div>
 
@@ -51,7 +61,10 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Music</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
-                <div star-rating rating-value="movieobj.music.rating" max="5" ></div>
+			
+					<uib-rating ng-model="movieobj.music.rating" max="5" read-only="true" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+			
+                
 			</div>
 		</div>
 		
